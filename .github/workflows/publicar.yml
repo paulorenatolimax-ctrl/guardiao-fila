@@ -1,0 +1,34 @@
+name: Publicar Reel
+
+on:
+  schedule:
+    # 8h, 13h e 17h no horário de Brasília (BRT = UTC-3)
+    - cron: '0 11 * * *'   # 08:00 BRT
+    - cron: '0 16 * * *'   # 13:00 BRT
+    - cron: '0 20 * * *'   # 17:00 BRT
+  workflow_dispatch:        # permite disparar na mão pelo site
+
+concurrency:
+  group: publicar
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Publicar o próximo da fila
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          RELEASE_TAG: videos
+        run: python3 publicar.py
+      - name: Registrar o que foi publicado
+        run: |
+          git config user.name  "fila-guardiao"
+          git config user.email "actions@github.com"
+          git add fila.json
+          git diff --staged --quiet || git commit -m "publicado: $(date -u +%d/%m %H:%M)"
+          git push
