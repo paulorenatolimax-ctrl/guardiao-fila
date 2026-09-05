@@ -8,12 +8,24 @@ e publica. Marca a fila e commita.
 Requer os secrets IG_TOKEN e IG_USER_ID.
 """
 import json, os, sys, time, urllib.parse, urllib.request, urllib.error
+from datetime import datetime, timedelta
 
 TOK  = os.environ["IG_TOKEN"]
 UID  = os.environ["IG_USER_ID"]
 REPO = os.environ.get("GITHUB_REPOSITORY", "")
 TAG  = os.environ.get("RELEASE_TAG", "videos")
 API  = "https://graph.instagram.com/v21.0"
+
+# Trava anti-post-duplicado: nenhum disparo (agendado ou manual) publica se o
+# último post real saiu há menos disso. Protege contra reprocessar a fila
+# duas vezes seguidas por engano, mesmo que alguém rode o workflow na mão.
+INTERVALO_MINIMO = timedelta(hours=3)
+
+def ultimo_publicado(fila):
+    datas = [x["publicado"] for x in fila["fila"] if x.get("publicado")]
+    if not datas:
+        return None
+    return max(datetime.strptime(d, "%Y-%m-%d %H:%M") for d in datas)
 
 def chamar(url, dados=None):
     corpo = urllib.parse.urlencode(dados).encode() if dados else None
@@ -26,6 +38,14 @@ def chamar(url, dados=None):
 
 def main():
     fila = json.load(open("fila.json"))
+
+    ultimo = ultimo_publicado(fila)
+    if ultimo and (datetime.utcnow() - ultimo) < INTERVALO_MINIMO:
+        faltam = INTERVALO_MINIMO - (datetime.utcnow() - ultimo)
+        print(f"último post foi às {ultimo} UTC, há menos de {INTERVALO_MINIMO}. "
+              f"Faltam {faltam} pro próximo poder sair — abortando pra não duplicar.")
+        return
+
     pendentes = [x for x in fila["fila"] if not x["publicado"]]
     if not pendentes:
         print("fila vazia — nada a publicar"); return
