@@ -19,6 +19,8 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+      - name: Conferir se os links estão vivos
+        run: python3 verificar_fila.py
       - name: Publicar o próximo da fila
         env:
           IG_TOKEN: ${{ secrets.IG_TOKEN }}
