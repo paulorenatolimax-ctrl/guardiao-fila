@@ -2,10 +2,14 @@ name: Publicar Reel
 
 on:
   schedule:
-    # 8h, 13h e 17h no horário de Brasília (BRT = UTC-3)
-    - cron: '0 11 * * *'   # 08:00 BRT
-    - cron: '0 16 * * *'   # 13:00 BRT
-    - cron: '0 20 * * *'   # 17:00 BRT
+    # ~8h, ~13h e ~17h no horário de Brasília (BRT = UTC-3).
+    # Minuto deslocado de propósito: cron em minuto redondo (:00) cai no pico
+    # de fila do GitHub Actions (todo mundo agenda assim) e atrasava 1h45-3h50.
+    # Minuto "quebrado" sofre bem menos fila. Ainda é best-effort do GitHub,
+    # sem garantia de horário exato.
+    - cron: '7 11 * * *'    # ~08:07 BRT
+    - cron: '13 16 * * *'   # ~13:13 BRT
+    - cron: '22 20 * * *'   # ~17:22 BRT
   workflow_dispatch:        # permite disparar na mão pelo site
 
 concurrency:
