@@ -2,14 +2,13 @@ name: Publicar Reel
 
 on:
   schedule:
-    # ~8h, ~13h e ~17h no horário de Brasília (BRT = UTC-3).
-    # Minuto deslocado de propósito: cron em minuto redondo (:00) cai no pico
-    # de fila do GitHub Actions (todo mundo agenda assim) e atrasava 1h45-3h50.
-    # Minuto "quebrado" sofre bem menos fila. Ainda é best-effort do GitHub,
-    # sem garantia de horário exato.
-    - cron: '7 11 * * *'    # ~08:07 BRT
-    - cron: '13 16 * * *'   # ~13:13 BRT
-    - cron: '22 20 * * *'   # ~17:22 BRT
+    # Roda a cada ~17min o dia todo. decidir.py filtra: só segue adiante se
+    # agora estiver dentro de uma das janelas (8h-9h, 13h-14h, 17h-18h BRT) E
+    # essa janela de hoje ainda não publicou. Existe porque em 07/09/2026 um
+    # dos três disparos agendados simplesmente não rodou — não atrasou,
+    # sumiu. Com várias tentativas por janela, um pulo isolado do agendador
+    # do GitHub deixa de custar um post inteiro: basta uma tentativa emplacar.
+    - cron: '*/17 * * * *'
   workflow_dispatch:        # permite disparar na mão pelo site
 
 concurrency:
@@ -23,15 +22,21 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+      - name: Decidir se é hora de publicar
+        id: decidir
+        run: python3 decidir.py
       - name: Conferir se os links estão vivos
+        if: steps.decidir.outputs.deve_publicar == 'true'
         run: python3 verificar_fila.py
       - name: Publicar o próximo da fila
+        if: steps.decidir.outputs.deve_publicar == 'true'
         env:
           IG_TOKEN: ${{ secrets.IG_TOKEN }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
           RELEASE_TAG: videos
         run: python3 publicar.py
       - name: Registrar o que foi publicado
+        if: steps.decidir.outputs.deve_publicar == 'true'
         run: |
           git config user.name  "fila-guardiao"
           git config user.email "actions@github.com"
