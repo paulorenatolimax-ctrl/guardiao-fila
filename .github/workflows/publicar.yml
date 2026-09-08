@@ -40,6 +40,6 @@ jobs:
         run: |
           git config user.name  "fila-guardiao"
           git config user.email "actions@github.com"
-          git add fila.json
+          git add fila.json stats.json
           git diff --staged --quiet || git commit -m "publicado: $(date -u +%d/%m %H:%M)"
           git push
