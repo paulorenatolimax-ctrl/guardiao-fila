@@ -51,6 +51,14 @@ def escrever(valor):
 
 
 def main():
+    if os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch":
+        # Disparo manual: humano decidiu explicitamente. Pula o filtro de
+        # janela — a trava de 3h do publicar.py continua sendo a proteção
+        # contra duplicar post sem querer.
+        print("disparo manual — ignorando filtro de janela")
+        escrever("true")
+        return
+
     agora = brt_agora()
     idx = achar_janela(agora)
 
