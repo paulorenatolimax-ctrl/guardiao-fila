@@ -2,13 +2,16 @@ name: Publicar Reel
 
 on:
   schedule:
-    # Roda a cada ~17min o dia todo. decidir.py filtra: só segue adiante se
-    # agora estiver dentro de uma das janelas (8h-9h, 13h-14h, 17h-18h BRT) E
-    # essa janela de hoje ainda não publicou. Existe porque em 07/09/2026 um
-    # dos três disparos agendados simplesmente não rodou — não atrasou,
-    # sumiu. Com várias tentativas por janela, um pulo isolado do agendador
-    # do GitHub deixa de custar um post inteiro: basta uma tentativa emplacar.
-    - cron: '*/17 * * * *'
+    # Só dispara DENTRO das 3 janelas (8h-9h, 13h-14h, 17h-18h BRT = 11h,
+    # 16h, 20h UTC), a cada 12min, 5x por janela. decidir.py ainda filtra em
+    # cima disso (janela certa + ainda não publicou hoje).
+    #
+    # Histórico: rodar a cada 17min o DIA TODO (85 disparos/dia) piorou tudo
+    # — em 08/09/2026 o GitHub só executou 5 dos ~85 esperados, e 2 das 3
+    # janelas ficaram sem nenhuma tentativa. Disparo frequente o dia inteiro
+    # parece ter sido tratado como abuso pelo agendador. Restringir aos
+    # horários que interessam (~15 disparos/dia) é a correção.
+    - cron: '*/12 11,16,20 * * *'
   workflow_dispatch:        # permite disparar na mão pelo site
 
 concurrency:
