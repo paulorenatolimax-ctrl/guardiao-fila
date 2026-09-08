@@ -89,4 +89,24 @@ def main():
     restam = sum(1 for x in fila["fila"] if not x["publicado"])
     print(f"restam {restam} na fila")
 
+    registrar_stats(item["n"])
+
+def registrar_stats(numero_video):
+    """Guarda seguidores/posts a cada publicação, pra ter histórico de
+    crescimento sem depender de alguém lembrar de checar."""
+    try:
+        s = chamar(f"{API}/{UID}?fields=followers_count,media_count&access_token={TOK}")
+    except SystemExit as e:
+        print(f"  (stats não registradas: {e})")
+        return
+    stats = json.load(open("stats.json")) if os.path.exists("stats.json") else {"historico": []}
+    stats["historico"].append({
+        "quando_utc": time.strftime("%Y-%m-%d %H:%M"),
+        "video": numero_video,
+        "seguidores": s.get("followers_count"),
+        "posts": s.get("media_count"),
+    })
+    json.dump(stats, open("stats.json", "w"), ensure_ascii=False, indent=1)
+    print(f"  stats: {s.get('followers_count')} seguidores, {s.get('media_count')} posts")
+
 main()
