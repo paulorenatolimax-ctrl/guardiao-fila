@@ -1,7 +1,31 @@
 {
  "historico": [
-  {"quando_utc": "2026-09-05 00:00", "video": null, "seguidores": 1003, "posts": null, "nota": "marco 1000 seguidores, do MEGA-HANDOFF-2"},
-  {"quando_utc": "2026-09-06 22:47", "video": null, "seguidores": 1043, "posts": 72, "nota": "checagem manual"},
-  {"quando_utc": "2026-09-08 12:09", "video": null, "seguidores": 1092, "posts": 75, "nota": "checagem manual"}
+  {
+   "quando_utc": "2026-09-05 00:00",
+   "video": null,
+   "seguidores": 1003,
+   "posts": null,
+   "nota": "marco 1000 seguidores, do MEGA-HANDOFF-2"
+  },
+  {
+   "quando_utc": "2026-09-06 22:47",
+   "video": null,
+   "seguidores": 1043,
+   "posts": 72,
+   "nota": "checagem manual"
+  },
+  {
+   "quando_utc": "2026-09-08 12:09",
+   "video": null,
+   "seguidores": 1092,
+   "posts": 75,
+   "nota": "checagem manual"
+  },
+  {
+   "quando_utc": "2026-09-08 21:26",
+   "video": 115,
+   "seguidores": 1106,
+   "posts": 76
+  }
  ]
 }
