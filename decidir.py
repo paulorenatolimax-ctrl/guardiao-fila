@@ -1,24 +1,22 @@
 #!/usr/bin/env python3
-"""Decide se É hora de publicar, ou se o workflow deve só sair sem fazer nada.
+"""Decide se é hora de publicar, ou se o workflow deve só sair sem fazer nada.
 
-Roda a cada ~17min o dia todo (ver publicar.yml). Existe porque o schedule
-do GitHub Actions em repositório público, sob alta carga, não só atrasa —
-em 07/09/2026 um dos três horários simplesmente não disparou, sem erro, sem
-aviso. Rodando várias vezes dentro de cada janela (8h-9h, 13h-14h, 17h-18h
-BRT), basta UMA tentativa emplacar pra o post sair; um pulo isolado do
-GitHub deixa de ser um post perdido.
+Roda dentro das 3 janelas com tolerância total para eventuais atrasos do runner do GitHub Actions:
+- Manhã:  08:00 às 10:00 BRT
+- Tarde:  13:00 às 15:00 BRT (cobre 13h e 14h em cheio)
+- Noite:  17:00 às 19:00 BRT (cobre 17h e 18h em cheio)
 
-Escreve deve_publicar=true/false em $GITHUB_OUTPUT.
+Basta UMA tentativa dentro da janela dar certo; assim que o post sai, a janela é marcada como cumprida para aquele dia.
 """
 import json, os
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 # BRT é UTC-3 fixo (Brasil não observa horário de verão desde 2019).
-JANELAS = [(8, 0, 9, 0), (13, 0, 14, 0), (17, 0, 18, 0)]  # (h,m) início, (h,m) fim exclusivo
+JANELAS = [(8, 0, 10, 0), (13, 0, 15, 0), (17, 0, 19, 0)]  # (h,m) início, (h,m) fim exclusivo
 
 
 def brt_agora():
-    return datetime.utcnow() - timedelta(hours=3)
+    return datetime.now(timezone.utc).replace(tzinfo=None) - timedelta(hours=3)
 
 
 def achar_janela(agora):
@@ -52,9 +50,6 @@ def escrever(valor):
 
 def main():
     if os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch":
-        # Disparo manual: humano decidiu explicitamente. Pula o filtro de
-        # janela — a trava de 3h do publicar.py continua sendo a proteção
-        # contra duplicar post sem querer.
         print("disparo manual — ignorando filtro de janela")
         escrever("true")
         return
