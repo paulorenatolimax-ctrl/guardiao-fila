@@ -79,12 +79,23 @@ def main():
     else:
         raise SystemExit("tempo esgotado esperando o processamento")
 
-    print("3/3 publicando…")
+    print("3/3 publicando no Instagram…")
     p = chamar(f"{API}/{UID}/media_publish", {"creation_id": cid, "access_token": TOK})
-    print(f"  PUBLICADO: media id {p['id']}")
+    print(f"  PUBLICADO NO INSTAGRAM: media id {p['id']}")
 
     item["publicado"] = time.strftime("%Y-%m-%d %H:%M")
     item["media_id"]  = p["id"]
+
+    # Publicar também no YouTube Shorts
+    try:
+        import publicar_youtube
+        print("→ Publicando no YouTube Shorts…")
+        yt_id = publicar_youtube.publicar_short(url_video, item)
+        item["youtube_id"] = yt_id
+        item["youtube_publicado"] = time.strftime("%Y-%m-%d %H:%M")
+    except Exception as e:
+        print(f"  [Aviso] Falha ao publicar no YouTube Shorts: {e}")
+
     json.dump(fila, open("fila.json", "w"), ensure_ascii=False, indent=1)
     restam = sum(1 for x in fila["fila"] if not x["publicado"])
     print(f"restam {restam} na fila")

@@ -26,11 +26,17 @@ jobs:
       - name: Conferir se os links estão vivos
         if: steps.decidir.outputs.deve_publicar == 'true'
         run: python3 verificar_fila.py
-      - name: Publicar o próximo da fila
+      - name: Instalar dependências do YouTube
+        if: steps.decidir.outputs.deve_publicar == 'true'
+        run: pip install --no-cache-dir google-api-python-client google-auth-oauthlib google-auth-httplib2
+      - name: Publicar o próximo da fila (Instagram + YouTube)
         if: steps.decidir.outputs.deve_publicar == 'true'
         env:
           IG_TOKEN: ${{ secrets.IG_TOKEN }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
           RELEASE_TAG: videos
         run: python3 publicar.py
       - name: Registrar o que foi publicado
