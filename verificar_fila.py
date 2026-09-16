@@ -33,5 +33,8 @@ if quebrados:
     print("\nA fila NÃO vai publicar até isso ser corrigido.")
     sys.exit(1)
 
-print(f"✅ os {len(pend)} pendentes estão acessíveis")
-print(f"   próximo: vídeo {pend[0]['n']} · autonomia {len(pend)/3:.1f} dias")
+if pend:
+    print(f"✅ os {len(pend)} pendentes estão acessíveis")
+    print(f"   próximo: vídeo {pend[0]['n']} · autonomia {len(pend)/3:.1f} dias")
+else:
+    print("ℹ️ Fila vazia — nenhum vídeo pendente.")
