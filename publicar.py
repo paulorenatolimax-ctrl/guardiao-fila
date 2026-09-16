@@ -46,7 +46,7 @@ def main():
               f"Faltam {faltam} pro próximo poder sair — abortando pra não duplicar.")
         return
 
-    pendentes = [x for x in fila["fila"] if not x["publicado"]]
+    pendentes = [x for x in fila["fila"] if not x.get("publicado")]
     if not pendentes:
         print("fila vazia — nada a publicar"); return
 
