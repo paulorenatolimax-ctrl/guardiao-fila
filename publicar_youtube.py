@@ -45,13 +45,32 @@ def obter_servico_youtube():
 
 def gerar_titulo_shorts(item):
     """Gera um título de alto impacto para o Shorts (máx 100 caracteres com #Shorts)."""
-    # Pega primeira linha da legenda ou um título limpo
-    linhas = [l.strip() for l in item["legenda"].split("\n") if l.strip()]
-    primeira = linhas[0] if linhas else f"Vídeo {item['n']}"
-    # Remove hashtags ou formatações da primeira linha se houver
-    primeira = primeira.replace("#", "").strip()
-    
-    # Se passar de 90 chars, trunca
+    # 1. Prioriza título explícito de alta conversão
+    if item.get("titulo_shorts"):
+        tit = item["titulo_shorts"].strip()
+        if len(tit) > 88:
+            tit = tit[:85] + "..."
+        return f"{tit} #Shorts"
+
+    # 2. Se tiver headline nos metadados, usa a headline
+    if item.get("headline"):
+        tit = item["headline"].strip()
+        if len(tit) > 88:
+            tit = tit[:85] + "..."
+        return f"{tit} #Shorts"
+
+    # 3. Fallback inteligente: pega primeira linha que NÃO seja citação técnica
+    linhas = [l.strip() for l in item.get("legenda", "").split("\n") if l.strip()]
+    primeira = f"Vídeo {item.get('n', '')}"
+    for l in linhas:
+        l_limpa = l.replace("#", "").strip()
+        # ignora se for citação de jornal/cartório como 'NYT,', 'Doc 1', 'Kit da'
+        if not any(l_limpa.startswith(x) for x in ["Kit", "Doc", "NYT", "Fonte:", "Semana", "Eduskunta", "Suprema", "Congresso", "Pesquisa", "Coreia", "Finlândia"]):
+            primeira = l_limpa
+            break
+        elif primeira == f"Vídeo {item.get('n', '')}":
+            primeira = l_limpa
+
     if len(primeira) > 88:
         primeira = primeira[:85] + "..."
         
