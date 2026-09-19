@@ -2,11 +2,9 @@ name: Publicar Reel
 
 on:
   schedule:
-    # Dispara a cada 15 min cobrindo as 3 janelas com tolerância a atrasos de runner:
-    # 11,12 UTC = 08h às 10h BRT (manhã)
-    # 16,17 UTC = 13h às 15h BRT (tarde: cobre 13h e 14h em cheio)
-    # 20,21 UTC = 17h às 19h BRT (noite: cobre 17h e 18h em cheio)
-    - cron: '*/15 11,12,16,17,20,21 * * *'
+    # Roda a cada 15 min de forma contínua cobrindo das 07h às 21h BRT (10h às 00h UTC):
+    # O decidir.py gerencia o filtro de janelas e o intervalo mínimo anti-duplicação.
+    - cron: '*/15 10-23 * * *'
   workflow_dispatch:        # permite disparar na mão pelo site
 
 concurrency:

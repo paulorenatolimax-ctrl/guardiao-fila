@@ -11,8 +11,11 @@ Basta UMA tentativa dentro da janela dar certo; assim que o post sai, a janela �
 import json, os
 from datetime import datetime, timedelta, timezone
 
-# BRT é UTC-3 fixo (Brasil não observa horário de verão desde 2019).
-JANELAS = [(8, 0, 10, 0), (13, 0, 15, 0), (17, 0, 19, 0)]  # (h,m) início, (h,m) fim exclusivo
+# Janelas ampliadas para absorver atrasos normais de fila do GitHub Actions:
+# Janela 0 (Manhã): 07:30 às 11:30 BRT (alvo 08h-09h)
+# Janela 1 (Tarde): 12:30 às 16:30 BRT (alvo 13h-14h)
+# Janela 2 (Noite): 17:00 às 21:30 BRT (alvo 18h-19h)
+JANELAS = [(7, 30, 11, 30), (12, 30, 16, 30), (17, 0, 21, 30)]  # (h,m) início, (h,m) fim exclusivo
 
 
 def brt_agora():
