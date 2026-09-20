@@ -40,7 +40,8 @@ def main():
     fila = json.load(open("fila.json"))
 
     ultimo = ultimo_publicado(fila)
-    if ultimo and (datetime.utcnow() - ultimo) < INTERVALO_MINIMO:
+    is_manual = os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch"
+    if not is_manual and ultimo and (datetime.utcnow() - ultimo) < INTERVALO_MINIMO:
         faltam = INTERVALO_MINIMO - (datetime.utcnow() - ultimo)
         print(f"último post foi às {ultimo} UTC, há menos de {INTERVALO_MINIMO}. "
               f"Faltam {faltam} pro próximo poder sair — abortando pra não duplicar.")
