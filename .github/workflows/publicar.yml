@@ -46,4 +46,7 @@ jobs:
           git config user.email "actions@github.com"
           git add fila.json stats.json
           git diff --staged --quiet || git commit -m "publicado: $(date -u +%d/%m %H:%M)"
-          git push
+          # se alguém gravou no repositório durante a publicação, junta e tenta de novo
+          # (em 23/09 um push simples falhou e o 257 quase saiu duplicado)
+          for i in 1 2 3 4 5; do git pull --rebase && git push && exit 0; sleep 5; done
+          exit 1
