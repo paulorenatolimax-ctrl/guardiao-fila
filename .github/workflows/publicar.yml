@@ -2,9 +2,11 @@ name: Publicar Reel
 
 on:
   schedule:
-    # Roda a cada 15 min de forma contínua cobrindo das 07h às 21h BRT (10h às 00h UTC):
+    # A cada 10 min, em minutos "quebrados" (7, 17, 27...): o GitHub atrasa/pula os
+    # agendamentos em :00/:15/:30/:45 (horário de pico). Cobre 07h-21h BRT (10h-00h UTC).
     # O decidir.py gerencia o filtro de janelas e o intervalo mínimo anti-duplicação.
-    - cron: '*/15 10-23 * * *'
+    # Reforço: o Mac do Paulo confere às 8h40/13h40/17h40 e dispara se a janela não saiu.
+    - cron: '7-59/10 10-23 * * *'
   workflow_dispatch:        # permite disparar na mão pelo site
 
 concurrency:
