@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Decide se é hora de publicar, ou se o workflow deve só sair sem fazer nada.
+"""24/09/2026: DUAS janelas por dia (13h e 19h), decididas pelo relatório de desempenho.
+Decide se é hora de publicar, ou se o workflow deve só sair sem fazer nada.
 
 Roda dentro das 3 janelas com tolerância total para eventuais atrasos do runner do GitHub Actions:
 - Manhã:  08:00 às 10:00 BRT
@@ -15,7 +16,7 @@ from datetime import datetime, timedelta, timezone
 # Janela 0 (Manhã): 07:30 às 11:30 BRT (alvo 08h-09h)
 # Janela 1 (Tarde): 12:30 às 16:30 BRT (alvo 13h-14h)
 # Janela 2 (Noite): 17:00 às 21:30 BRT (alvo 18h-19h)
-JANELAS = [(7, 30, 11, 30), (12, 30, 16, 30), (17, 0, 21, 30)]  # (h,m) início, (h,m) fim exclusivo
+JANELAS = [(12, 30, 16, 0), (18, 0, 21, 30)]  # 24/09/2026: 2 posts/dia, alvo 13h e 19h (melhores horários pelo relatório)
 
 
 def brt_agora():
