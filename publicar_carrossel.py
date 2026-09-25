@@ -20,7 +20,7 @@ if not pend: print("fila de carrosséis vazia"); sys.exit(0)
 c = pend[0]; print("→ carrossel", c["id"], c["titulo"])
 filhos = []
 for s in c["slides"]:
-    url = f"https://github.com/{REPO}/releases/download/{TAG}/{urllib.parse.quote(s)}"
+    url = f"https://raw.githubusercontent.com/{REPO}/main/carrosseis/{urllib.parse.quote(s)}"  # raw serve image/jpeg
     r = chamar(f"{API}/{UID}/media", {"image_url": url, "is_carousel_item": "true", "access_token": TOK}); filhos.append(r["id"])
 r = chamar(f"{API}/{UID}/media", {"media_type": "CAROUSEL", "children": ",".join(filhos), "caption": c["legenda"], "access_token": TOK})
 cid = r["id"]
