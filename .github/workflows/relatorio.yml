@@ -1,0 +1,19 @@
+name: Relatorio de desempenho
+on:
+  workflow_dispatch:
+jobs:
+  relatorio:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 relatorio.py
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+      - run: |
+          git config user.name "fila-guardiao"; git config user.email "actions@github.com"
+          git add relatorio.csv relatorio.json
+          git diff --staged --quiet || git commit -m "relatório de desempenho"
+          for i in 1 2 3; do git pull --rebase && git push && exit 0; sleep 5; done
