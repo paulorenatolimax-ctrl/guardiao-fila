@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Publica 1 carrossel por dia às 8h (janela 7h30-10h BRT). 24/09/2026.
+"""Publica 2 carrosséis por dia: 8h (janela 7h30-10h BRT) e 21h (janela 20h30-23h BRT, a partir de 28/09/2026).
 Fila própria: carrosseis.json (slides JPEG no release "videos"). A API não põe música."""
 import json, os, sys, time, urllib.parse, urllib.request
 from datetime import datetime, timedelta, timezone
@@ -11,10 +11,14 @@ def chamar(url, dados=None):
     except urllib.error.HTTPError as e: print("ERRO:", e.code, e.read().decode()[:400]); raise
 brt = datetime.now(timezone.utc).replace(tzinfo=None) - timedelta(hours=3)
 manual = os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch"
-if not manual and not (7*60+30 <= brt.hour*60+brt.minute < 10*60): print("fora da janela do carrossel"); sys.exit(0)
+JANELAS = [(7*60+30, 10*60), (20*60+30, 23*60)]  # 8h e 21h BRT
+m = brt.hour*60 + brt.minute
+jan = next((j for j in JANELAS if j[0] <= m < j[1]), None)
+if not manual and (jan is None or (jan == JANELAS[1] and brt.strftime("%Y-%m-%d") < "2026-09-28")): print("fora da janela do carrossel"); sys.exit(0)
 fila = json.load(open("carrosseis.json"))
-hoje = brt.strftime("%Y-%m-%d")
-if not manual and any((c.get("publicado") or "").startswith(hoje) for c in fila["carrosseis"]): print("carrossel de hoje já saiu"); sys.exit(0)
+def em_brt(p): return datetime.strptime(p, "%Y-%m-%d %H:%M") - timedelta(hours=3)
+ini = brt.replace(hour=jan[0]//60, minute=jan[0]%60, second=0, microsecond=0) - timedelta(minutes=90) if jan else None
+if not manual and any(c.get("publicado") and ini <= em_brt(c["publicado"]) <= brt for c in fila["carrosseis"]): print("o carrossel desta janela já saiu"); sys.exit(0)
 pend = [c for c in fila["carrosseis"] if not c.get("publicado")]
 if not pend: print("fila de carrosséis vazia"); sys.exit(0)
 c = pend[0]; print("→ carrossel", c["id"], c["titulo"])
