@@ -2,7 +2,7 @@ name: Publicar carrossel
 on:
   schedule:
     - cron: '7-59/10 10-15 * * *'   # 7h-12h59 BRT (8h e 11h), minutos quebrados
-    - cron: '7-59/10 23,0,1 * * *'  # 20h-22h59 BRT (2º carrossel)
+    - cron: '7-59/10 22,23,0,1 * * *'  # 19h-22h59 BRT (carrossel das 20h)
   workflow_dispatch:
 concurrency:
   group: publicar
