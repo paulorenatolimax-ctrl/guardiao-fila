@@ -63,6 +63,7 @@ def main():
         "caption": item["legenda"],
         "share_to_feed": "true",
         "access_token": TOK,
+        **({"cover_url": f"https://raw.githubusercontent.com/{REPO}/main/capas/{urllib.parse.quote(item['capa'])}"} if item.get("capa") else {}),
     })
     cid = c["id"]
     print(f"  container {cid}")
