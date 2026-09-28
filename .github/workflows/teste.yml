@@ -1,0 +1,36 @@
+name: Reel de teste (Trial)
+
+on:
+  schedule:
+    # 1 Trial Reel por dia (só para NÃO seguidores), alvo 16h BRT.
+    # Minutos quebrados a cada 10 min, 18h-20h59 UTC (15h-17h59 BRT);
+    # o publicar_teste.py só publica entre 15h30 e 17h30 BRT e no máximo 1 por dia.
+    - cron: '7-59/10 18-20 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: publicar
+  cancel-in-progress: false
+
+jobs:
+  teste:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Publicar o Reel de teste (só Instagram)
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          RELEASE_TAG: videos
+        run: python3 publicar_teste.py
+      - name: Registrar o teste publicado
+        run: |
+          git config user.name  "fila-guardiao"
+          git config user.email "actions@github.com"
+          git add teste.json
+          git diff --staged --quiet && exit 0
+          git commit -m "teste publicado: $(date -u +%d/%m %H:%M)"
+          for i in 1 2 3 4 5; do git pull --rebase && git push && exit 0; sleep 5; done
+          exit 1
