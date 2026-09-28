@@ -99,7 +99,7 @@ def main():
         print(f"  [Aviso] Falha ao publicar no YouTube Shorts: {e}")
 
     json.dump(fila, open("fila.json", "w"), ensure_ascii=False, indent=1)
-    restam = sum(1 for x in fila["fila"] if not x["publicado"])
+    restam = sum(1 for x in fila["fila"] if not x.get("publicado"))
     print(f"restam {restam} na fila")
 
     registrar_stats(item["n"])
