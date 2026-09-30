@@ -12,7 +12,7 @@ from googleapiclient.http import MediaFileUpload
 
 SCOPES = [
     "https://www.googleapis.com/auth/youtube.upload",
-    "https://www.googleapis.com/auth/youtube.readonly"
+    "https://www.googleapis.com/auth/youtube"
 ]
 
 def obter_servico_youtube():
