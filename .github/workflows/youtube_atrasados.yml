@@ -1,0 +1,33 @@
+name: YouTube atrasados
+on:
+  workflow_dispatch:
+    inputs:
+      numeros:
+        description: "Números dos Reels, separados por vírgula (máx. 5)"
+        required: true
+concurrency:
+  group: publicar
+  cancel-in-progress: false
+jobs:
+  subir:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install --no-cache-dir google-api-python-client google-auth-oauthlib google-auth-httplib2
+      - name: Subir os Shorts
+        env:
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+          RELEASE_TAG: videos
+          NUMEROS: ${{ github.event.inputs.numeros }}
+        run: python3 youtube_atrasados.py
+      - name: Registrar
+        run: |
+          git config user.name  "fila-guardiao"
+          git config user.email "actions@github.com"
+          git add fila.json
+          git diff --staged --quiet || git commit -m "youtube atrasados: $(date -u +%d/%m %H:%M)"
+          for i in 1 2 3 4 5; do git pull --rebase && git push && exit 0; sleep 5; done
