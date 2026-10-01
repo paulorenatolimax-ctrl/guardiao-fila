@@ -2,10 +2,9 @@ name: Reel de teste (Trial)
 
 on:
   schedule:
-    # 1 Trial Reel por dia (só para NÃO seguidores), alvo 16h BRT.
-    # Minutos quebrados a cada 10 min, 18h-20h59 UTC (15h-17h59 BRT);
-    # o publicar_teste.py só publica entre 15h30 e 17h30 BRT e no máximo 1 por dia.
-    - cron: '7-59/10 18-20 * * *'
+    # 01/10/2026: 3 Trial Reels por dia (só para NÃO seguidores), alvo 8h, 14h e 18h BRT.
+    # Cron a cada 10 min cobrindo 7h-9h59, 13h-15h59 e 17h-19h59 BRT; o publicar_teste.py publica 1 por janela.
+    - cron: '7-59/10 10-12,16-18,20-22 * * *'
   workflow_dispatch:
 
 concurrency:

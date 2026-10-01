@@ -20,37 +20,47 @@ from datetime import datetime, timedelta, date
 ARQ    = "teste.json"
 API    = "https://graph.instagram.com/v21.0"
 INICIO = date(2026, 9, 29)             # primeiro dia com teste
-JANELA = ((15, 30), (17, 30))          # BRT, início inclusivo, fim exclusivo
+JANELAS = [((7, 30), (9, 30)), ((13, 30), (15, 30)), ((17, 30), (19, 30))]  # 01/10/2026: 3 testes por dia, alvo 8h, 14h e 18h BRT
 
 
 def brt(dt_utc):
     return dt_utc - timedelta(hours=3)
 
 
-def saiu_hoje(fila, hoje_brt):
-    """'publicado' é gravado em UTC (igual ao fila.json)."""
+def janela_de(agora_brt):
+    m = agora_brt.hour * 60 + agora_brt.minute
+    for i, ((sh, sm), (eh, em)) in enumerate(JANELAS):
+        if sh * 60 + sm <= m < eh * 60 + em:
+            return i
+    return None
+
+
+def saiu_na_janela(fila, agora_brt, idx):
+    """'publicado' é gravado em UTC (igual ao fila.json). Uma publicação por janela por dia."""
     for it in fila["fila"]:
         pub = it.get("publicado")
-        if pub and brt(datetime.strptime(pub, "%Y-%m-%d %H:%M")).date() == hoje_brt:
+        if not pub:
+            continue
+        p = brt(datetime.strptime(pub, "%Y-%m-%d %H:%M"))
+        if p.date() == agora_brt.date() and janela_de(p) == idx:
             return True
     return False
 
 
 def decidir(agora_brt, fila, manual=False):
     """Devolve (deve_publicar, motivo). Função pura, testável a seco."""
-    if saiu_hoje(fila, agora_brt.date()):
-        return False, f"{agora_brt:%d/%m %H:%M} BRT: já saiu um teste hoje"
     if not any(not x.get("publicado") for x in fila["fila"]):
         return False, "teste.json sem pendentes"
     if manual:
         return True, "disparo manual: ignorando janela"
     if agora_brt.date() < INICIO:
         return False, f"{agora_brt:%d/%m} BRT: antes do início ({INICIO:%d/%m})"
-    m = agora_brt.hour * 60 + agora_brt.minute
-    (sh, sm), (eh, em) = JANELA
-    if not (sh * 60 + sm <= m < eh * 60 + em):
-        return False, f"{agora_brt:%H:%M} BRT: fora da janela 15h30-17h30"
-    return True, f"{agora_brt:%H:%M} BRT: dentro da janela e nenhum teste hoje"
+    idx = janela_de(agora_brt)
+    if idx is None:
+        return False, f"{agora_brt:%H:%M} BRT: fora das janelas (7h30-9h30, 13h30-15h30, 17h30-19h30)"
+    if saiu_na_janela(fila, agora_brt, idx):
+        return False, f"{agora_brt:%d/%m %H:%M} BRT: esta janela já teve teste hoje"
+    return True, f"{agora_brt:%H:%M} BRT: dentro da janela {idx} e nenhum teste nela hoje"
 
 
 def chamar(url, dados=None):
