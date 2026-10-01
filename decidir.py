@@ -54,9 +54,12 @@ def escrever(valor):
 
 def main():
     if os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch":
-        print("disparo manual — ignorando filtro de janela")
-        escrever("true")
-        return
+        if os.environ.get("FORCAR", "false") == "true":
+            print("disparo manual com FORCAR — ignorando filtro de janela")
+            escrever("true")
+            return
+        # 01/10/2026: disparo manual SEM forçar respeita as janelas (o 313 saiu às 9h23 por um disparo avulso).
+        print("disparo manual — respeitando as janelas (marque 'forcar' para furar o horário)")
 
     agora = brt_agora()
     idx = achar_janela(agora)

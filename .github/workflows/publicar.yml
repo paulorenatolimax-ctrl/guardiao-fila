@@ -7,7 +7,12 @@ on:
     # O decidir.py gerencia o filtro de janelas e o intervalo mínimo anti-duplicação.
     # Reforço: o Mac do Paulo confere às 8h40/13h40/17h40 e dispara se a janela não saiu.
     - cron: '7-59/10 10-23 * * *'
-  workflow_dispatch:        # permite disparar na mão pelo site
+  workflow_dispatch:        # permite disparar na mão pelo site (só publica dentro da janela, a não ser com "forcar")
+    inputs:
+      forcar:
+        description: "Publicar agora mesmo fora do horário (13h/19h)?"
+        type: boolean
+        default: false
 
 concurrency:
   group: publicar
@@ -23,6 +28,8 @@ jobs:
       - name: Decidir se é hora de publicar
         id: decidir
         run: python3 decidir.py
+        env:
+          FORCAR: ${{ github.event.inputs.forcar }}
       - name: Conferir se os links estão vivos
         if: steps.decidir.outputs.deve_publicar == 'true'
         run: python3 verificar_fila.py
