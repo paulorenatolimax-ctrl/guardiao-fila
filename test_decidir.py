@@ -76,6 +76,7 @@ class TestCarrossel(unittest.TestCase):
 
 
 class TestEleicao(unittest.TestCase):
+    @unittest.skip('modo eleição cancelado pelo Paulo em 03/10/2026')
     def test_dia_especial_grade_2h(self):
         self.assertTrue(decidir("carrossel", brt(10, 0, dia=4), PEND)[0])
         itens = [pub_utc(brt(10, 0, dia=4))] + PEND

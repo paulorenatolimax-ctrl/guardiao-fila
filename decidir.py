@@ -29,8 +29,7 @@ TIPOS = {
 # MODO ELEIÇÃO: grade especial por data (BRT), por tipo. Fora dessas datas vale TIPOS.
 ESPECIAIS = {
     "carrossel": {
-        date(2026, 10, 3): ([8, 10, 12, 14, 16, 18, 20, 22], timedelta(minutes=100), 6),
-        date(2026, 10, 4): ([8, 10, 12, 14, 16, 18, 20, 22], timedelta(minutes=100), 6),
+        # 03/10/2026: modo eleição (6/dia) cancelado pelo Paulo; volta à grade normal de 3 por dia.
     },
 }
 INICIO_DIA = 7  # nada sai antes das 7h BRT (e o cron vai até 23h59 BRT)
