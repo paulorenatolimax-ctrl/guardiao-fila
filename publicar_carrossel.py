@@ -3,6 +3,7 @@
 Fila própria: carrosseis.json (slides JPEG no release "videos"). A API não põe música."""
 import json, os, sys, time, urllib.parse, urllib.request
 from datetime import datetime, timedelta, timezone
+LIMITE_LEGENDA = 2200  # Instagram recusa acima disso
 API = "https://graph.instagram.com/v21.0"; TOK = os.environ["IG_TOKEN"]; UID = os.environ["IG_USER_ID"]
 REPO = os.environ.get("GITHUB_REPOSITORY", "paulorenatolimax-ctrl/guardiao-fila"); TAG = "videos"
 def chamar(url, dados=None):
@@ -24,7 +25,7 @@ filhos = []
 for s in c["slides"]:
     url = f"https://raw.githubusercontent.com/{REPO}/main/carrosseis/{urllib.parse.quote(s)}"  # raw serve image/jpeg
     r = chamar(f"{API}/{UID}/media", {"image_url": url, "is_carousel_item": "true", "access_token": TOK}); filhos.append(r["id"])
-r = chamar(f"{API}/{UID}/media", {"media_type": "CAROUSEL", "children": ",".join(filhos), "caption": c["legenda"], "access_token": TOK})
+r = chamar(f"{API}/{UID}/media", {"media_type": "CAROUSEL", "children": ",".join(filhos), "caption": c["legenda"][:2200], "access_token": TOK})
 cid = r["id"]
 for _ in range(30):
     s = chamar(f"{API}/{cid}?fields=status_code&access_token={TOK}")
