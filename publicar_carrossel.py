@@ -4,6 +4,12 @@ Fila própria: carrosseis.json (slides JPEG no release "videos"). A API não põ
 import json, os, sys, time, urllib.parse, urllib.request
 from datetime import datetime, timedelta, timezone
 LIMITE_LEGENDA = 2200  # Instagram recusa acima disso
+def legenda_ok(t):
+    # acima do limite: tira hashtags do fim, uma a uma; nunca corta o texto nem as Fontes
+    import re
+    while len(t) > LIMITE_LEGENDA and re.search(r"\s#\S+\s*$", t): t = re.sub(r"\s*#\S+\s*$", "", t)
+    if len(t) > LIMITE_LEGENDA: print("legenda longa demais mesmo sem hashtags:", len(t)); sys.exit(1)
+    return t
 API = "https://graph.instagram.com/v21.0"; TOK = os.environ["IG_TOKEN"]; UID = os.environ["IG_USER_ID"]
 REPO = os.environ.get("GITHUB_REPOSITORY", "paulorenatolimax-ctrl/guardiao-fila"); TAG = "videos"
 def chamar(url, dados=None):
@@ -25,7 +31,7 @@ filhos = []
 for s in c["slides"]:
     url = f"https://raw.githubusercontent.com/{REPO}/main/carrosseis/{urllib.parse.quote(s)}"  # raw serve image/jpeg
     r = chamar(f"{API}/{UID}/media", {"image_url": url, "is_carousel_item": "true", "access_token": TOK}); filhos.append(r["id"])
-r = chamar(f"{API}/{UID}/media", {"media_type": "CAROUSEL", "children": ",".join(filhos), "caption": c["legenda"][:2200], "access_token": TOK})
+r = chamar(f"{API}/{UID}/media", {"media_type": "CAROUSEL", "children": ",".join(filhos), "caption": legenda_ok(c["legenda"]), "access_token": TOK})
 cid = r["id"]
 for _ in range(30):
     s = chamar(f"{API}/{cid}?fields=status_code&access_token={TOK}")
