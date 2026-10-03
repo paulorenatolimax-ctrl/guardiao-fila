@@ -73,6 +73,23 @@ def decidir(tipo, agora_brt, itens, forcar=False):
     return True, f"[{tipo}] {agora_brt:%H:%M} BRT: {feitos} publicados / {vencidos} vencidos: publicando 1"
 
 
+MAX_SLIDES = 10  # limite da API do Instagram para carrossel
+
+
+def proximo_valido(itens, max_slides=MAX_SLIDES):
+    """Primeiro item não publicado com <= max_slides slides. Retorna (item|None, [mensagens de pulo])."""
+    logs = []
+    for c in itens:
+        if c.get("publicado"):
+            continue
+        n = len(c.get("slides", []))
+        if n > max_slides:
+            logs.append(f"PULADO {c.get('id')}: {n} slides (máximo {max_slides} no Instagram)")
+            continue
+        return c, logs
+    return None, logs
+
+
 def main():
     tipo = sys.argv[1] if len(sys.argv) > 1 else "reel"
     arquivo, chave = TIPOS[tipo][0], TIPOS[tipo][1]

@@ -2,7 +2,7 @@
 """Testes da regra de recuperação (decidir.py). Rodar: python3 -m unittest test_decidir -v"""
 import unittest
 from datetime import datetime, timedelta
-from decidir import decidir
+from decidir import decidir, proximo_valido
 
 
 def brt(h, m=0, dia=5):  # 05/10 = dia normal (03 e 04 são eleição)
@@ -124,6 +124,18 @@ class TestTeste(unittest.TestCase):
     def test_tres_no_dia(self):
         itens = [pub_utc(brt(8, 0)), pub_utc(brt(14, 0)), pub_utc(brt(18, 0))] + PEND
         self.assertFalse(decidir("teste", brt(23, 0), itens)[0])
+
+
+class TestTravaSlides(unittest.TestCase):
+    def test_pula_item_com_mais_de_10_slides(self):
+        itens = [{"id": "X", "slides": list("abcdefghijkl")}, {"id": "Y", "slides": list("abcdefghij")}]
+        c, logs = proximo_valido(itens)
+        self.assertEqual(c["id"], "Y")
+        self.assertIn("PULADO X", logs[0])
+
+    def test_so_invalidos_retorna_none(self):
+        c, logs = proximo_valido([{"id": "X", "slides": list("abcdefghijk")}])
+        self.assertIsNone(c)
 
 
 if __name__ == "__main__":

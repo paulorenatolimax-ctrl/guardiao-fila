@@ -12,13 +12,14 @@ def chamar(url, dados=None):
 brt = datetime.now(timezone.utc).replace(tzinfo=None) - timedelta(hours=3)
 fila = json.load(open("carrosseis.json"))
 # 03/10/2026: regra de recuperação (catch-up) centralizada no decidir.py
-from decidir import decidir
+from decidir import decidir, proximo_valido
 forcar = os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch" and os.environ.get("FORCAR", "false") == "true"
 ok, motivo = decidir("carrossel", brt, fila["carrosseis"], forcar); print(motivo)
 if not ok: sys.exit(0)
-pend = [c for c in fila["carrosseis"] if not c.get("publicado")]
-if not pend: print("fila de carrosséis vazia"); sys.exit(0)
-c = pend[0]; print("→ carrossel", c["id"], c["titulo"])
+c, pulos = proximo_valido(fila["carrosseis"])  # trava: carrossel com mais de 10 slides nunca é tentado
+for m in pulos: print(m)
+if not c: print("fila de carrosséis vazia (ou só itens inválidos)"); sys.exit(0)
+print("→ carrossel", c["id"], c["titulo"])
 filhos = []
 for s in c["slides"]:
     url = f"https://raw.githubusercontent.com/{REPO}/main/carrosseis/{urllib.parse.quote(s)}"  # raw serve image/jpeg
