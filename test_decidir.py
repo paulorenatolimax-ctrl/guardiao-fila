@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from decidir import decidir
 
 
-def brt(h, m=0, dia=3):
+def brt(h, m=0, dia=5):  # 05/10 = dia normal (03 e 04 são eleição)
     return datetime(2026, 10, dia, h, m)
 
 
@@ -73,6 +73,24 @@ class TestCarrossel(unittest.TestCase):
     def test_fila_vazia(self):
         self.assertFalse(decidir("carrossel", brt(9, 0), [pub_utc(brt(8, 0, dia=2))])[0])
         self.assertFalse(decidir("carrossel", brt(9, 0), [pub_utc(brt(8, 0, dia=2))], forcar=True)[0])
+
+
+class TestEleicao(unittest.TestCase):
+    def test_dia_especial_grade_2h(self):
+        self.assertTrue(decidir("carrossel", brt(10, 0, dia=4), PEND)[0])
+        itens = [pub_utc(brt(10, 0, dia=4))] + PEND
+        self.assertTrue(decidir("carrossel", brt(11, 40, dia=4), itens)[0])   # 8h vencido, 100 min ok
+        self.assertFalse(decidir("carrossel", brt(11, 39, dia=4), itens)[0])  # só 99 min
+        itens = [pub_utc(brt(8 + 2 * i, 0, dia=4)) for i in range(6)] + PEND
+        self.assertFalse(decidir("carrossel", brt(22, 30, dia=4), itens)[0])  # máximo 6
+        self.assertTrue(decidir("carrossel", brt(22, 0, dia=3), [pub_utc(brt(20, 0, dia=3))] + PEND)[0])
+
+    def test_dia_normal_volta(self):
+        itens = [pub_utc(brt(8, 0, dia=5)), pub_utc(brt(11, 0, dia=5))] + PEND
+        self.assertFalse(decidir("carrossel", brt(12, 0, dia=5), itens)[0])   # 2/2 em dia
+        self.assertFalse(decidir("carrossel", brt(10, 0, dia=5), [pub_utc(brt(8, 0, dia=5))] + PEND)[0])
+        itens = [pub_utc(brt(h, 0, dia=5)) for h in (8, 11, 20)] + PEND
+        self.assertFalse(decidir("carrossel", brt(22, 0, dia=5), itens)[0])   # máx 3
 
 
 class TestReel(unittest.TestCase):

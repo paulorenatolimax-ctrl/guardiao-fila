@@ -18,13 +18,20 @@ Disparo manual SEM 'forcar' segue a mesma regra do cron (é o que o Mac usa).
 Uso no workflow:  python3 decidir.py reel|carrossel|teste   -> grava deve_publicar=true/false
 """
 import json, os, sys
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 
 TIPOS = {
     # tipo:      arquivo,            chave,        horários BRT,  intervalo mínimo,      máximo/dia
     "reel":      ("fila.json",       "fila",       [13, 19],      timedelta(hours=4),    2),
     "carrossel": ("carrosseis.json", "carrosseis", [8, 11, 20],   timedelta(minutes=90), 3),
     "teste":     ("teste.json",      "fila",       [8, 14, 18],   timedelta(minutes=90), 3),
+}
+# MODO ELEIÇÃO: grade especial por data (BRT), por tipo. Fora dessas datas vale TIPOS.
+ESPECIAIS = {
+    "carrossel": {
+        date(2026, 10, 3): ([8, 10, 12, 14, 16, 18, 20, 22], timedelta(minutes=100), 6),
+        date(2026, 10, 4): ([8, 10, 12, 14, 16, 18, 20, 22], timedelta(minutes=100), 6),
+    },
 }
 INICIO_DIA = 7  # nada sai antes das 7h BRT (e o cron vai até 23h59 BRT)
 
@@ -41,6 +48,7 @@ def decidir(tipo, agora_brt, itens, forcar=False):
     """Função pura. Devolve (deve_publicar, motivo).
     itens = lista do JSON (cada um com "publicado" em UTC 'AAAA-MM-DD HH:MM' ou vazio)."""
     _, _, horarios, intervalo, maximo = TIPOS[tipo]
+    horarios, intervalo, maximo = ESPECIAIS.get(tipo, {}).get(agora_brt.date(), (horarios, intervalo, maximo))
     if not any(not x.get("publicado") for x in itens):
         return False, f"[{tipo}] fila vazia"
     if forcar:
