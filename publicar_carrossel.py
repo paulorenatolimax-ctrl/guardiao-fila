@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Publica 3 carrosséis por dia: 8h (7h30-10h BRT), 11h (10h30-12h30, a partir de 29/09/2026) e 20h (19h45-22h30, a partir de 28/09/2026).
+"""Publica 3 carrosséis por dia: 8h, 11h e 20h BRT, com recuperação de horário perdido (ver decidir.py, 03/10/2026).
 Fila própria: carrosseis.json (slides JPEG no release "videos"). A API não põe música."""
 import json, os, sys, time, urllib.parse, urllib.request
 from datetime import datetime, timedelta, timezone
@@ -10,15 +10,12 @@ def chamar(url, dados=None):
     try: return json.load(urllib.request.urlopen(req, timeout=90))
     except urllib.error.HTTPError as e: print("ERRO:", e.code, e.read().decode()[:400]); raise
 brt = datetime.now(timezone.utc).replace(tzinfo=None) - timedelta(hours=3)
-manual = os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch"
-JANELAS = [(7*60+30, 10*60), (19*60+45, 22*60+30), (10*60+30, 12*60+30)]  # 8h, 20h e 11h BRT
-m = brt.hour*60 + brt.minute
-jan = next((j for j in JANELAS if j[0] <= m < j[1]), None)
-if not manual and (jan is None or (jan == JANELAS[1] and brt.strftime("%Y-%m-%d") < "2026-09-28") or (jan == JANELAS[2] and brt.strftime("%Y-%m-%d") < "2026-09-29")): print("fora da janela do carrossel"); sys.exit(0)
 fila = json.load(open("carrosseis.json"))
-def em_brt(p): return datetime.strptime(p, "%Y-%m-%d %H:%M") - timedelta(hours=3)
-ini = brt.replace(hour=jan[0]//60, minute=jan[0]%60, second=0, microsecond=0) - timedelta(minutes=90) if jan else None
-if not manual and any(c.get("publicado") and ini <= em_brt(c["publicado"]) <= brt for c in fila["carrosseis"]): print("o carrossel desta janela já saiu"); sys.exit(0)
+# 03/10/2026: regra de recuperação (catch-up) centralizada no decidir.py
+from decidir import decidir
+forcar = os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch" and os.environ.get("FORCAR", "false") == "true"
+ok, motivo = decidir("carrossel", brt, fila["carrosseis"], forcar); print(motivo)
+if not ok: sys.exit(0)
 pend = [c for c in fila["carrosseis"] if not c.get("publicado")]
 if not pend: print("fila de carrosséis vazia"); sys.exit(0)
 c = pend[0]; print("→ carrossel", c["id"], c["titulo"])

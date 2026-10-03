@@ -2,13 +2,19 @@ name: Reel de teste (Trial)
 
 on:
   schedule:
-    # 01/10/2026: 3 Trial Reels por dia (só para NÃO seguidores), alvo 8h, 14h e 18h BRT.
-    # Cron a cada 10 min cobrindo 7h-9h59, 13h-15h59 e 17h-19h59 BRT; o publicar_teste.py publica 1 por janela.
-    - cron: '7-59/10 10-12,16-18,20-22 * * *'
+    # 03/10/2026: a cada 5 min, 7h00-23h59 BRT (10:00-02:59 UTC). Quem decide se publica é o
+    # decidir.py (regra de recuperação: horário vencido e não publicado sai na próxima execução).
+    - cron: '*/5 10-23 * * *'
+    - cron: '*/5 0-2 * * *'
   workflow_dispatch:
+    inputs:
+      forcar:
+        description: "Publicar agora mesmo, sem regra de horário?"
+        type: boolean
+        default: false
 
 concurrency:
-  group: publicar
+  group: publicar-teste
   cancel-in-progress: false
 
 jobs:
@@ -18,11 +24,14 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main   # pega o main da HORA em que roda (não o commit da hora do agendamento): evita repostar
       - name: Publicar o Reel de teste (só Instagram)
         env:
           IG_TOKEN: ${{ secrets.IG_TOKEN }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
           RELEASE_TAG: videos
+          FORCAR: ${{ github.event.inputs.forcar }}
         run: python3 publicar_teste.py
       - name: Registrar o teste publicado
         run: |

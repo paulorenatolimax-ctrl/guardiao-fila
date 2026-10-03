@@ -1,83 +1,84 @@
 #!/usr/bin/env python3
-"""24/09/2026: DUAS janelas por dia (13h e 19h), decididas pelo relatório de desempenho.
-Decide se é hora de publicar, ou se o workflow deve só sair sem fazer nada.
+"""03/10/2026: regra de RECUPERAÇÃO (catch-up) para os 3 tipos de post.
 
-Roda dentro das 3 janelas com tolerância total para eventuais atrasos do runner do GitHub Actions:
-- Manhã:  08:00 às 10:00 BRT
-- Tarde:  13:00 às 15:00 BRT (cobre 13h e 14h em cheio)
-- Noite:  17:00 às 19:00 BRT (cobre 17h e 18h em cheio)
+O cron do GitHub atrasa e pula execuções; a regra antiga de "janela" fazia o post
+atrasado ser PULADO. Agora, a cada execução (cron a cada 5 min, 7h-23h59 BRT):
 
-Basta UMA tentativa dentro da janela dar certo; assim que o post sai, a janela é marcada como cumprida para aquele dia.
+  1. conta quantos horários do dia já venceram (ex.: carrossel às 14h -> 8h e 11h = 2);
+  2. conta quantos posts daquele tipo saíram HOJE (BRT; "publicado" é gravado em UTC);
+  3. se publicados < vencidos, publica o próximo da fila, desde que:
+       - o último post daquele tipo tenha saído há pelo menos INTERVALO (90 min / 4 h);
+       - agora esteja entre 7h00 e 23h59 BRT;
+       - não passe do MÁXIMO do dia;
+     e nunca mais de 1 por execução (cada execução publica no máximo 1 item).
+
+'forcar' (disparo manual com a caixa marcada) publica sem regra nenhuma.
+Disparo manual SEM 'forcar' segue a mesma regra do cron (é o que o Mac usa).
+
+Uso no workflow:  python3 decidir.py reel|carrossel|teste   -> grava deve_publicar=true/false
 """
-import json, os
+import json, os, sys
 from datetime import datetime, timedelta, timezone
 
-# Janelas ampliadas para absorver atrasos normais de fila do GitHub Actions:
-# Janela 0 (Manhã): 07:30 às 11:30 BRT (alvo 08h-09h)
-# Janela 1 (Tarde): 12:30 às 16:30 BRT (alvo 13h-14h)
-# Janela 2 (Noite): 17:00 às 21:30 BRT (alvo 18h-19h)
-JANELAS = [(12, 30, 16, 0), (18, 0, 21, 30)]  # 24/09/2026: 2 posts/dia, alvo 13h e 19h (melhores horários pelo relatório)
+TIPOS = {
+    # tipo:      arquivo,            chave,        horários BRT,  intervalo mínimo,      máximo/dia
+    "reel":      ("fila.json",       "fila",       [13, 19],      timedelta(hours=4),    2),
+    "carrossel": ("carrosseis.json", "carrosseis", [8, 11, 20],   timedelta(minutes=90), 3),
+    "teste":     ("teste.json",      "fila",       [8, 14, 18],   timedelta(minutes=90), 3),
+}
+INICIO_DIA = 7  # nada sai antes das 7h BRT (e o cron vai até 23h59 BRT)
 
 
 def brt_agora():
     return datetime.now(timezone.utc).replace(tzinfo=None) - timedelta(hours=3)
 
 
-def achar_janela(agora):
-    minutos = agora.hour * 60 + agora.minute
-    for i, (sh, sm, eh, em) in enumerate(JANELAS):
-        if sh * 60 + sm <= minutos < eh * 60 + em:
-            return i
-    return None
+def utc_para_brt(texto):
+    return datetime.strptime(texto, "%Y-%m-%d %H:%M") - timedelta(hours=3)
 
 
-def janela_ja_saiu_hoje(fila, idx, hoje):
-    sh, sm, eh, em = JANELAS[idx]
-    for item in fila["fila"]:
-        pub = item.get("publicado")
-        if not pub:
-            continue
-        # "publicado" é gravado em UTC pelo runner do GitHub Actions.
-        dt_brt = datetime.strptime(pub, "%Y-%m-%d %H:%M") - timedelta(hours=3)
-        if dt_brt.strftime("%Y-%m-%d") != hoje:
-            continue
-        minutos = dt_brt.hour * 60 + dt_brt.minute
-        if sh * 60 + sm <= minutos < eh * 60 + em:
-            return True
-    return False
+def decidir(tipo, agora_brt, itens, forcar=False):
+    """Função pura. Devolve (deve_publicar, motivo).
+    itens = lista do JSON (cada um com "publicado" em UTC 'AAAA-MM-DD HH:MM' ou vazio)."""
+    _, _, horarios, intervalo, maximo = TIPOS[tipo]
+    if not any(not x.get("publicado") for x in itens):
+        return False, f"[{tipo}] fila vazia"
+    if forcar:
+        return True, f"[{tipo}] FORCAR: publicando sem regras"
 
+    if agora_brt.hour < INICIO_DIA:
+        return False, f"[{tipo}] {agora_brt:%H:%M} BRT: antes das {INICIO_DIA}h, nada sai"
 
-def escrever(valor):
-    with open(os.environ["GITHUB_OUTPUT"], "a") as f:
-        f.write(f"deve_publicar={valor}\n")
+    pubs = [utc_para_brt(x["publicado"]) for x in itens if x.get("publicado")]
+    hoje = agora_brt.date()
+    feitos = sum(1 for p in pubs if p.date() == hoje)
+    vencidos = sum(1 for h in horarios if h * 60 <= agora_brt.hour * 60 + agora_brt.minute)
+
+    if feitos >= maximo:
+        return False, f"[{tipo}] já saíram {feitos} hoje (máximo {maximo})"
+    if feitos >= vencidos:
+        return False, f"[{tipo}] {agora_brt:%H:%M} BRT: {feitos} publicados / {vencidos} horários vencidos: em dia"
+    ultimo = max(pubs) if pubs else None
+    if ultimo and agora_brt - ultimo < intervalo:
+        falta = intervalo - (agora_brt - ultimo)
+        return False, (f"[{tipo}] atrasado ({feitos}/{vencidos}), mas o último saiu às {ultimo:%d/%m %H:%M} BRT; "
+                       f"espera mais {int(falta.total_seconds() // 60)} min")
+    return True, f"[{tipo}] {agora_brt:%H:%M} BRT: {feitos} publicados / {vencidos} vencidos: publicando 1"
 
 
 def main():
-    if os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch":
-        if os.environ.get("FORCAR", "false") == "true":
-            print("disparo manual com FORCAR — ignorando filtro de janela")
-            escrever("true")
-            return
-        # 01/10/2026: disparo manual SEM forçar respeita as janelas (o 313 saiu às 9h23 por um disparo avulso).
-        print("disparo manual — respeitando as janelas (marque 'forcar' para furar o horário)")
-
-    agora = brt_agora()
-    idx = achar_janela(agora)
-
-    if idx is None:
-        print(f"{agora:%H:%M} BRT — fora de janela, nada a fazer")
-        escrever("false")
-        return
-
-    fila = json.load(open("fila.json"))
-    hoje = agora.strftime("%Y-%m-%d")
-    if janela_ja_saiu_hoje(fila, idx, hoje):
-        print(f"{agora:%H:%M} BRT — janela {idx} de hoje já publicou, nada a fazer")
-        escrever("false")
-        return
-
-    print(f"{agora:%H:%M} BRT — dentro da janela {idx}, ainda não publicou hoje: seguindo")
-    escrever("true")
+    tipo = sys.argv[1] if len(sys.argv) > 1 else "reel"
+    arquivo, chave = TIPOS[tipo][0], TIPOS[tipo][1]
+    itens = json.load(open(arquivo))[chave]
+    forcar = (os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch"
+              and os.environ.get("FORCAR", "false") == "true")
+    ok, motivo = decidir(tipo, brt_agora(), itens, forcar)
+    print(motivo)
+    saida = os.environ.get("GITHUB_OUTPUT")
+    if saida:
+        with open(saida, "a") as f:
+            f.write(f"deve_publicar={'true' if ok else 'false'}\n")
 
 
-main()
+if __name__ == "__main__":
+    main()
