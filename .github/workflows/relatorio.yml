@@ -1,6 +1,8 @@
 name: Relatorio de desempenho
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '55 2 * * *'   # 23h55 BRT: seguidores do dia + relatório
 jobs:
   relatorio:
     runs-on: ubuntu-latest
@@ -8,12 +10,16 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+      - run: python3 seguidores_dia.py
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
       - run: python3 relatorio.py
         env:
           IG_TOKEN: ${{ secrets.IG_TOKEN }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
       - run: |
           git config user.name "fila-guardiao"; git config user.email "actions@github.com"
-          git add relatorio.csv relatorio.json
+          git add relatorio.csv relatorio.json stats.json
           git diff --staged --quiet || git commit -m "relatório de desempenho"
           for i in 1 2 3; do git pull --rebase && git push && exit 0; sleep 5; done
