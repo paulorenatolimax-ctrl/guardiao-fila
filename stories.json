@@ -116,11 +116,15 @@
   },
   {
    "arquivo": "dq_20_pais.jpg",
-   "destaque": "pais"
+   "destaque": "pais",
+   "publicado": "2026-10-04 23:00",
+   "media_id": "18079032026710642"
   },
   {
    "arquivo": "dq_21_pais.jpg",
-   "destaque": "pais"
+   "destaque": "pais",
+   "publicado": "2026-10-04 23:01",
+   "media_id": "17901177843670419"
   }
  ]
 }
