@@ -447,5 +447,14 @@
    "seguidores": 7578,
    "posts": 159
   }
+ ],
+ "diario": [
+  {
+   "data": "2026-10-04",
+   "hora_brt": "18:49",
+   "seguidores": 8833,
+   "posts": 165,
+   "ganho_dia": null
+  }
  ]
 }
