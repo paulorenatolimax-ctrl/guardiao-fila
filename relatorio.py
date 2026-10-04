@@ -19,8 +19,22 @@ while url and len(out) < 200:
                 row["erro"] = str(e)[:60]
         out.append(row)
     url = d.get("paging", {}).get("next")
+# Reels de TESTE (trial, só para não seguidores) não aparecem em /media: busca pelo media_id do teste.json
+vistos = {r["id"] for r in out}
+for it in json.load(open("teste.json")).get("fila", []):
+    mid = it.get("media_id")
+    if not mid or mid in vistos: continue
+    row = {"id": mid, "timestamp": it.get("publicado"), "media_product_type": "TRIAL_REEL", "caption": f"[TESTE n={it.get('n')}] " + (it.get("legenda") or "")[:70].replace("\n", " ")}
+    try:
+        m = get(f"{API}/{mid}?fields=like_count,comments_count,permalink&access_token={TOK}")
+        row.update({k: m.get(k) for k in ("like_count", "comments_count", "permalink")})
+        ins = get(f"{API}/{mid}/insights?metric=views,reach,saved,shares,total_interactions&access_token={TOK}")
+        for x in ins.get("data", []): row[x["name"]] = x["values"][0]["value"]
+    except Exception as e:
+        row["erro"] = str(e)[:60]
+    out.append(row)
 json.dump(out, open("relatorio.json", "w"), ensure_ascii=False, indent=1)
-cols = ["timestamp", "views", "reach", "like_count", "comments_count", "shares", "saved", "total_interactions", "caption", "permalink"]
+cols = ["media_product_type", "timestamp", "views", "reach", "like_count", "comments_count", "shares", "saved", "total_interactions", "caption", "permalink"]
 with open("relatorio.csv", "w", newline="") as f:
     w = csv.DictWriter(f, fieldnames=cols, extrasaction="ignore"); w.writeheader(); w.writerows(out)
 print(len(out), "posts")
