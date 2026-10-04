@@ -17,8 +17,8 @@
    "destaque": "comece"
   },
   {
-   "arquivo": "dq_05_trilha.jpg",
-   "destaque": "trilha"
+   "arquivo": "dq_05_comece.jpg",
+   "destaque": "comece"
   },
   {
    "arquivo": "dq_06_trilha.jpg",
@@ -33,8 +33,8 @@
    "destaque": "trilha"
   },
   {
-   "arquivo": "dq_09_idolos.jpg",
-   "destaque": "idolos"
+   "arquivo": "dq_09_trilha.jpg",
+   "destaque": "trilha"
   },
   {
    "arquivo": "dq_10_idolos.jpg",
@@ -61,8 +61,8 @@
    "destaque": "idolos"
   },
   {
-   "arquivo": "dq_16_estante.jpg",
-   "destaque": "estante"
+   "arquivo": "dq_16_idolos.jpg",
+   "destaque": "idolos"
   },
   {
    "arquivo": "dq_17_estante.jpg",
@@ -73,8 +73,8 @@
    "destaque": "estante"
   },
   {
-   "arquivo": "dq_19_pais.jpg",
-   "destaque": "pais"
+   "arquivo": "dq_19_estante.jpg",
+   "destaque": "estante"
   },
   {
    "arquivo": "dq_20_pais.jpg",
@@ -82,6 +82,10 @@
   },
   {
    "arquivo": "dq_21_pais.jpg",
+   "destaque": "pais"
+  },
+  {
+   "arquivo": "dq_22_pais.jpg",
    "destaque": "pais"
   }
  ]
