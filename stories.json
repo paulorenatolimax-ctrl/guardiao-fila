@@ -165,6 +165,25 @@
   {
    "arquivo": "dq3_10_pais.jpg",
    "destaque": "pais"
+  },
+  {
+   "arquivo": "dq3_11_video.jpg",
+   "destaque": "video"
+  },
+  {
+   "arquivo": "story_clip_251.mp4",
+   "destaque": "video",
+   "release": true
+  },
+  {
+   "arquivo": "story_clip_317.mp4",
+   "destaque": "video",
+   "release": true
+  },
+  {
+   "arquivo": "story_clip_300.mp4",
+   "destaque": "video",
+   "release": true
   }
  ]
 }

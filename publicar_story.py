@@ -11,12 +11,17 @@ def chamar(url, dados=None):
 d = json.load(open("stories.json"))
 for it in d["stories"]:
     if it.get("publicado"): continue
-    url = f"https://raw.githubusercontent.com/{REPO}/main/stories/{urllib.parse.quote(it['arquivo'])}"
-    c = chamar(f"{API}/{UID}/media", {"image_url": url, "media_type": "STORIES", "access_token": TOK})
-    for _ in range(20):
+    if it.get("release"):  # vídeo: fica no release "videos"
+        url = f"https://github.com/{REPO}/releases/download/videos/{urllib.parse.quote(it['arquivo'])}"
+        c = chamar(f"{API}/{UID}/media", {"video_url": url, "media_type": "STORIES", "access_token": TOK})
+    else:
+        url = f"https://raw.githubusercontent.com/{REPO}/main/stories/{urllib.parse.quote(it['arquivo'])}"
+        c = chamar(f"{API}/{UID}/media", {"image_url": url, "media_type": "STORIES", "access_token": TOK})
+    for _ in range(60):
         st = chamar(f"{API}/{c['id']}?fields=status_code&access_token={TOK}").get("status_code")
         if st == "FINISHED": break
         time.sleep(3)
+    time.sleep(3)
     p = chamar(f"{API}/{UID}/media_publish", {"creation_id": c["id"], "access_token": TOK})
     it["publicado"] = time.strftime("%Y-%m-%d %H:%M"); it["media_id"] = p["id"]
     json.dump(d, open("stories.json", "w"), ensure_ascii=False, indent=1)
