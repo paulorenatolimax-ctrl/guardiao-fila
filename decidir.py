@@ -31,7 +31,7 @@ ESPECIAIS = {
     "carrossel": {
         # 03/10/2026: modo eleição (6/dia) cancelado pelo Paulo; volta à grade normal de 3 por dia.
         # 04/10/2026: Paulo pediu 4 carrosséis no dia (carrossel ganha tração com os dias).
-        date(2026, 10, 4): ([8, 11, 15, 20], timedelta(minutes=90), 4),
+        date(2026, 10, 4): ([8, 11, 15, 20], timedelta(minutes=90), 5),  # 5: Gramsci extra às 17h, a pedido
     },
 }
 INICIO_DIA = 7  # nada sai antes das 7h BRT (e o cron vai até 23h59 BRT)
