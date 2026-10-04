@@ -81,8 +81,16 @@ MAX_SLIDES = 10  # limite da API do Instagram para carrossel
 def proximo_valido(itens, max_slides=MAX_SLIDES):
     """Primeiro item não publicado com <= max_slides slides. Retorna (item|None, [mensagens de pulo])."""
     logs = []
+    # trava contra duplicata (04/10/2026: o carrossel de dados saiu 2x porque foi recolocado na fila
+    # já publicado): mesmas imagens ou mesmo título de um item já publicado = pula
+    ja = [x for x in itens if x.get("publicado")]
+    ja_slides = {tuple(x.get("slides", [])) for x in ja}
+    ja_titulos = {(x.get("titulo") or "").strip().lower() for x in ja}
     for c in itens:
         if c.get("publicado"):
+            continue
+        if tuple(c.get("slides", [])) in ja_slides or (c.get("titulo") or "").strip().lower() in ja_titulos:
+            logs.append(f"PULADO {c.get('id')}: já publicado antes (mesmas imagens ou mesmo título)")
             continue
         n = len(c.get("slides", []))
         if n > max_slides:
