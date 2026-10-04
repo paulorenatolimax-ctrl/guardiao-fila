@@ -128,62 +128,90 @@
   },
   {
    "arquivo": "dq3_01_idolos.jpg",
-   "destaque": "idolos"
+   "destaque": "idolos",
+   "publicado": "2026-10-04 23:30",
+   "media_id": "17876839857567120"
   },
   {
    "arquivo": "dq3_02_trilha.jpg",
-   "destaque": "trilha"
+   "destaque": "trilha",
+   "publicado": "2026-10-04 23:30",
+   "media_id": "17910999561552093"
   },
   {
    "arquivo": "dq3_03_trilha.jpg",
-   "destaque": "trilha"
+   "destaque": "trilha",
+   "publicado": "2026-10-04 23:31",
+   "media_id": "17961582333211934"
   },
   {
    "arquivo": "dq3_04_trilha.jpg",
-   "destaque": "trilha"
+   "destaque": "trilha",
+   "publicado": "2026-10-04 23:31",
+   "media_id": "18132435526667195"
   },
   {
    "arquivo": "dq3_05_pais.jpg",
-   "destaque": "pais"
+   "destaque": "pais",
+   "publicado": "2026-10-04 23:31",
+   "media_id": "18121777843797484"
   },
   {
    "arquivo": "dq3_06_pais.jpg",
-   "destaque": "pais"
+   "destaque": "pais",
+   "publicado": "2026-10-04 23:32",
+   "media_id": "18031078925854765"
   },
   {
    "arquivo": "dq3_07_pais.jpg",
-   "destaque": "pais"
+   "destaque": "pais",
+   "publicado": "2026-10-04 23:32",
+   "media_id": "17935108035253886"
   },
   {
    "arquivo": "dq3_08_pais.jpg",
-   "destaque": "pais"
+   "destaque": "pais",
+   "publicado": "2026-10-04 23:32",
+   "media_id": "17949476316318232"
   },
   {
    "arquivo": "dq3_09_pais.jpg",
-   "destaque": "pais"
+   "destaque": "pais",
+   "publicado": "2026-10-04 23:32",
+   "media_id": "18646097227028860"
   },
   {
    "arquivo": "dq3_10_pais.jpg",
-   "destaque": "pais"
+   "destaque": "pais",
+   "publicado": "2026-10-04 23:33",
+   "media_id": "18428131462150725"
   },
   {
    "arquivo": "dq3_11_video.jpg",
-   "destaque": "video"
+   "destaque": "video",
+   "publicado": "2026-10-04 23:33",
+   "media_id": "18078829883710540"
   },
   {
    "arquivo": "story_clip_251.mp4",
    "destaque": "video",
-   "release": true
+   "release": true,
+   "publicado": "2026-10-04 23:34",
+   "media_id": "18141083530548119"
   },
   {
    "arquivo": "story_clip_317.mp4",
    "destaque": "video",
-   "release": true
+   "release": true,
+   "publicado": "2026-10-04 23:34",
+   "media_id": "18087682799274589"
   },
   {
    "arquivo": "story_clip_300.mp4",
    "destaque": "video",
-   "release": true
+   "release": true,
+   "publicado": "2026-10-04 23:35",
+   "media_id": "18434978794194930"
   }
  ]
 }
