@@ -1,0 +1,88 @@
+{
+ "stories": [
+  {
+   "arquivo": "dq_01_comece.jpg",
+   "destaque": "comece"
+  },
+  {
+   "arquivo": "dq_02_comece.jpg",
+   "destaque": "comece"
+  },
+  {
+   "arquivo": "dq_03_comece.jpg",
+   "destaque": "comece"
+  },
+  {
+   "arquivo": "dq_04_comece.jpg",
+   "destaque": "comece"
+  },
+  {
+   "arquivo": "dq_05_trilha.jpg",
+   "destaque": "trilha"
+  },
+  {
+   "arquivo": "dq_06_trilha.jpg",
+   "destaque": "trilha"
+  },
+  {
+   "arquivo": "dq_07_trilha.jpg",
+   "destaque": "trilha"
+  },
+  {
+   "arquivo": "dq_08_trilha.jpg",
+   "destaque": "trilha"
+  },
+  {
+   "arquivo": "dq_09_idolos.jpg",
+   "destaque": "idolos"
+  },
+  {
+   "arquivo": "dq_10_idolos.jpg",
+   "destaque": "idolos"
+  },
+  {
+   "arquivo": "dq_11_idolos.jpg",
+   "destaque": "idolos"
+  },
+  {
+   "arquivo": "dq_12_idolos.jpg",
+   "destaque": "idolos"
+  },
+  {
+   "arquivo": "dq_13_idolos.jpg",
+   "destaque": "idolos"
+  },
+  {
+   "arquivo": "dq_14_idolos.jpg",
+   "destaque": "idolos"
+  },
+  {
+   "arquivo": "dq_15_idolos.jpg",
+   "destaque": "idolos"
+  },
+  {
+   "arquivo": "dq_16_estante.jpg",
+   "destaque": "estante"
+  },
+  {
+   "arquivo": "dq_17_estante.jpg",
+   "destaque": "estante"
+  },
+  {
+   "arquivo": "dq_18_estante.jpg",
+   "destaque": "estante"
+  },
+  {
+   "arquivo": "dq_19_pais.jpg",
+   "destaque": "pais"
+  },
+  {
+   "arquivo": "dq_20_pais.jpg",
+   "destaque": "pais"
+  },
+  {
+   "arquivo": "dq_21_pais.jpg",
+   "destaque": "pais"
+  }
+ ]
+}
