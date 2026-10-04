@@ -92,6 +92,10 @@ def proximo_valido(itens, max_slides=MAX_SLIDES):
         if tuple(c.get("slides", [])) in ja_slides or (c.get("titulo") or "").strip().lower() in ja_titulos:
             logs.append(f"PULADO {c.get('id')}: já publicado antes (mesmas imagens ou mesmo título)")
             continue
+        # trava do OK (04/10/2026): o Paulo vê cada carrossel antes. Sem "aprovado": true, nunca sai (nem com forcar).
+        if "slides" in c and not c.get("aprovado"):
+            logs.append(f"PULADO {c.get('id')}: ainda sem o OK do Paulo (falta \"aprovado\": true)")
+            continue
         n = len(c.get("slides", []))
         if n > max_slides:
             logs.append(f"PULADO {c.get('id')}: {n} slides (máximo {max_slides} no Instagram)")

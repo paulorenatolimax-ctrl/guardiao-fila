@@ -128,7 +128,7 @@ class TestTeste(unittest.TestCase):
 
 class TestTravaSlides(unittest.TestCase):
     def test_pula_item_com_mais_de_10_slides(self):
-        itens = [{"id": "X", "slides": list("abcdefghijkl")}, {"id": "Y", "slides": list("abcdefghij")}]
+        itens = [{"id": "X", "slides": list("abcdefghijkl"), "aprovado": True}, {"id": "Y", "slides": list("abcdefghij"), "aprovado": True}]
         c, logs = proximo_valido(itens)
         self.assertEqual(c["id"], "Y")
         self.assertIn("PULADO X", logs[0])
@@ -136,6 +136,12 @@ class TestTravaSlides(unittest.TestCase):
     def test_so_invalidos_retorna_none(self):
         c, logs = proximo_valido([{"id": "X", "slides": list("abcdefghijk")}])
         self.assertIsNone(c)
+
+    def test_sem_ok_do_paulo_nao_sai(self):
+        itens = [{"id": "X", "slides": list("abcde")}, {"id": "Y", "slides": list("abcde"), "aprovado": True}]
+        c, logs = proximo_valido(itens)
+        self.assertEqual(c["id"], "Y")
+        self.assertIn("sem o OK", logs[0])
 
 
 if __name__ == "__main__":
