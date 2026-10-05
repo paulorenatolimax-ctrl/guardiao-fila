@@ -87,10 +87,10 @@ class TestEleicao(unittest.TestCase):
         self.assertTrue(decidir("carrossel", brt(22, 0, dia=3), [pub_utc(brt(20, 0, dia=3))] + PEND)[0])
 
     def test_dia_normal_volta(self):
-        itens = [pub_utc(brt(8, 0, dia=5)), pub_utc(brt(11, 0, dia=5))] + PEND
-        self.assertFalse(decidir("carrossel", brt(12, 0, dia=5), itens)[0])   # 2/2 em dia
-        self.assertFalse(decidir("carrossel", brt(10, 0, dia=5), [pub_utc(brt(8, 0, dia=5))] + PEND)[0])
-        itens = [pub_utc(brt(h, 0, dia=5)) for h in (8, 11, 20)] + PEND
+        itens = [pub_utc(brt(8, 0, dia=6)), pub_utc(brt(11, 0, dia=6))] + PEND
+        self.assertFalse(decidir("carrossel", brt(12, 0, dia=6), itens)[0])   # 2/2 em dia
+        self.assertFalse(decidir("carrossel", brt(10, 0, dia=6), [pub_utc(brt(8, 0, dia=6))] + PEND)[0])
+        itens = [pub_utc(brt(h, 0, dia=6)) for h in (8, 11, 20)] + PEND
         self.assertFalse(decidir("carrossel", brt(22, 0, dia=5), itens)[0])   # máx 3
 
 
