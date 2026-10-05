@@ -31,6 +31,8 @@ ESPECIAIS = {
     "carrossel": {
         # 03/10/2026: modo eleição (6/dia) cancelado pelo Paulo; volta à grade normal de 3 por dia.
         # 04/10/2026: Paulo pediu 4 carrosséis no dia (carrossel ganha tração com os dias).
+        # 05/10/2026: Paulo aprovou tudo e pediu 5 no dia (8h saiu atrasado pelo bloqueio da API).
+        date(2026, 10, 5): ([8, 11, 14, 17, 20], timedelta(minutes=90), 5),
         date(2026, 10, 4): ([8, 11, 15, 16, 20], timedelta(minutes=90), 5),  # 5: Gramsci extra às 17h, a pedido
     },
 }
