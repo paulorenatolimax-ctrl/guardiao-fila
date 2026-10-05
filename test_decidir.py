@@ -44,14 +44,14 @@ class TestCarrossel(unittest.TestCase):
         # 90 min depois -> publica o segundo
         self.assertTrue(decidir("carrossel", brt(13, 30), itens)[0])
         itens = [pub_utc(brt(12, 0)), pub_utc(brt(13, 30))] + PEND
-        self.assertFalse(decidir("carrossel", brt(15, 0), itens)[0])  # 2/2 em dia
+        self.assertFalse(decidir("carrossel", brt(13, 45), itens)[0])  # 2/2 em dia (14h ainda não venceu)
 
     def test_todos_do_dia_ja_publicados(self):
-        itens = [pub_utc(brt(8, 5)), pub_utc(brt(11, 5)), pub_utc(brt(20, 5))] + PEND
+        itens = [pub_utc(brt(h, 5)) for h in (8, 11, 14, 17, 20)] + PEND
         self.assertFalse(decidir("carrossel", brt(22, 0), itens)[0])
 
     def test_maximo_do_dia_mesmo_com_forcados_antes(self):
-        itens = [pub_utc(brt(7, 10)), pub_utc(brt(9, 0)), pub_utc(brt(11, 0))] + PEND
+        itens = [pub_utc(brt(h, m)) for h, m in ((7, 10), (9, 0), (11, 0), (12, 40), (14, 20))] + PEND
         self.assertFalse(decidir("carrossel", brt(21, 0), itens)[0])
 
     def test_antes_das_7h_nao_publica(self):
