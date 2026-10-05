@@ -9,8 +9,12 @@ def chamar(url, dados=None):
     try: return json.load(urllib.request.urlopen(req, timeout=120))
     except urllib.error.HTTPError as e: print("ERRO:", e.code, e.read().decode()[:400]); raise
 d = json.load(open("stories.json"))
+MAX_POR_RODADA = 8   # 05/10/2026: 42 stories em 1 noite renderam bloqueio de "muitas ações"
+feitos = 0
 for it in d["stories"]:
     if it.get("publicado"): continue
+    if feitos >= MAX_POR_RODADA: print("limite da rodada atingido; o resto fica para depois"); break
+    feitos += 1
     if it.get("release"):  # vídeo: fica no release "videos"
         url = f"https://github.com/{REPO}/releases/download/videos/{urllib.parse.quote(it['arquivo'])}"
         c = chamar(f"{API}/{UID}/media", {"video_url": url, "media_type": "STORIES", "access_token": TOK})
@@ -25,4 +29,4 @@ for it in d["stories"]:
     p = chamar(f"{API}/{UID}/media_publish", {"creation_id": c["id"], "access_token": TOK})
     it["publicado"] = time.strftime("%Y-%m-%d %H:%M"); it["media_id"] = p["id"]
     json.dump(d, open("stories.json", "w"), ensure_ascii=False, indent=1)
-    print("STORY", it["arquivo"], p["id"]); time.sleep(4)
+    print("STORY", it["arquivo"], p["id"]); time.sleep(45)
