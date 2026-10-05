@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from decidir import decidir, proximo_valido
 
 
-def brt(h, m=0, dia=5):  # 05/10 = dia normal (03 e 04 são eleição)
+def brt(h, m=0, dia=6):  # 06/10 = dia normal (03, 04 e 05 têm grade especial)
     return datetime(2026, 10, dia, h, m)
 
 
