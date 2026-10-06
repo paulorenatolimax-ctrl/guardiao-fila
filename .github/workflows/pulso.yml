@@ -1,0 +1,30 @@
+name: Pulso do Instagram
+# De hora em hora: posts dos últimos 10 dias + seguidores, para o Guardião Studio medir velocidade.
+# Grava no branch `pulso` (um commit só, sobrescrito) para não encher o main nem brigar com a fila.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 * * * *'
+concurrency:
+  group: pulso
+  cancel-in-progress: false
+jobs:
+  pulso:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          git fetch origin pulso --depth=1 2>/dev/null && git show origin/pulso:pulso.json > pulso_prev.json || true
+      - run: python3 pulso.py
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+      - run: |
+          mkdir -p /tmp/pulso && cp pulso.json /tmp/pulso/ && cd /tmp/pulso
+          git init -q -b pulso
+          git config user.name "fila-guardiao"; git config user.email "actions@github.com"
+          git add pulso.json && git commit -qm "pulso $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" pulso
