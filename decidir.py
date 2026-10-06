@@ -22,7 +22,8 @@ from datetime import date, datetime, timedelta, timezone
 
 TIPOS = {
     # tipo:      arquivo,            chave,        horários BRT,  intervalo mínimo,      máximo/dia
-    "reel":      ("fila.json",       "fila",       [13, 19],      timedelta(hours=4),    2),
+    # 06/10/2026: Paulo reduziu para 1 Reel por dia, às 13h.
+    "reel":      ("fila.json",       "fila",       [13],          timedelta(hours=4),    1),
     # 05/10/2026: Paulo fixou a estratégia em 2 Reels + 5 carrosséis por dia ("está funcionando").
     "carrossel": ("carrosseis.json", "carrosseis", [8, 11, 14, 17, 20], timedelta(minutes=90), 5),
     "teste":     ("teste.json",      "fila",       [8, 14, 18],   timedelta(minutes=90), 3),
