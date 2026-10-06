@@ -1,0 +1,25 @@
+name: Facebook (postar o último publicado)
+on:
+  workflow_dispatch:
+    inputs:
+      tipo:
+        description: "carrossel ou reel"
+        default: "carrossel"
+jobs:
+  fb:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - env:
+          FB_PAGE_TOKEN: ${{ secrets.FB_PAGE_TOKEN }}
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+          RELEASE_TAG: videos
+        run: python3 publicar_facebook.py ${{ github.event.inputs.tipo }}
+      - run: |
+          git config user.name "fila-guardiao"; git config user.email "actions@github.com"
+          git add carrosseis.json fila.json
+          git diff --staged --quiet && exit 0
+          git commit -m "facebook: registra fb_id"
+          for i in 1 2 3; do git pull --rebase && git push && exit 0; sleep 5; done
