@@ -13,8 +13,22 @@ import json, os, sys, time, urllib.parse, urllib.request
 
 TIPO = sys.argv[1] if len(sys.argv) > 1 else "reel"
 TOK = os.environ.get("FB_PAGE_TOKEN", ""); PAGE = os.environ.get("FB_PAGE_ID", "")
-if not (TOK and PAGE):
-    print("Facebook: FB_PAGE_TOKEN/FB_PAGE_ID ausentes nos secrets — pulando (a fila segue normal)."); sys.exit(0)
+if not TOK:
+    print("Facebook: FB_PAGE_TOKEN ausente nos secrets — pulando (a fila segue normal)."); sys.exit(0)
+# 06/10/2026: o secret guarda o token de USUÁRIO de vida longa (vence em 05/12/2026).
+# A cada execução, troca pelo token da Página "Guardião da Tradição" (me/accounts); se já for token de Página, segue.
+try:
+    _r = json.load(urllib.request.urlopen("https://graph.facebook.com/v21.0/me/accounts?fields=id,name,access_token&access_token="
+                                          + urllib.parse.quote(TOK), timeout=60))
+    _pgs = _r.get("data", [])
+    _pg = next((x for x in _pgs if PAGE and x["id"] == PAGE), None) or next((x for x in _pgs if "Guardi" in x.get("name", "")), None)
+    if _pg:
+        TOK, PAGE = _pg["access_token"], _pg["id"]
+        print(f"Facebook: usando a Página {_pg['name']} ({PAGE}).")
+except Exception as _e:
+    print("Facebook: me/accounts falhou, tentando o token como token de Página:", str(_e)[:120])
+if not PAGE:
+    print("Facebook: não achei a Página — pulando (a fila segue normal)."); sys.exit(0)
 REPO = os.environ.get("GITHUB_REPOSITORY", "paulorenatolimax-ctrl/guardiao-fila")
 TAG = os.environ.get("RELEASE_TAG", "videos")
 API = "https://graph.facebook.com/v21.0"
