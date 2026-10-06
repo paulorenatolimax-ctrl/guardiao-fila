@@ -36,7 +36,8 @@ ESPECIAIS = {
         # 05/10/2026: Paulo aprovou tudo e pediu 5 no dia (8h saiu atrasado pelo bloqueio da API).
         # 06/10/2026: Reel do Millett saiu às 10h42; carrossel das 11h passa para 12h (pedido do Paulo).
         # 06/10/2026: o voto feminino saiu forçado às 12h15 (conta como o horário das 13h); Gramsci às 20h = 6 no dia.
-        date(2026, 10, 6): ([8, 12, 13, 14, 17, 20], timedelta(minutes=90), 6),
+        # (14h16: o socialista de iPhone saiu no lugar do Peirce corrigido, barrado pela trava de título; Peirce às 17h, Gramsci às 20h)
+        date(2026, 10, 6): ([8, 12, 13, 14, 15, 17, 20], timedelta(minutes=90), 7),
         date(2026, 10, 5): ([8, 11, 14, 17, 20], timedelta(minutes=90), 5),
         date(2026, 10, 4): ([8, 11, 15, 16, 20], timedelta(minutes=90), 5),  # 5: Gramsci extra às 17h, a pedido
     },
