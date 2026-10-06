@@ -1,0 +1,218 @@
+{
+ "follower_demographics.gender": [
+  [
+   "M",
+   1647
+  ],
+  [
+   "F",
+   702
+  ],
+  [
+   "U",
+   334
+  ]
+ ],
+ "follower_demographics.age": [
+  [
+   "45-54",
+   834
+  ],
+  [
+   "35-44",
+   827
+  ],
+  [
+   "25-34",
+   423
+  ],
+  [
+   "55-64",
+   358
+  ],
+  [
+   "65+",
+   136
+  ],
+  [
+   "18-24",
+   91
+  ],
+  [
+   "13-17",
+   14
+  ]
+ ],
+ "follower_demographics.city": [
+  [
+   "São Paulo, São Paulo (state)",
+   222
+  ],
+  [
+   "Rio de Janeiro, Rio de Janeiro (state)",
+   155
+  ],
+  [
+   "Belo Horizonte, Minas Gerais",
+   68
+  ],
+  [
+   "Fortaleza, Ceará",
+   50
+  ],
+  [
+   "Curitiba, Paraná",
+   47
+  ],
+  [
+   "Salvador, Bahia",
+   45
+  ],
+  [
+   "Goiânia, Goiás",
+   38
+  ],
+  [
+   "Manaus, Amazonas",
+   32
+  ],
+  [
+   "Niterói, Rio de Janeiro (state)",
+   30
+  ],
+  [
+   "Taguatinga, Federal District",
+   25
+  ],
+  [
+   "Campinas, São Paulo (state)",
+   25
+  ],
+  [
+   "Guarulhos, São Paulo (state)",
+   23
+  ],
+  [
+   "Belém, Pará",
+   23
+  ],
+  [
+   "Porto Alegre, Rio Grande do Sul",
+   22
+  ],
+  [
+   "São Luís, Maranhão",
+   21
+  ]
+ ],
+ "engaged_audience_demographics.gender": [
+  [
+   "M",
+   12480
+  ],
+  [
+   "F",
+   7795
+  ],
+  [
+   "U",
+   2600
+  ]
+ ],
+ "engaged_audience_demographics.age": [
+  [
+   "45-54",
+   6662
+  ],
+  [
+   "35-44",
+   6589
+  ],
+  [
+   "25-34",
+   3851
+  ],
+  [
+   "55-64",
+   3027
+  ],
+  [
+   "18-24",
+   1445
+  ],
+  [
+   "65+",
+   1058
+  ],
+  [
+   "13-17",
+   242
+  ],
+  [
+   "U",
+   1
+  ]
+ ],
+ "engaged_audience_demographics.city": [
+  [
+   "São Paulo, São Paulo (state)",
+   1700
+  ],
+  [
+   "Rio de Janeiro, Rio de Janeiro (state)",
+   1418
+  ],
+  [
+   "Fortaleza, Ceará",
+   508
+  ],
+  [
+   "Belo Horizonte, Minas Gerais",
+   479
+  ],
+  [
+   "Curitiba, Paraná",
+   439
+  ],
+  [
+   "Salvador, Bahia",
+   352
+  ],
+  [
+   "Recife, Pernambuco",
+   351
+  ],
+  [
+   "Porto Alegre, Rio Grande do Sul",
+   338
+  ],
+  [
+   "Goiânia, Goiás",
+   311
+  ],
+  [
+   "Manaus, Amazonas",
+   308
+  ],
+  [
+   "Belém, Pará",
+   222
+  ],
+  [
+   "Taguatinga, Federal District",
+   203
+  ],
+  [
+   "Florianópolis, Santa Catarina",
+   193
+  ],
+  [
+   "João Pessoa, Paraíba",
+   190
+  ],
+  [
+   "Natal, Rio Grande do Norte",
+   190
+  ]
+ ]
+}
