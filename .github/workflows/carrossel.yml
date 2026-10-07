@@ -42,6 +42,11 @@ jobs:
           X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
           X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
         run: pip install --no-cache-dir -q requests-oauthlib && python3 publicar_x_carrossel.py
+      - name: Postar no Threads (se o token existir)
+        continue-on-error: true
+        env:
+          THREADS_TOKEN: ${{ secrets.THREADS_TOKEN }}
+        run: python3 publicar_threads.py carrossel
       - run: |
           git config user.name "fila-guardiao"; git config user.email "actions@github.com"
           git add carrosseis.json

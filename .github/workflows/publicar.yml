@@ -64,6 +64,13 @@ jobs:
           FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
           RELEASE_TAG: videos
         run: python3 publicar_facebook.py reel
+      - name: Postar no Threads (se o token existir)
+        if: steps.decidir.outputs.deve_publicar == 'true'
+        continue-on-error: true
+        env:
+          THREADS_TOKEN: ${{ secrets.THREADS_TOKEN }}
+          RELEASE_TAG: videos
+        run: python3 publicar_threads.py reel
       - name: Enviar ao TikTok (se as chaves existirem)
         if: steps.decidir.outputs.deve_publicar == 'true'
         continue-on-error: true
