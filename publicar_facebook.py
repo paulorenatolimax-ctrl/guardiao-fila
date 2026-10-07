@@ -44,6 +44,10 @@ def chamar(url, dados=None, headers=None):
 arq, chave = ("fila.json", "fila") if TIPO == "reel" else ("carrosseis.json", "carrosseis")
 dados = json.load(open(arq))
 alvo = [i for i in dados[chave] if i.get("publicado") and not i.get("fb_id") and not i.get("fb_pular")]
+# 07/10/2026: só o que saiu nas últimas 6 h — sem isso, a cada execução (5 em 5 min) ele postava um antigo.
+import datetime as _dt
+_lim = (_dt.datetime.utcnow() - _dt.timedelta(hours=9)).strftime("%Y-%m-%d %H:%M")   # "publicado" está em BRT (UTC-3)
+alvo = [i for i in alvo if str(i.get("publicado", "")) >= _lim]
 if not alvo: print("Facebook: nada novo para postar."); sys.exit(0)
 item = alvo[-1]   # só o mais recente: não despeja atrasados de uma vez
 legenda = item.get("legenda", "")

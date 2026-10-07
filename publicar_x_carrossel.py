@@ -15,6 +15,10 @@ x = OAuth1Session(K[0], client_secret=K[1], resource_owner_key=K[2], resource_ow
 
 dados = json.load(open("carrosseis.json"))
 alvo = [i for i in dados["carrosseis"] if i.get("publicado") and not i.get("x_id") and not i.get("x_pular")]
+# 07/10/2026: só o que saiu nas últimas 6 h — sem isso, a cada execução (5 em 5 min) ele postava um antigo.
+import datetime as _dt
+_lim = (_dt.datetime.utcnow() - _dt.timedelta(hours=9)).strftime("%Y-%m-%d %H:%M")   # "publicado" está em BRT (UTC-3)
+alvo = [i for i in alvo if str(i.get("publicado", "")) >= _lim]
 if not alvo: print("X: nada novo para postar."); sys.exit(0)
 item = alvo[-1]   # só o mais recente: não despeja atrasados de uma vez
 
