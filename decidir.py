@@ -38,6 +38,8 @@ ESPECIAIS = {
         # 06/10/2026: o voto feminino saiu forçado às 12h15 (conta como o horário das 13h); Gramsci às 20h = 6 no dia.
         # (14h16: o socialista de iPhone saiu no lugar do Peirce corrigido, barrado pela trava de título; Peirce às 17h, Gramsci às 20h)
         # 19h14: Gramsci forçado a pedido do Paulo; 21h: mais um (DIR1).
+        # 07/10/2026: Paulo pediu o carrossel da democracia (DEM1) às 19h; CPV1 segue às 20h (intervalo do dia: 55 min).
+        date(2026, 10, 7): ([8, 11, 14, 17, 19, 20], timedelta(minutes=55), 6),
         date(2026, 10, 6): ([8, 12, 13, 14, 15, 17, 19, 21], timedelta(minutes=90), 8),
         date(2026, 10, 5): ([8, 11, 14, 17, 20], timedelta(minutes=90), 5),
         date(2026, 10, 4): ([8, 11, 15, 16, 20], timedelta(minutes=90), 5),  # 5: Gramsci extra às 17h, a pedido
