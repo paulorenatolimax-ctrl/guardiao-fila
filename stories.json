@@ -265,16 +265,24 @@
    "publicado": "cancelado (não precisou: vídeo antigo já fica logo após a capa)"
   },
   {
-   "arquivo": "voto_resposta_1.jpg"
+   "arquivo": "voto_resposta_1.jpg",
+   "publicado": "2026-10-08 16:17",
+   "media_id": "18109018874523635"
   },
   {
-   "arquivo": "voto_resposta_2.jpg"
+   "arquivo": "voto_resposta_2.jpg",
+   "publicado": "2026-10-08 16:18",
+   "media_id": "18111792944151546"
   },
   {
-   "arquivo": "voto_resposta_3.jpg"
+   "arquivo": "voto_resposta_3.jpg",
+   "publicado": "2026-10-08 16:19",
+   "media_id": "18165918049469666"
   },
   {
-   "arquivo": "voto_resposta_4.jpg"
+   "arquivo": "voto_resposta_4.jpg",
+   "publicado": "2026-10-08 16:20",
+   "media_id": "18134249488706875"
   }
  ]
 }
