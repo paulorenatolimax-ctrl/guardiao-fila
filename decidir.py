@@ -25,7 +25,8 @@ TIPOS = {
     # 06/10/2026: Paulo reduziu para 1 Reel por dia, às 13h.
     "reel":      ("fila.json",       "fila",       [13],          timedelta(hours=4),    1),
     # 05/10/2026: Paulo fixou a estratégia em 2 Reels + 5 carrosséis por dia ("está funcionando").
-    "carrossel": ("carrosseis.json", "carrosseis", [8, 11, 14, 17, 20], timedelta(minutes=90), 5),
+    # 08/10/2026: Paulo pediu 6 por dia: 8, 11, 14, 17, 19 e 21h.
+    "carrossel": ("carrosseis.json", "carrosseis", [8, 11, 14, 17, 19, 21], timedelta(minutes=55), 6),
     "teste":     ("teste.json",      "fila",       [8, 14, 18],   timedelta(minutes=90), 3),
 }
 # MODO ELEIÇÃO: grade especial por data (BRT), por tipo. Fora dessas datas vale TIPOS.
@@ -39,6 +40,7 @@ ESPECIAIS = {
         # (14h16: o socialista de iPhone saiu no lugar do Peirce corrigido, barrado pela trava de título; Peirce às 17h, Gramsci às 20h)
         # 19h14: Gramsci forçado a pedido do Paulo; 21h: mais um (DIR1).
         # 07/10/2026: Paulo pediu o carrossel da democracia (DEM1) às 19h; CPV1 segue às 20h (intervalo do dia: 55 min).
+        date(2026, 10, 8): ([8, 11, 14, 17, 18, 20], timedelta(minutes=55), 6),  # ONU1 "já sobe" às 18h45
         date(2026, 10, 7): ([8, 11, 14, 17, 19, 20], timedelta(minutes=55), 6),
         date(2026, 10, 6): ([8, 12, 13, 14, 15, 17, 19, 21], timedelta(minutes=90), 8),
         date(2026, 10, 5): ([8, 11, 14, 17, 20], timedelta(minutes=90), 5),
