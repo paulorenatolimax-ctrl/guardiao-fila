@@ -329,22 +329,30 @@
   {
    "arquivo": "trilha1010_06a.mp4",
    "destaque": "trilha_venda",
-   "release": true
+   "release": true,
+   "publicado": "2026-10-10 15:44",
+   "media_id": "17963129472198413"
   },
   {
    "arquivo": "trilha1010_06b.mp4",
    "destaque": "trilha_venda",
-   "release": true
+   "release": true,
+   "publicado": "2026-10-10 15:46",
+   "media_id": "17949227319299569"
   },
   {
    "arquivo": "trilha1010_07.mp4",
    "destaque": "trilha_venda",
-   "release": true
+   "release": true,
+   "publicado": "2026-10-10 15:47",
+   "media_id": "17879827020543744"
   },
   {
    "arquivo": "trilha1010_08.mp4",
    "destaque": "trilha_venda",
-   "release": true
+   "release": true,
+   "publicado": "2026-10-10 15:49",
+   "media_id": "17904736704350248"
   }
  ]
 }
