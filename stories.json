@@ -287,32 +287,44 @@
   {
    "arquivo": "trilha1010_01.mp4",
    "destaque": "trilha_venda",
-   "release": true
+   "release": true,
+   "publicado": "2026-10-10 13:28",
+   "media_id": "18114499781103771"
   },
   {
    "arquivo": "trilha1010_02a.mp4",
    "destaque": "trilha_venda",
-   "release": true
+   "release": true,
+   "publicado": "2026-10-10 13:29",
+   "media_id": "17874841758585254"
   },
   {
    "arquivo": "trilha1010_02b.mp4",
    "destaque": "trilha_venda",
-   "release": true
+   "release": true,
+   "publicado": "2026-10-10 13:31",
+   "media_id": "18126586612881570"
   },
   {
    "arquivo": "trilha1010_03.mp4",
    "destaque": "trilha_venda",
-   "release": true
+   "release": true,
+   "publicado": "2026-10-10 13:33",
+   "media_id": "17892682728681273"
   },
   {
    "arquivo": "trilha1010_04.mp4",
    "destaque": "trilha_venda",
-   "release": true
+   "release": true,
+   "publicado": "2026-10-10 13:35",
+   "media_id": "17902641897668806"
   },
   {
    "arquivo": "trilha1010_05.mp4",
    "destaque": "trilha_venda",
-   "release": true
+   "release": true,
+   "publicado": "2026-10-10 13:36",
+   "media_id": "18190656595405031"
   },
   {
    "arquivo": "trilha1010_06a.mp4",
