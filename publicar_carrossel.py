@@ -42,3 +42,9 @@ p = chamar(f"{API}/{UID}/media_publish", {"creation_id": cid, "access_token": TO
 c["publicado"] = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M"); c["media_id"] = p["id"]
 json.dump(fila, open("carrosseis.json", "w"), ensure_ascii=False, indent=2)
 print("  PUBLICADO CARROSSEL NO INSTAGRAM:", p["id"])
+try:  # aviso no WhatsApp para pôr a música; nunca pode quebrar a publicação
+    from avisar import avisar_publicado
+    link = chamar(f"{API}/{p['id']}?fields=permalink&access_token={TOK}").get("permalink", "https://www.instagram.com/")
+    avisar_publicado(c["titulo"], link)
+except Exception as e:
+    print("aviso WhatsApp ignorado:", type(e).__name__)
