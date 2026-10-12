@@ -28,7 +28,9 @@ TIPOS = {
     # 08/10/2026: Paulo pediu 6 por dia: 8, 11, 14, 17, 19 e 21h.
     # 10/10/2026: Paulo aprovou a ESTRATEGIA_EXPLOSAO: a partir de 11/10, 4 por dia às 7h30, 14h, 18h30 e 20h30
     # (horário fracionado: 7.5 = 7h30). Corta a faixa 10h-13h, a mais fraca.
-    "carrossel": ("carrosseis.json", "carrosseis", [7.5, 14, 18.5, 20.5], timedelta(minutes=90), 4),
+    # 12/10/2026: Paulo achou 18h30 e 20h30 colados e o buraco de manhã sem sentido; grade harmonizada a cada ~4 h
+    # (7h30, 11h30, 15h30, 20h), com o Reel das 17h no meio da tarde.
+    "carrossel": ("carrosseis.json", "carrosseis", [7.5, 11.5, 15.5, 20], timedelta(minutes=90), 4),
     "teste":     ("teste.json",      "fila",       [8, 14, 18],   timedelta(minutes=90), 3),
 }
 # MODO ELEIÇÃO: grade especial por data (BRT), por tipo. Fora dessas datas vale TIPOS.
@@ -42,6 +44,7 @@ ESPECIAIS = {
         # (14h16: o socialista de iPhone saiu no lugar do Peirce corrigido, barrado pela trava de título; Peirce às 17h, Gramsci às 20h)
         # 19h14: Gramsci forçado a pedido do Paulo; 21h: mais um (DIR1).
         # 07/10/2026: Paulo pediu o carrossel da democracia (DEM1) às 19h; CPV1 segue às 20h (intervalo do dia: 55 min).
+        date(2026, 10, 12): ([7.5, 9, 14, 18, 21], timedelta(minutes=90), 5),  # JAN1 extra às 9h; Paulo quer o próximo às 14h
         date(2026, 10, 10): ([8, 11, 14, 17, 19, 21], timedelta(minutes=55), 6),  # grade antiga até o fim de 10/10
         date(2026, 10, 8): ([8, 11, 14, 17, 18, 20], timedelta(minutes=55), 6),  # ONU1 "já sobe" às 18h45
         date(2026, 10, 7): ([8, 11, 14, 17, 19, 20], timedelta(minutes=55), 6),
