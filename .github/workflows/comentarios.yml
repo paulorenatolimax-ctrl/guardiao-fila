@@ -1,0 +1,36 @@
+name: Robô de comentários
+on:
+  workflow_dispatch:
+    inputs:
+      modo:
+        description: "listar ou responder"
+        default: listar
+      max:
+        description: "máximo de respostas nesta rodada"
+        default: "40"
+concurrency:
+  group: comentarios
+  cancel-in-progress: false
+permissions:
+  contents: write
+jobs:
+  c:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          MODO: ${{ inputs.modo }}
+          MAX: ${{ inputs.max }}
+        run: python3 comentarios.py
+      - name: Registrar
+        if: always()
+        run: |
+          git config user.name  "fila-guardiao"
+          git config user.email "actions@github.com"
+          git add pendentes.json respostas.json 2>/dev/null || true
+          git diff --staged --quiet && exit 0
+          git commit -m "comentários: ${{ inputs.modo }} $(date -u +%d/%m %H:%M)"
+          for i in 1 2 3 4 5; do git pull --rebase && git push && exit 0; sleep 5; done
