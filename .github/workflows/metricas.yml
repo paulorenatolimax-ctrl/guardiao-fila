@@ -1,0 +1,15 @@
+name: Métricas de posts (por id)
+on:
+  workflow_dispatch:
+    inputs:
+      ids:
+        description: "media ids separados por vírgula"
+jobs:
+  m:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          IDS: ${{ inputs.ids }}
+        run: python3 metricas.py
