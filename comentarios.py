@@ -27,10 +27,11 @@ def listar():
     media = get(f"{UID}/media", fields="id,caption,timestamp", limit=n)["data"]
     out = []
     for m in media:
-        url = None; pagina = 0
+        url = None; pagina = 0; brutos = 0
         while pagina < 5:
             r = json.load(urllib.request.urlopen(url, timeout=60)) if url else get(
                 f"{m['id']}/comments", fields="id,text,username,timestamp,replies{username}", limit=50)
+            brutos += len(r.get("data", []))
             for c in r.get("data", []):
                 if c.get("username") == EU: continue
                 reps = (c.get("replies") or {}).get("data", [])
@@ -39,6 +40,7 @@ def listar():
                             "post": (m.get("caption") or "")[:50], "ts": c.get("timestamp")})
             url = r.get("paging", {}).get("next"); pagina += 1
             if not url: break
+        print(f"  {(m.get('caption') or '')[:40]!r}: {brutos} comentários")
     json.dump(out, open("pendentes.json", "w"), ensure_ascii=False, indent=1)
     print(f"{len(out)} comentários sem resposta em {len(media)} posts")
 
