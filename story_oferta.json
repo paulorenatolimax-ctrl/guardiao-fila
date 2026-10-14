@@ -1,7 +1,7 @@
 {
- "ativo": false,
- "pendente_ok_do_paulo": true,
- "arquivo": "story_oferta_14out.jpg",
+ "ativo": true,
+ "pendente_ok_do_paulo": false,
+ "arquivo": "story_oferta_fundador.jpg",
  "horario": "19h BRT (22:00 UTC), 1 por dia",
  "nota": "Ligar so depois do OK do Paulo na imagem: trocar ativo para true e pendente_ok_do_paulo para false. A API do Instagram nao aceita link sticker; o story diz 'link na bio'.",
  "ultimo_publicado": null
