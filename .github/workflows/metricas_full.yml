@@ -1,0 +1,25 @@
+name: Metricas full (so leitura)
+# 16/10/2026: coleta completa SÓ LEITURA para análise. Grava no branch `metricas`. Não toca na fila nem na publicação.
+on:
+  workflow_dispatch:
+concurrency:
+  group: metricas_full
+  cancel-in-progress: false
+jobs:
+  coleta:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 metricas_full.py
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+      - run: |
+          mkdir -p /tmp/m && cp metricas_full.json /tmp/m/ && cd /tmp/m
+          git init -q -b metricas
+          git config user.name "fila-guardiao"; git config user.email "actions@github.com"
+          git add metricas_full.json && git commit -qm "metricas $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" metricas
