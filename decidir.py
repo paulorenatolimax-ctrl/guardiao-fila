@@ -44,7 +44,8 @@ ESPECIAIS = {
         # (14h16: o socialista de iPhone saiu no lugar do Peirce corrigido, barrado pela trava de título; Peirce às 17h, Gramsci às 20h)
         # 19h14: Gramsci forçado a pedido do Paulo; 21h: mais um (DIR1).
         # 07/10/2026: Paulo pediu o carrossel da democracia (DEM1) às 19h; CPV1 segue às 20h (intervalo do dia: 55 min).
-        date(2026, 10, 13): ([7.5, 11.5, 15.5, 21], timedelta(minutes=90), 4),  # Paulo: último carrossel às 21h (Reel R52 às 19h45)
+        date(2026, 10, 13): ([7.5, 11.5, 15.5, 21], timedelta(minutes=90), 4),
+        date(2026, 10, 16): ([7, 11.5, 15.5, 20], timedelta(minutes=90), 4),  # Paulo: 6x1 (SEIS1) às 7h00 em ponto  # Paulo: último carrossel às 21h (Reel R52 às 19h45)
         date(2026, 10, 12): ([7.5, 9, 14, 18, 21], timedelta(minutes=90), 5),  # JAN1 extra às 9h; Paulo quer o próximo às 14h
         date(2026, 10, 10): ([8, 11, 14, 17, 19, 21], timedelta(minutes=55), 6),  # grade antiga até o fim de 10/10
         date(2026, 10, 8): ([8, 11, 14, 17, 18, 20], timedelta(minutes=55), 6),  # ONU1 "já sobe" às 18h45
