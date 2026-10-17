@@ -8,7 +8,13 @@ def legenda_ok(t):
     # acima do limite: tira hashtags do fim, uma a uma; nunca corta o texto nem as Fontes
     import re
     while len(t) > LIMITE_LEGENDA and re.search(r"\s#\S+\s*$", t): t = re.sub(r"\s*#\S+\s*$", "", t)
-    if len(t) > LIMITE_LEGENDA: print("legenda longa demais mesmo sem hashtags:", len(t)); sys.exit(1)
+    # 17/10/2026: em vez de travar o post, enxuga o rodapé: primeiro os créditos de imagem, depois as últimas Fontes
+    if len(t) > LIMITE_LEGENDA:
+        t = re.sub(r"\n+Imagens:[^\n]*", "", t)
+    while len(t) > LIMITE_LEGENDA and re.search(r"\nFontes:.*\n• [^\n]*$", t, re.S):
+        t = re.sub(r"\n• [^\n]*$", "", t)
+    if len(t) > LIMITE_LEGENDA: print("legenda longa demais mesmo enxugando rodapé:", len(t)); sys.exit(1)
+    print("legenda final:", len(t), "caracteres")
     return t
 API = "https://graph.instagram.com/v21.0"; TOK = os.environ["IG_TOKEN"]; UID = os.environ["IG_USER_ID"]
 REPO = os.environ.get("GITHUB_REPOSITORY", "paulorenatolimax-ctrl/guardiao-fila"); TAG = "videos"
