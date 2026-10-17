@@ -1221,6 +1221,25 @@
       "cta_modo": "pergunta"
     },
     {
+      "id": "G272",
+      "titulo": "Picasso: só há dois tipos de mulher",
+      "slides": [
+        "carG272_01.jpg",
+        "carG272_02.jpg",
+        "carG272_03.jpg",
+        "carG272_04.jpg",
+        "carG272_05.jpg",
+        "carG272_06.jpg",
+        "carG272_07.jpg",
+        "carG272_08.jpg",
+        "carG272_09.jpg",
+        "carG272_10.jpg"
+      ],
+      "legenda": "Picasso: \"só há dois tipos de mulher\".\n\nSegundo Françoise Gilot, que viveu cerca de dez anos com Pablo Picasso e teve dois filhos com ele, o pintor lhe disse: \"For me there are only two kinds of women: goddesses and doormats\" (\"Para mim só há dois tipos de mulher: deusas e capachos\", tradução nossa). Está em Life with Picasso, o livro de memórias que ela publicou em 1964 com Carlton Lake.\n\nGilot conheceu Picasso em 1943, aos 21 anos. Ele tinha 61. Em outubro de 1944, Picasso entrou no Partido Comunista Francês.\n\nPara ser justo: a frase é relato de Gilot, não escrito de Picasso. O livro saiu onze anos depois da separação, e Picasso tentou barrá-lo na Justiça francesa.\n\nO argumento:\n• Uma frase registrada por quem conviveu dez anos com alguém é indício de como essa pessoa pensava.\n• Gilot, que conviveu dez anos com Picasso, registrou que ele dividia as mulheres em deusas e capachos.\n• Logo, a frase é indício de como Picasso pensava as mulheres.\n\nO relato de uma ex-companheira deve pesar no juízo sobre um artista?\n\n📚 Formação Clássica em 10 min/dia: preço de Fundador até 31/10. Link na bio.\n\nFontes:\n• Françoise Gilot e Carlton Lake, Life with Picasso (McGraw-Hill, 1964).\n• NPR, \"'Life With Picasso' Stands As An Invaluable Work Of Art History\", 6/6/2019.\n• The Nation, \"The Entwined Lives of Françoise Gilot and Pablo Picasso\".\n• L'Humanité, 5/10/1944 (adesão de Picasso ao PCF).\n\n#Picasso #Arte #Gilot #Comunismo #Intelectuais #Historia",
+      "aprovado": true,
+      "cta_modo": "pergunta"
+    },
+    {
       "id": "G273",
       "titulo": "Fidel pregava a igualdade. Tinha uma ilha só para ele",
       "slides": [
@@ -1236,8 +1255,9 @@
         "carG273_10.jpg"
       ],
       "legenda": "Fidel pregava a igualdade. Tinha uma ilha só para ele.\n\nJuan Reinaldo Sánchez serviu na escolta pessoal de Fidel Castro de 1977 a 1994. Em 2014, publicou com o jornalista Axel Gyldén \"La vida oculta de Fidel Castro\". Segundo ele, Fidel usava Cayo Piedra, uma ilha ao sul da Baía dos Porcos, com lagoa de golfinhos e tartarugas, onde passava cerca de um mês por ano. Chegava ali no iate Aquarama II, de 27 metros, com quatro motores de lancha torpedeira enviados por Leonid Brejnev.\n\nEm 2006, depois de aparecer numa lista da Forbes, Fidel declarou ganhar cerca de 900 pesos por mês.\n\nPara ser justo: é o testemunho de um único autor, um desertor que ficou dois anos preso. Os relatos não podem ser confirmados de forma independente. Outros desertores confirmam que ele serviu na escolta.\n\nO argumento:\n• Quem prega a igualdade e reserva para si uma ilha vive acima da regra que prega.\n• Segundo o guarda-costas, Fidel reservava para si a ilha de Cayo Piedra.\n• Logo, segundo esse testemunho, Fidel vivia acima da regra que pregava.\n\nQue tipo de prova você exigiria antes de aceitar ou recusar esse relato?\n\n📚 Formação Clássica em 10 min/dia: preço de Fundador até 31/10. Link na bio.\n\nFontes:\n• Juan Reinaldo Sánchez e Axel Gyldén, La vida oculta de Fidel Castro (Península, 2014).\n• Juan O. Tamayo, \"Former bodyguard to Fidel Castro describes dictator's luxe life in new book\", Miami Herald, 23/5/2014.\n• BBC Mundo, \"La 'doble vida' de Fidel Castro: el relato de un guardaespaldas\", 23/6/2014.\n\n#Fidel #Cuba #Comunismo #AmericaLatina #Socialismo #Historia",
-      "aprovado": true,
-      "cta_modo": "pergunta"
+      "aprovado": false,
+      "cta_modo": "pergunta",
+      "segurado_1710": true
     },
     {
       "id": "ADU1",
