@@ -30,7 +30,7 @@ def curto(t, n=270):
 
 base = f"https://raw.githubusercontent.com/{REPO}/main/carrosseis/"
 ids = []
-for s in item["slides"]:
+for s in [x for x in item["slides"] if not x.lower().endswith((".mp4", ".mov"))]:
     img = urllib.request.urlopen(base + urllib.parse.quote(s), timeout=60).read()
     r = x.post("https://api.x.com/2/media/upload", data={"media_category": "tweet_image", "media_type": "image/jpeg"},
                files={"media": (s, img, "image/jpeg")})

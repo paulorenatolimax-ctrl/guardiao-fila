@@ -70,7 +70,7 @@ if TIPO == "reel":
 else:
     base = f"https://raw.githubusercontent.com/{REPO}/main/carrosseis/"
     filhos = []
-    for s in item["slides"][:20]:
+    for s in [x for x in item["slides"] if not x.lower().endswith((".mp4", ".mov"))][:20]:
         f = chamar("me/threads", {"media_type": "IMAGE", "image_url": base + urllib.parse.quote(s), "is_carousel_item": "true"})["id"]
         filhos.append(f)
     for f in filhos: esperar(f, 180)
