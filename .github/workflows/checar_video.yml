@@ -1,0 +1,14 @@
+name: Checar vídeo no carrossel (sem publicar)
+on:
+  push:
+    branches: [feat/video-no-carrossel]
+    paths: [checar_conteiner_video.py, carrossel_midia.py, .github/workflows/checar_video.yml]
+jobs:
+  checar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 checar_conteiner_video.py
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
