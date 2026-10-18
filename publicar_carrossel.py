@@ -33,17 +33,22 @@ c, pulos = proximo_valido(fila["carrosseis"])  # trava: carrossel com mais de 10
 for m in pulos: print(m)
 if not c: print("fila de carrosséis vazia (ou só itens inválidos)"); sys.exit(0)
 print("→ carrossel", c["id"], c["titulo"])
-filhos = []
-for s in c["slides"]:
-    url = f"https://raw.githubusercontent.com/{REPO}/main/carrosseis/{urllib.parse.quote(s)}"  # raw serve image/jpeg
-    r = chamar(f"{API}/{UID}/media", {"image_url": url, "is_carousel_item": "true", "access_token": TOK}); filhos.append(r["id"])
+from carrossel_midia import criar_filhos  # 17/10/2026: aceita slides .mp4 (filho VIDEO + espera FINISHED)
+try: filhos = criar_filhos(c["slides"], chamar, API, UID, TOK, REPO, TAG)
+except (RuntimeError, urllib.error.HTTPError, KeyError) as e:
+    if not c.get("fallback_slides"): print("filho de vídeo falhou:", e); sys.exit(1)
+    print("VÍDEO FALHOU → publicando a versão só imagens (fallback_slides):", e)
+    c["fallback_usado"] = str(e)[:200]; c["legenda"] = c.get("legenda_fallback") or c["legenda"]
+    filhos = criar_filhos(c["fallback_slides"], chamar, API, UID, TOK, REPO, TAG)
 r = chamar(f"{API}/{UID}/media", {"media_type": "CAROUSEL", "children": ",".join(filhos), "caption": legenda_ok(c["legenda"]), "access_token": TOK})
 cid = r["id"]
-for _ in range(30):
+for _ in range(60):  # carrossel com vídeo demora mais (17/10/2026)
     s = chamar(f"{API}/{cid}?fields=status_code&access_token={TOK}")
     if s.get("status_code") == "FINISHED": break
     if s.get("status_code") == "ERROR": print("container com erro", s); sys.exit(1)
     time.sleep(5)
+if os.environ.get("SEM_PUBLICAR") == "1":  # 18/10/2026: teste de contêiner; não chama media_publish
+    print("SEM_PUBLICAR=1: contêiner CAROUSEL", cid, "FINISHED; nada publicado"); sys.exit(0)
 p = chamar(f"{API}/{UID}/media_publish", {"creation_id": cid, "access_token": TOK})
 c["publicado"] = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M"); c["media_id"] = p["id"]
 json.dump(fila, open("carrosseis.json", "w"), ensure_ascii=False, indent=2)

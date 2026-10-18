@@ -65,7 +65,7 @@ if TIPO == "reel":
 else:
     base = f"https://raw.githubusercontent.com/{REPO}/main/carrosseis/"
     fotos = []
-    for s in item["slides"]:
+    for s in [x for x in item["slides"] if not x.lower().endswith((".mp4", ".mov"))]:
         r = chamar(f"{API}/{PAGE}/photos", {"url": base + urllib.parse.quote(s), "published": "false", "access_token": TOK})
         fotos.append(r["id"])
     campos = {"message": legenda, "access_token": TOK}
