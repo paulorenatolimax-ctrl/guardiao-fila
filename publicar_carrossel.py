@@ -43,6 +43,8 @@ for _ in range(60):  # carrossel com vídeo demora mais (17/10/2026)
     if s.get("status_code") == "FINISHED": break
     if s.get("status_code") == "ERROR": print("container com erro", s); sys.exit(1)
     time.sleep(5)
+if os.environ.get("SEM_PUBLICAR") == "1":  # 18/10/2026: teste de contêiner; não chama media_publish
+    print("SEM_PUBLICAR=1: contêiner CAROUSEL", cid, "FINISHED; nada publicado"); sys.exit(0)
 p = chamar(f"{API}/{UID}/media_publish", {"creation_id": cid, "access_token": TOK})
 c["publicado"] = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M"); c["media_id"] = p["id"]
 json.dump(fila, open("carrosseis.json", "w"), ensure_ascii=False, indent=2)
