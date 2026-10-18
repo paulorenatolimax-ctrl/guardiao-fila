@@ -45,6 +45,7 @@ ESPECIAIS = {
         # 19h14: Gramsci forçado a pedido do Paulo; 21h: mais um (DIR1).
         # 07/10/2026: Paulo pediu o carrossel da democracia (DEM1) às 19h; CPV1 segue às 20h (intervalo do dia: 55 min).
         date(2026, 10, 13): ([7.5, 11.5, 15.5, 21], timedelta(minutes=90), 4),
+        date(2026, 10, 18): ([7.5], timedelta(minutes=90), 1),  # 18/10: só G294 (vídeo no slide 3) às 07h30, OK do Paulo 17/10
         date(2026, 10, 17): ([7, 12, 15, 17.5, 21.25], timedelta(minutes=90), 5),  # 17/10: Paulo pediu extras às 15h e 17h30  # ULTRA_ESTRATEGIA: 07h00, 12h30, 18h00, 21h15
         date(2026, 10, 16): ([7, 11.5, 15.5, 20], timedelta(minutes=90), 4),  # Paulo: 6x1 (SEIS1) às 7h00 em ponto  # Paulo: último carrossel às 21h (Reel R52 às 19h45)
         date(2026, 10, 12): ([7.5, 9, 14, 18, 21], timedelta(minutes=90), 5),  # JAN1 extra às 9h; Paulo quer o próximo às 14h

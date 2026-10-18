@@ -35,7 +35,11 @@ if not c: print("fila de carrosséis vazia (ou só itens inválidos)"); sys.exit
 print("→ carrossel", c["id"], c["titulo"])
 from carrossel_midia import criar_filhos  # 17/10/2026: aceita slides .mp4 (filho VIDEO + espera FINISHED)
 try: filhos = criar_filhos(c["slides"], chamar, API, UID, TOK, REPO, TAG)
-except RuntimeError as e: print("filho de vídeo falhou:", e); sys.exit(1)
+except (RuntimeError, urllib.error.HTTPError, KeyError) as e:
+    if not c.get("fallback_slides"): print("filho de vídeo falhou:", e); sys.exit(1)
+    print("VÍDEO FALHOU → publicando a versão só imagens (fallback_slides):", e)
+    c["fallback_usado"] = str(e)[:200]; c["legenda"] = c.get("legenda_fallback") or c["legenda"]
+    filhos = criar_filhos(c["fallback_slides"], chamar, API, UID, TOK, REPO, TAG)
 r = chamar(f"{API}/{UID}/media", {"media_type": "CAROUSEL", "children": ",".join(filhos), "caption": legenda_ok(c["legenda"]), "access_token": TOK})
 cid = r["id"]
 for _ in range(60):  # carrossel com vídeo demora mais (17/10/2026)
