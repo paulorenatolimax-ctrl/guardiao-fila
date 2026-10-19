@@ -107,46 +107,46 @@
  ],
  "engaged_audience_demographics.gender": [
   [
-   "M",
-   18263
+   "F",
+   61748
   ],
   [
-   "F",
-   14999
+   "M",
+   36052
   ],
   [
    "U",
-   4272
+   12982
   ]
  ],
  "engaged_audience_demographics.age": [
   [
-   "45-54",
-   11110
+   "25-34",
+   28882
   ],
   [
    "35-44",
-   10879
+   28545
   ],
   [
-   "25-34",
-   5864
-  ],
-  [
-   "55-64",
-   5310
-  ],
-  [
-   "65+",
-   2013
+   "45-54",
+   22458
   ],
   [
    "18-24",
-   2001
+   16144
+  ],
+  [
+   "55-64",
+   9496
+  ],
+  [
+   "65+",
+   3385
   ],
   [
    "13-17",
-   356
+   1871
   ],
   [
    "U",
@@ -156,63 +156,63 @@
  "engaged_audience_demographics.city": [
   [
    "São Paulo, São Paulo (state)",
-   2747
+   8766
   ],
   [
    "Rio de Janeiro, Rio de Janeiro (state)",
-   2189
+   5148
   ],
   [
    "Fortaleza, Ceará",
-   850
-  ],
-  [
-   "Belo Horizonte, Minas Gerais",
-   801
+   2149
   ],
   [
    "Curitiba, Paraná",
-   726
+   2087
   ],
   [
-   "Salvador, Bahia",
-   577
+   "Belo Horizonte, Minas Gerais",
+   2033
   ],
   [
    "Porto Alegre, Rio Grande do Sul",
-   573
-  ],
-  [
-   "Recife, Pernambuco",
-   570
-  ],
-  [
-   "Goiânia, Goiás",
-   546
+   1499
   ],
   [
    "Manaus, Amazonas",
-   480
+   1455
+  ],
+  [
+   "Goiânia, Goiás",
+   1409
+  ],
+  [
+   "Recife, Pernambuco",
+   1349
+  ],
+  [
+   "Salvador, Bahia",
+   1326
   ],
   [
    "Belém, Pará",
-   349
+   972
   ],
   [
-   "Natal, Rio Grande do Norte",
-   345
+   "Campinas, São Paulo (state)",
+   971
   ],
   [
    "Taguatinga, Federal District",
-   342
-  ],
-  [
-   "Florianópolis, Santa Catarina",
-   333
+   931
   ],
   [
    "São Luís, Maranhão",
-   331
+   867
+  ],
+  [
+   "João Pessoa, Paraíba",
+   863
   ]
  ]
 }
