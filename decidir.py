@@ -35,6 +35,9 @@ TIPOS = {
 }
 # MODO ELEIÇÃO: grade especial por data (BRT), por tipo. Fora dessas datas vale TIPOS.
 ESPECIAIS = {
+    "reel": {
+        date(2026, 10, 19): ([13], timedelta(hours=4), 1),  # 19/10: Paulo aprovou o R54 (Gramsci, folclore) para as 13h
+    },
     "carrossel": {
         # 03/10/2026: modo eleição (6/dia) cancelado pelo Paulo; volta à grade normal de 3 por dia.
         # 04/10/2026: Paulo pediu 4 carrosséis no dia (carrossel ganha tração com os dias).
