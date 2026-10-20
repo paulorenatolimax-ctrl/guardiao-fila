@@ -82,6 +82,12 @@ def decidir(tipo, agora_brt, itens, forcar=False):
     if not any(not x.get("publicado") for x in itens):
         return False, f"[{tipo}] fila vazia"
     if forcar:
+        # 20/10/2026: Lennon (G298) e a palavra saíram com 2 min de diferença e um comeu o outro.
+        # Nem o forçado sai se outro do mesmo tipo saiu há menos de 30 min.
+        pubs = [utc_para_brt(x["publicado"]) for x in itens if x.get("publicado")]
+        ultimo = max(pubs) if pubs else None
+        if ultimo and agora_brt - ultimo < timedelta(minutes=30):
+            return False, f"[{tipo}] FORCAR barrado: o último saiu às {ultimo:%H:%M} BRT, menos de 30 min atrás"
         return True, f"[{tipo}] FORCAR: publicando sem regras"
 
     if agora_brt.hour < INICIO_DIA:
