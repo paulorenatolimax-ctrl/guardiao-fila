@@ -68,7 +68,9 @@ class TestCarrossel(unittest.TestCase):
     def test_forcar(self):
         itens = [pub_utc(brt(8, 0)), pub_utc(brt(11, 0)), pub_utc(brt(20, 0))] + PEND
         self.assertTrue(decidir("carrossel", brt(3, 0), itens, forcar=True)[0])
-        self.assertTrue(decidir("carrossel", brt(20, 1), itens, forcar=True)[0])
+        # 20/10/2026: forçado colado no anterior (Lennon x palavra) fica barrado por 30 min
+        self.assertFalse(decidir("carrossel", brt(20, 1), itens, forcar=True)[0])
+        self.assertTrue(decidir("carrossel", brt(20, 31), itens, forcar=True)[0])
 
     def test_fila_vazia(self):
         self.assertFalse(decidir("carrossel", brt(9, 0), [pub_utc(brt(8, 0, dia=2))])[0])
