@@ -108,45 +108,45 @@
  "engaged_audience_demographics.gender": [
   [
    "F",
-   61748
+   93931
   ],
   [
    "M",
-   36052
+   52607
   ],
   [
    "U",
-   12982
+   20043
   ]
  ],
  "engaged_audience_demographics.age": [
   [
    "25-34",
-   28882
+   45735
   ],
   [
    "35-44",
-   28545
+   40101
   ],
   [
    "45-54",
-   22458
+   30207
   ],
   [
    "18-24",
-   16144
+   29088
   ],
   [
    "55-64",
-   9496
+   13058
   ],
   [
    "65+",
-   3385
+   4646
   ],
   [
    "13-17",
-   1871
+   3745
   ],
   [
    "U",
@@ -156,63 +156,63 @@
  "engaged_audience_demographics.city": [
   [
    "São Paulo, São Paulo (state)",
-   8766
+   13119
   ],
   [
    "Rio de Janeiro, Rio de Janeiro (state)",
-   5148
+   7425
   ],
   [
    "Fortaleza, Ceará",
-   2149
+   3132
   ],
   [
    "Curitiba, Paraná",
-   2087
+   3075
   ],
   [
    "Belo Horizonte, Minas Gerais",
-   2033
+   3017
   ],
   [
    "Porto Alegre, Rio Grande do Sul",
-   1499
+   2171
   ],
   [
    "Manaus, Amazonas",
-   1455
+   2122
   ],
   [
    "Goiânia, Goiás",
-   1409
+   2106
   ],
   [
    "Recife, Pernambuco",
-   1349
+   1917
   ],
   [
    "Salvador, Bahia",
-   1326
-  ],
-  [
-   "Belém, Pará",
-   972
+   1896
   ],
   [
    "Campinas, São Paulo (state)",
-   971
+   1520
   ],
   [
    "Taguatinga, Federal District",
-   931
+   1434
   ],
   [
-   "São Luís, Maranhão",
-   867
+   "Belém, Pará",
+   1424
   ],
   [
    "João Pessoa, Paraíba",
-   863
+   1298
+  ],
+  [
+   "São Luís, Maranhão",
+   1251
   ]
  ]
 }
