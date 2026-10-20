@@ -49,7 +49,7 @@ ESPECIAIS = {
         # 07/10/2026: Paulo pediu o carrossel da democracia (DEM1) às 19h; CPV1 segue às 20h (intervalo do dia: 55 min).
         date(2026, 10, 13): ([7.5, 11.5, 15.5, 21], timedelta(minutes=90), 4),
         date(2026, 10, 21): ([7.5, 11.5, 14, 18.5, 20.5], timedelta(minutes=90), 5),  # validado 20/10: G276 Mao, G273 Fidel, G318 Stalin, G296 Picasso, G314 Identitarismo
-        date(2026, 10, 20): ([7.5, 14, 14.25, 18.5, 20.5], timedelta(minutes=90), 5),  # G345 7h24, G333+G298 14h, G198 Livros 18h30, G315 Marx/Bolsa 20h30 (Paulo 20/10)
+        date(2026, 10, 20): ([7.5, 14, 14.25, 17, 18.5, 20.5], timedelta(minutes=90), 6),  # G348 Smith x Che 17h (Paulo); G345 7h24, G333+G298 14h, G198 Livros 18h30, G315 Marx/Bolsa 20h30 (Paulo 20/10)
         date(2026, 10, 19): ([7.5, 14, 18.5, 20.5], timedelta(minutes=90), 4),  # lote validado 18/10: G299, G322, G329, G337
         date(2026, 10, 18): ([7.5, 10, 14, 18.5], timedelta(minutes=90), 4),  # 18/10: G294 (vídeo) 07h30, G338 Obama antecipado (saiu 10h21), G280 Rivera 14h, G265 Aristóteles×Freire 18h30 (lote validado pelo Paulo 18/10)
         date(2026, 10, 17): ([7, 12, 15, 17.5, 21.25], timedelta(minutes=90), 5),  # 17/10: Paulo pediu extras às 15h e 17h30  # ULTRA_ESTRATEGIA: 07h00, 12h30, 18h00, 21h15
