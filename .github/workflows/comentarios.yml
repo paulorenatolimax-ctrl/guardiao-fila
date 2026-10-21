@@ -8,6 +8,9 @@ on:
       max:
         description: "máximo de respostas nesta rodada"
         default: "40"
+      n_posts:
+        description: "quantos posts recentes varrer"
+        default: "15"
 concurrency:
   group: comentarios
   cancel-in-progress: false
@@ -24,13 +27,14 @@ jobs:
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
           MODO: ${{ inputs.modo }}
           MAX: ${{ inputs.max }}
+          N_POSTS: ${{ inputs.n_posts }}
         run: python3 comentarios.py
       - name: Registrar
         if: always()
         run: |
           git config user.name  "fila-guardiao"
           git config user.email "actions@github.com"
-          git add pendentes.json respostas.json 2>/dev/null || true
+          for f in pendentes.json respostas.json; do [ -f $f ] && git add $f; done
           git diff --staged --quiet && exit 0
           git commit -m "comentários: ${{ inputs.modo }} $(date -u +%d/%m %H:%M)"
           for i in 1 2 3 4 5; do git pull --rebase && git push && exit 0; sleep 5; done

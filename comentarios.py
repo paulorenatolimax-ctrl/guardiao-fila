@@ -27,7 +27,12 @@ def ja_respondi(cid):
 
 def listar():
     n = int(os.environ.get("N_POSTS", "15"))
-    media = get(f"{UID}/media", fields="id,caption,timestamp,comments_count", limit=n)["data"]
+    media, u = [], None
+    while len(media) < n:
+        r = json.load(urllib.request.urlopen(u, timeout=60)) if u else get(f"{UID}/media", fields="id,caption,timestamp,comments_count", limit=min(n, 50))
+        media += r.get("data", []); u = r.get("paging", {}).get("next")
+        if not u: break
+    media = [m for m in media[:n] if m.get("comments_count")]
     out = []
     for m in media:
         url = None; pagina = 0; brutos = 0
