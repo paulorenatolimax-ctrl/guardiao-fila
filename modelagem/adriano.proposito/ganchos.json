@@ -1,0 +1,24 @@
+[
+ {
+  "code": "Dd2cFPNsH98",
+  "data": "2026-09-29T00:11:30",
+  "views": null,
+  "likes": 28648,
+  "comentarios": 1202,
+  "duracao": null,
+  "posicao": 1,
+  "fala_10s": "[erro: TypeError(\"open() got an unexpected keyword argument 'metadata_errors'\")]",
+  "legenda_1a_linha": "O que acontece quando um Estado concentra o poder econômico, político e social?"
+ },
+ {
+  "code": "Dd1ite3yXrV",
+  "data": "2026-09-28T15:49:09",
+  "views": null,
+  "likes": 12368,
+  "comentarios": 344,
+  "duracao": null,
+  "posicao": 2,
+  "fala_10s": "[erro: TypeError(\"open() got an unexpected keyword argument 'metadata_errors'\")]",
+  "legenda_1a_linha": "A política brasileira não começou a ser problemática ontem."
+ }
+]
