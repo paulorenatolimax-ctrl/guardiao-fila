@@ -6,7 +6,21 @@ import instaloader
 P, TOP = os.environ["PERFIL"], int(os.environ.get("TOP", "100"))
 out = pathlib.Path(f"modelagem/{P}"); (out / "quadros").mkdir(parents=True, exist_ok=True)
 L = instaloader.Instaloader(download_pictures=False, download_videos=False, save_metadata=False, quiet=True)
-prof = instaloader.Profile.from_username(L.context, P)
+import urllib.request as _u
+def _pid():
+    for host in ("https://i.instagram.com", "https://www.instagram.com"):
+        try:
+            rq = _u.Request(f"{host}/api/v1/users/web_profile_info/?username={P}", headers={"X-IG-App-ID": "936619743392459",
+                 "User-Agent": "Instagram 219.0.0.12.117 Android (31/12; 420dpi; 1080x2210; samsung; SM-G991B; o1s; exynos2100; pt_BR; 346138365)"})
+            return int(json.load(_u.urlopen(rq, timeout=30))["data"]["user"]["id"])
+        except Exception as e:
+            print("web_profile_info falhou em", host, repr(e)[:120])
+    return None
+try:
+    prof = instaloader.Profile.from_username(L.context, P)
+except Exception as e:
+    print("from_username falhou:", repr(e)[:120]); pid = _pid(); print("id", pid)
+    prof = instaloader.Profile.from_id(L.context, pid)
 print("seguidores", prof.followers, "posts", prof.mediacount)
 itens = []
 try:
