@@ -24,7 +24,7 @@ def ja_respondi(cid):
 
 def listar():
     n = int(os.environ.get("N_POSTS", "15"))
-    media = get(f"{UID}/media", fields="id,caption,timestamp", limit=n)["data"]
+    media = get(f"{UID}/media", fields="id,caption,timestamp,comments_count", limit=n)["data"]
     out = []
     for m in media:
         url = None; pagina = 0; brutos = 0
@@ -40,7 +40,7 @@ def listar():
                             "post": (m.get("caption") or "")[:50], "ts": c.get("timestamp")})
             url = r.get("paging", {}).get("next"); pagina += 1
             if not url: break
-        print(f"  {(m.get('caption') or '')[:40]!r}: {brutos} comentários")
+        print(f"  {(m.get('caption') or '')[:40]!r}: {brutos} comentários lidos de {m.get('comments_count')} que o post tem")
     json.dump(out, open("pendentes.json", "w"), ensure_ascii=False, indent=1)
     print(f"{len(out)} comentários sem resposta em {len(media)} posts")
 
