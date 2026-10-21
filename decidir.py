@@ -82,6 +82,14 @@ def decidir(tipo, agora_brt, itens, forcar=False):
     horarios, intervalo, maximo = ESPECIAIS.get(tipo, {}).get(agora_brt.date(), (horarios, intervalo, maximo))
     if not any(not x.get("publicado") for x in itens):
         return False, f"[{tipo}] fila vazia"
+    # 21/10/2026: trava de pausa (Paulo: "não sobe mais nenhum carrossel hoje"). Vale até para o forçado.
+    # Arquivo PAUSA_<tipo> com a data-hora BRT "AAAA-MM-DD HH:MM" até quando nada sai.
+    import os as _os
+    _pa = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), f"PAUSA_{tipo}")
+    if _os.path.exists(_pa):
+        _ate = datetime.strptime(open(_pa).read().strip(), "%Y-%m-%d %H:%M")
+        if agora_brt.replace(tzinfo=None) < _ate:
+            return False, f"[{tipo}] PAUSA: nada sai até {_ate:%d/%m %H:%M} BRT (arquivo PAUSA_{tipo})"
     if forcar:
         # 20/10/2026: Lennon (G298) e a palavra saíram com 2 min de diferença e um comeu o outro.
         # Nem o forçado sai se outro do mesmo tipo saiu há menos de 30 min.
