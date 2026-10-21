@@ -1,0 +1,24 @@
+name: Baixar post público (sem login)
+on:
+  workflow_dispatch:
+    inputs:
+      code:
+        required: true
+permissions:
+  contents: write
+jobs:
+  p:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install -q instaloader
+      - env:
+          CODE: ${{ inputs.code }}
+        run: python3 post_publico.py
+      - if: always()
+        run: |
+          git config user.name "fila-guardiao"; git config user.email "actions@github.com"
+          git add modelagem 2>/dev/null || true
+          git diff --staged --quiet && exit 0
+          git commit -m "post público: ${{ inputs.code }}"
+          for i in 1 2 3; do git pull --rebase && git push && exit 0; sleep 5; done
