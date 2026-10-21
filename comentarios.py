@@ -11,7 +11,10 @@ EU = "prof.paulolima1844"
 
 def get(path, **q):
     q["access_token"] = TOK
-    return json.load(urllib.request.urlopen(f"{API}/{path}?{urllib.parse.urlencode(q)}", timeout=60))
+    try:
+        return json.load(urllib.request.urlopen(f"{API}/{path}?{urllib.parse.urlencode(q)}", timeout=60))
+    except urllib.error.HTTPError as e:
+        print("ERRO GET", path, e.code, e.read().decode()[:400]); raise
 
 def post(path, **d):
     d["access_token"] = TOK
