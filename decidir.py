@@ -48,7 +48,8 @@ ESPECIAIS = {
         # 19h14: Gramsci forçado a pedido do Paulo; 21h: mais um (DIR1).
         # 07/10/2026: Paulo pediu o carrossel da democracia (DEM1) às 19h; CPV1 segue às 20h (intervalo do dia: 55 min).
         date(2026, 10, 13): ([7.5, 11.5, 15.5, 21], timedelta(minutes=90), 4),
-        date(2026, 10, 21): ([7.5, 11.5, 14, 16.5, 18.5, 20.5], timedelta(minutes=90), 6),  # validado 20/10: G276 Mao, G273 Fidel, G318 Stalin, G296 Picasso 16h30, G314 Identitarismo 18h30, G315 Marx/Bolsa 20h30 (saiu da noite de 20/10 para o G326)
+        date(2026, 10, 21): ([7.5, 11.5, 14.5, 17.5, 20.5], timedelta(minutes=90), 5),  # Paulo 21/10: 5 por dia, espaçados (18h30+20h30 colados reprovado em 12/10). G276 Mao, G273 Fidel, G318 Stalin, G296 Picasso, G314 Identitarismo
+        date(2026, 10, 22): ([7.5, 11.5, 14.5, 17.5, 20.5], timedelta(minutes=90), 5),  # G288 Lennon, G052 Freire/Lenin, G279 Lenin fome, G344 Chaui, G315 Marx/Bolsa
         date(2026, 10, 20): ([7.5, 14, 14.25, 17, 18.5, 20.5], timedelta(minutes=90), 6),  # G348 Smith x Che 17h (Paulo); G345 7h24, G333+G298 14h, G198 Livros 18h52, G326 Racismo estrutural 20h30 (Paulo 20/10)
         date(2026, 10, 19): ([7.5, 14, 18.5, 20.5], timedelta(minutes=90), 4),  # lote validado 18/10: G299, G322, G329, G337
         date(2026, 10, 18): ([7.5, 10, 14, 18.5], timedelta(minutes=90), 4),  # 18/10: G294 (vídeo) 07h30, G338 Obama antecipado (saiu 10h21), G280 Rivera 14h, G265 Aristóteles×Freire 18h30 (lote validado pelo Paulo 18/10)
