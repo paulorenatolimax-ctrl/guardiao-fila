@@ -6,6 +6,9 @@ on:
         default: adriano.proposito
       top:
         default: "100"
+      codes:
+        description: "shortcodes separados por vírgula (opcional)"
+        default: ""
 permissions:
   contents: write
 jobs:
@@ -18,6 +21,7 @@ jobs:
       - env:
           PERFIL: ${{ inputs.perfil }}
           TOP: ${{ inputs.top }}
+          CODES: ${{ inputs.codes }}
         run: python3 modelagem.py
       - if: always()
         run: |

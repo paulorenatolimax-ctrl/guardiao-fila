@@ -16,15 +16,30 @@ def _pid():
         except Exception as e:
             print("web_profile_info falhou em", host, repr(e)[:120])
     return None
-try:
+prof = None
+if os.environ.get("CODES"):
+    pass
+else:
+  try:
     prof = instaloader.Profile.from_username(L.context, P)
-except Exception as e:
+  except Exception as e:
     print("from_username falhou:", repr(e)[:120]); pid = _pid(); print("id", pid)
     prof = instaloader.Profile.from_id(L.context, pid)
-print("seguidores", prof.followers, "posts", prof.mediacount)
+  print("seguidores", prof.followers, "posts", prof.mediacount)
 itens = []
+def _posts():
+    cods = [c for c in os.environ.get("CODES", "").split(",") if c]
+    if cods:
+        for c in cods:
+            try:
+                yield instaloader.Post.from_shortcode(L.context, c)
+            except Exception as e:
+                print("falhou", c, repr(e)[:100])
+            time.sleep(3)
+    else:
+        yield from prof.get_posts()
 try:
-    for i, p in enumerate(prof.get_posts()):
+    for i, p in enumerate(_posts()):
         itens.append({"code": p.shortcode, "data": p.date_utc.isoformat(), "video": p.is_video,
                       "views": p.video_view_count if p.is_video else None,
                       "likes": p.likes, "comentarios": p.comments,
