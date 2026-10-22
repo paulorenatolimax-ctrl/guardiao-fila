@@ -1,108 +1,108 @@
 {
  "follower_demographics.gender": [
   [
-   "M",
-   1647
+   "F",
+   12573
   ],
   [
-   "F",
-   702
+   "M",
+   11577
   ],
   [
    "U",
-   334
+   2826
   ]
  ],
  "follower_demographics.age": [
   [
-   "45-54",
-   834
+   "35-44",
+   8635
   ],
   [
-   "35-44",
-   827
+   "45-54",
+   8114
   ],
   [
    "25-34",
-   423
+   4410
   ],
   [
    "55-64",
-   358
-  ],
-  [
-   "65+",
-   136
+   3432
   ],
   [
    "18-24",
-   91
+   1136
+  ],
+  [
+   "65+",
+   1124
   ],
   [
    "13-17",
-   14
+   125
   ]
  ],
  "follower_demographics.city": [
   [
    "São Paulo, São Paulo (state)",
-   222
+   2220
   ],
   [
    "Rio de Janeiro, Rio de Janeiro (state)",
-   155
-  ],
-  [
-   "Belo Horizonte, Minas Gerais",
-   68
-  ],
-  [
-   "Fortaleza, Ceará",
-   50
+   1472
   ],
   [
    "Curitiba, Paraná",
-   47
+   564
   ],
   [
-   "Salvador, Bahia",
-   45
+   "Belo Horizonte, Minas Gerais",
+   553
   ],
   [
-   "Goiânia, Goiás",
-   38
-  ],
-  [
-   "Manaus, Amazonas",
-   32
-  ],
-  [
-   "Niterói, Rio de Janeiro (state)",
-   30
-  ],
-  [
-   "Taguatinga, Federal District",
-   25
-  ],
-  [
-   "Campinas, São Paulo (state)",
-   25
-  ],
-  [
-   "Guarulhos, São Paulo (state)",
-   23
-  ],
-  [
-   "Belém, Pará",
-   23
+   "Fortaleza, Ceará",
+   517
   ],
   [
    "Porto Alegre, Rio Grande do Sul",
-   22
+   420
+  ],
+  [
+   "Goiânia, Goiás",
+   371
+  ],
+  [
+   "Salvador, Bahia",
+   356
+  ],
+  [
+   "Manaus, Amazonas",
+   317
+  ],
+  [
+   "Recife, Pernambuco",
+   304
+  ],
+  [
+   "Taguatinga, Federal District",
+   294
+  ],
+  [
+   "Belém, Pará",
+   280
+  ],
+  [
+   "Campinas, São Paulo (state)",
+   252
+  ],
+  [
+   "Florianópolis, Santa Catarina",
+   240
   ],
   [
    "São Luís, Maranhão",
-   21
+   227
   ]
  ],
  "engaged_audience_demographics.gender": [
