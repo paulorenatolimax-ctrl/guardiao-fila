@@ -399,22 +399,26 @@
   {
    "arquivo": "story2610_08.mp4",
    "destaque": "posicao_pos_eleicao",
-   "release": true
+   "release": true,
+   "publicado": "manual pelo celular (26/10, API no limite)"
   },
   {
    "arquivo": "story2610_09.mp4",
    "destaque": "posicao_pos_eleicao",
-   "release": true
+   "release": true,
+   "publicado": "manual pelo celular (26/10, API no limite)"
   },
   {
    "arquivo": "story2610_10.mp4",
    "destaque": "posicao_pos_eleicao",
-   "release": true
+   "release": true,
+   "publicado": "manual pelo celular (26/10, API no limite)"
   },
   {
    "arquivo": "story2610_11.mp4",
    "destaque": "posicao_pos_eleicao",
-   "release": true
+   "release": true,
+   "publicado": "manual pelo celular (26/10, API no limite)"
   }
  ]
 }
