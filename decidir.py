@@ -37,6 +37,7 @@ TIPOS = {
 ESPECIAIS = {
     "reel": {
         date(2026, 10, 19): ([13], timedelta(hours=4), 1),  # 19/10: Paulo aprovou o R54 (Gramsci, folclore) para as 13h
+        date(2026, 10, 27): ([14], timedelta(hours=4), 1),  # 27/10: Paulo aprovou o R95 (Gramsci, o poder não está na Presidência) para as 14h
     },
     "carrossel": {
         # 03/10/2026: modo eleição (6/dia) cancelado pelo Paulo; volta à grade normal de 3 por dia.
@@ -47,6 +48,7 @@ ESPECIAIS = {
         # (14h16: o socialista de iPhone saiu no lugar do Peirce corrigido, barrado pela trava de título; Peirce às 17h, Gramsci às 20h)
         # 19h14: Gramsci forçado a pedido do Paulo; 21h: mais um (DIR1).
         # 07/10/2026: Paulo pediu o carrossel da democracia (DEM1) às 19h; CPV1 segue às 20h (intervalo do dia: 55 min).
+        date(2026, 10, 27): ([7.5], timedelta(minutes=90), 1),  # 27/10: só o das 10h34; E04/G07/E06/B03 são de 28/10 (OK do Paulo ao GrokBot: "bota pra amanhã")
         date(2026, 10, 13): ([7.5, 11.5, 15.5, 21], timedelta(minutes=90), 4),
         date(2026, 10, 21): ([7.5, 11.5, 14.5, 17.5, 20.5], timedelta(minutes=90), 5),  # Paulo 21/10: 5 por dia, espaçados (18h30+20h30 colados reprovado em 12/10). G276 Mao, G273 Fidel, G318 Stalin, G296 Picasso, G314 Identitarismo
         date(2026, 10, 22): ([7, 9.5, 12, 14.5, 17, 19.5, 22], timedelta(minutes=90), 7),  # Paulo 21/10: voltar a 6-7 por dia na reta do 2º turno, a cada 2h30
