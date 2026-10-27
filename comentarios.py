@@ -72,5 +72,23 @@ def responder():
     json.dump(fila, open("respostas.json", "w"), ensure_ascii=False, indent=1)
     print(f"respondidos agora: {feitos}; restam {sum(1 for x in fila if not x.get('feito'))}")
 
+def direct():
+    """27/10/2026: resposta privada (direct) a um comentário + resposta pública depois.
+    Lê direct.json [{cid, dm, txt}]. O público só sai se o direct saiu (senão o "te mandei" seria mentira)."""
+    fila = json.load(open("direct.json"))
+    for it in fila:
+        if it.get("feito"): continue
+        try:
+            body = json.dumps({"recipient": {"comment_id": it["cid"]}, "message": {"text": it["dm"]}}).encode()
+            req = urllib.request.Request(f"{API}/{UID}/messages?access_token={TOK}", body, {"Content-Type": "application/json"}, method="POST")
+            it["dm_ok"] = json.load(urllib.request.urlopen(req, timeout=60)).get("message_id", "ok")
+            print("direct ok", it["cid"])
+            if it.get("txt") and not ja_respondi(it["cid"]):
+                it["feito"] = post(f"{it['cid']}/replies", message=it["txt"]).get("id", "ok"); print("público ok")
+        except urllib.error.HTTPError as e:
+            it["erro"] = f"{e.code} {e.read().decode()[:300]}"; print("ERRO", it["erro"])
+    json.dump(fila, open("direct.json", "w"), ensure_ascii=False, indent=1)
+
 if __name__ == "__main__":
-    listar() if os.environ.get("MODO", "listar") == "listar" else responder()
+    m = os.environ.get("MODO", "listar")
+    listar() if m == "listar" else direct() if m == "direct" else responder()
