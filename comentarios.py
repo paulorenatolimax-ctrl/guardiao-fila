@@ -89,6 +89,53 @@ def direct():
             it["erro"] = f"{e.code} {e.read().decode()[:300]}"; print("ERRO", it["erro"])
     json.dump(fila, open("direct.json", "w"), ensure_ascii=False, indent=1)
 
+# 27/10/2026: rodada diária automática. Pedido de material ganha direct + resposta pública;
+# elogio e só-emoji ganham resposta curta; o resto (hater, pergunta, discussão) fica em pendentes.json para o Paulo.
+import re
+from datetime import datetime, timedelta, timezone
+PEDIDO = re.compile(r"\b(quero|me (envi|mand)\w*|envi[ae]|manda|tenho interesse|interess\w+|link|materia[li]s?)\b", re.I)
+ELOGIO = re.compile(r"(obrigad|amei|amo |adoro|adorando|parab[eé]ns|excelente|incr[ií]vel|sensacional|maravilh|gratid|show|top\b|muito bom|que aula|perfeito)", re.I)
+NEGA = re.compile(r"(mentir|lixo|idiot|burr|fake|vergonh|ridícul|ridicul|errad|falso|não é bem|nao é|discordo)", re.I)
+DM = ("Oi! Que bom ter você aqui. Começa pelo Guia do Guardião, gratuito: https://jornadafilosofica.com/guia\n\n"
+      "E se quiser ir além, a Trilha do Guardião tem 247 estações de 10 minutos por dia: https://jornadafilosofica.com/trilha 💙")
+OBRIGADO = ["Muito obrigado pelo carinho!! ❤️🔥", "Obrigado! Seguimos juntos 🙌🔥", "Que bom que gostou! 🙌", "Valeu demais! 🔥"]
+
+def auto():
+    listar()
+    pend = json.load(open("pendentes.json"))
+    corte = datetime.now(timezone.utc) - timedelta(hours=int(os.environ.get("HORAS", "36")))
+    limite = int(os.environ.get("MAX", "40")); feitos = 0; log = []
+    for c in pend:
+        if feitos >= limite: break
+        t = (c.get("t") or "").strip()
+        try:
+            if datetime.strptime(c["ts"], "%Y-%m-%dT%H:%M:%S%z") < corte: continue
+        except Exception: continue
+        palavras = t.split()
+        if len(palavras) == 1 and t.isupper(): continue  # palavra-chave: quem responde é o ManyChat
+        if NEGA.search(t) or "?" in t: continue           # discussão/pergunta: fica para o Paulo
+        try:
+            if PEDIDO.search(t):
+                body = json.dumps({"recipient": {"comment_id": c["cid"]}, "message": {"text": DM}}).encode()
+                req = urllib.request.Request(f"{API}/{UID}/messages?access_token={TOK}", body, {"Content-Type": "application/json"}, method="POST")
+                urllib.request.urlopen(req, timeout=60)
+                post(f"{c['cid']}/replies", message="Que bom! Te mandei agora no direct 💙")
+                tipo = "pedido"
+            elif ELOGIO.search(t):
+                post(f"{c['cid']}/replies", message=random.choice(OBRIGADO)); tipo = "elogio"
+            elif t and not re.search(r"[A-Za-zÀ-ú]", t):
+                post(f"{c['cid']}/replies", message="🙌🔥"); tipo = "emoji"
+            else:
+                continue
+            feitos += 1; log.append({"tipo": tipo, "t": t[:80], "post": c["post"]}); print(tipo, "|", t[:60])
+        except urllib.error.HTTPError as e:
+            msg = e.read().decode()[:300]; print("ERRO", e.code, msg)
+            if e.code == 429 or "limit" in msg.lower() or "spam" in msg.lower(): break
+            continue
+        time.sleep(60 + random.random() * 60)
+    json.dump(log, open("auto_log.json", "w"), ensure_ascii=False, indent=1)
+    print(f"respondidos hoje: {feitos}")
+
 if __name__ == "__main__":
     m = os.environ.get("MODO", "listar")
-    listar() if m == "listar" else direct() if m == "direct" else responder()
+    listar() if m == "listar" else direct() if m == "direct" else auto() if m == "auto" else responder()

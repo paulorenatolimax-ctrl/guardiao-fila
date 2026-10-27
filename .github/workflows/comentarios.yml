@@ -1,5 +1,7 @@
 name: Robô de comentários
 on:
+  schedule:
+    - cron: '0 23 * * *'   # 27/10/2026: todo dia às 20h (Brasília), rodada automática
   workflow_dispatch:
     inputs:
       modo:
@@ -25,16 +27,16 @@ jobs:
       - env:
           IG_TOKEN: ${{ secrets.IG_TOKEN }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
-          MODO: ${{ inputs.modo }}
-          MAX: ${{ inputs.max }}
-          N_POSTS: ${{ inputs.n_posts }}
+          MODO: ${{ inputs.modo || 'auto' }}
+          MAX: ${{ inputs.max || '40' }}
+          N_POSTS: ${{ inputs.n_posts || '10' }}
         run: python3 comentarios.py
       - name: Registrar
         if: always()
         run: |
           git config user.name  "fila-guardiao"
           git config user.email "actions@github.com"
-          for f in pendentes.json respostas.json direct.json; do [ -f $f ] && git add $f; done
+          for f in pendentes.json respostas.json direct.json auto_log.json; do [ -f $f ] && git add $f; done
           git diff --staged --quiet && exit 0
           git commit -m "comentários: ${{ inputs.modo }} $(date -u +%d/%m %H:%M)"
           for i in 1 2 3 4 5; do git pull --rebase && git push && exit 0; sleep 5; done
