@@ -65,10 +65,12 @@ with sync_playwright() as p:
         pg.wait_for_timeout(4000)
         texto = pg.inner_text("body")
         marca = "/ ano" if plano == "anual" else "/ mês"
+        # O servidor do GitHub (EUA) vê a Hotmart em outro idioma/moeda: o texto do preço só informa.
+        # Quem decide o plano é a oferta (off=), conferida acima; oferta desativada nem abre o checkout.
+        preco = re.search(r"(R\$|US\$|\$)\s?[\d.,]+\s?/\s?\w+", texto)
         if marca not in texto.replace("/ano", "/ ano").replace("/mês", "/ mês"):
-            raise AssertionError(f"Hotmart abriu {off} mas a página não mostra '{marca}' (oferta desativada?)")
-        preco = re.search(r"R\$\s?[\d.,]+\s?/\s?(ano|mês)", texto)
-        return f"{esperado[off]} ({preco.group(0) if preco else off})"
+            print(f"  aviso: página da Hotmart sem '{marca}' (idioma de fora?): {texto[:120]!r}")
+        return f"{esperado[off]} ({preco.group(0) if preco else 'oferta ' + off})"
 
     def caminho(nome, url, passos):
         ctx, pg = pagina()
