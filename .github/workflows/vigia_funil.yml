@@ -1,23 +1,61 @@
-name: Vigia do funil (caminho até a Hotmart)
+name: Vigia do funil (plano e preço até a Hotmart)
+# 27/10/2026: confere o PLANO e o PREÇO de cada caminho (antes só via "chegou na Hotmart" e deixou
+# o anual quebrado 19 dias). De 10 em 10 min olha se o site mudou (Publish no Lovable): mudou, testa na hora.
+# De hora em hora testa de qualquer jeito. Falhou: apito no celular (ntfy) + issue (e-mail).
 on:
   schedule:
-    - cron: '17 */2 * * *'
+    - cron: '*/10 * * * *'
   workflow_dispatch:
 permissions:
   contents: read
   issues: write
+concurrency:
+  group: vigia-funil
+  cancel-in-progress: false
 jobs:
   vigia:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
-      - run: pip install -q playwright && python -m playwright install --with-deps chromium >/dev/null
-      - id: teste
+      - name: O site mudou desde o último teste?
+        id: versao
+        run: |
+          B=https://jornadafilosofica.com
+          { curl -fsSL "$B/" ; curl -fsSL "$B/checkout" ; } | grep -o '/assets/[A-Za-z0-9_.-]*\.js' | sort -u > v.txt || true
+          for p in /trilha /guia; do curl -fsSL "$B$p" | md5sum >> v.txt || true; done
+          echo "hash=$(md5sum v.txt | cut -c1-16)" >> "$GITHUB_OUTPUT"
+          # teste completo obrigatório nos minutos 0-9 de cada hora
+          if [ "$(date -u +%M)" -lt 10 ] || [ "${{ github.event_name }}" = "workflow_dispatch" ]; then echo "forcar=1" >> "$GITHUB_OUTPUT"; fi
+      - name: Já testei esta versão?
+        id: cache
+        uses: actions/cache/restore@v4
+        with:
+          path: v.txt
+          key: funil-${{ steps.versao.outputs.hash }}
+          lookup-only: true
+      - name: Preparar navegador
+        if: steps.cache.outputs.cache-hit != 'true' || steps.versao.outputs.forcar == '1'
+        run: pip install -q playwright && python -m playwright install --with-deps chromium >/dev/null
+      - name: Fazer o caminho do cliente
+        id: teste
+        if: steps.cache.outputs.cache-hit != 'true' || steps.versao.outputs.forcar == '1'
         run: python3 vigia_funil.py
-      - name: Avisar o Paulo (issue = e-mail do GitHub)
-        if: failure()
+      - name: Guardar esta versão como testada
+        if: always() && steps.teste.outcome != 'skipped' && steps.cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: v.txt
+          key: funil-${{ steps.versao.outputs.hash }}
+      - name: Apitar no celular e abrir issue
+        if: failure() && steps.teste.outcome == 'failure'
         env:
           GH_TOKEN: ${{ github.token }}
+          NTFY: ${{ secrets.NTFY_TOPIC }}
         run: |
-          gh issue create --title "🚨 FUNIL QUEBRADO: alguém não chega na Hotmart ($(date -u +%d/%m %H:%M) UTC)" \
-            --body "$(cat vigia_falhas.txt 2>/dev/null || echo 'ver o log do workflow')" || true
+          MSG="$(cat vigia_falhas.txt 2>/dev/null || echo 'ver o log do workflow')"
+          T="${NTFY:-guardiao-paulo-musica-7f3k9}"
+          curl -s -H "Title: FUNIL QUEBRADO - cliente nao consegue comprar" -H "Priority: urgent" -H "Tags: rotating_light" \
+               -d "$MSG" "https://ntfy.sh/$T" || true
+          gh issue create --title "🚨 FUNIL QUEBRADO: $(date -u +%d/%m\ %H:%M) UTC" \
+            --body "$MSG"$'\n\n'"Log: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" || true
