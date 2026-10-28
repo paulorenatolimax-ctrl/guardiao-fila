@@ -1,0 +1,39 @@
+name: Renovar token Instagram
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 9 * * 1'   # toda segunda, 09:17 UTC
+
+permissions:
+  contents: read
+
+jobs:
+  renovar:
+    runs-on: ubuntu-latest
+    env:
+      IG_TOKEN: ${{ secrets.IG_TOKEN }}
+      GH_PAT: ${{ secrets.GH_PAT }}
+    steps:
+      - name: Renovar token (refresh_access_token)
+        run: |
+          set -euo pipefail
+          resp=$(curl -sS -G "https://graph.instagram.com/refresh_access_token" \
+            --data-urlencode "grant_type=ig_refresh_token" \
+            --data-urlencode "access_token=$IG_TOKEN")
+          new=$(echo "$resp" | jq -r '.access_token // empty')
+          exp=$(echo "$resp" | jq -r '.expires_in // empty')
+          if [ -z "$new" ] || [ -z "$exp" ]; then
+            echo "ERRO ao renovar: $(echo "$resp" | jq -c 'del(.access_token)')"
+            exit 1
+          fi
+          echo "::add-mask::$new"
+          echo "Token renovado. Novo vencimento: $(date -u -d "+${exp} seconds" +%Y-%m-%d) (expires_in=${exp}s)"
+          if [ "$new" = "$IG_TOKEN" ]; then
+            echo "Token devolvido e igual ao atual: o vencimento foi estendido no servidor, secret nao precisa mudar."
+          elif [ -n "${GH_PAT:-}" ]; then
+            echo "Token mudou: atualizando secret IG_TOKEN."
+            GH_TOKEN="$GH_PAT" gh secret set IG_TOKEN -R "$GITHUB_REPOSITORY" --body "$new"
+          else
+            echo "::warning::Token MUDOU mas nao ha secret GH_PAT para atualizar IG_TOKEN. Crie o PAT (ver README)."
+          fi
