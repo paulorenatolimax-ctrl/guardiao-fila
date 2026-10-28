@@ -2,45 +2,45 @@
  "follower_demographics.gender": [
   [
    "F",
-   13660
+   13932
   ],
   [
    "M",
-   12689
+   12973
   ],
   [
    "U",
-   3137
+   3199
   ]
  ],
  "follower_demographics.age": [
   [
    "35-44",
-   9385
+   9578
   ],
   [
    "45-54",
-   8894
+   9049
   ],
   [
    "25-34",
-   4693
+   4816
   ],
   [
    "55-64",
-   3881
+   3962
   ],
   [
    "65+",
-   1321
+   1365
   ],
   [
    "18-24",
-   1180
+   1199
   ],
   [
    "13-17",
-   131
+   134
   ],
   [
    "U",
@@ -50,63 +50,63 @@
  "follower_demographics.city": [
   [
    "São Paulo, São Paulo (state)",
-   2420
+   2479
   ],
   [
    "Rio de Janeiro, Rio de Janeiro (state)",
-   1599
+   1635
   ],
   [
    "Belo Horizonte, Minas Gerais",
-   622
+   631
   ],
   [
    "Curitiba, Paraná",
-   614
+   625
   ],
   [
    "Fortaleza, Ceará",
-   563
+   578
   ],
   [
    "Porto Alegre, Rio Grande do Sul",
-   478
-  ],
-  [
-   "Salvador, Bahia",
-   401
+   486
   ],
   [
    "Goiânia, Goiás",
-   398
+   408
+  ],
+  [
+   "Salvador, Bahia",
+   406
   ],
   [
    "Manaus, Amazonas",
-   347
+   359
   ],
   [
    "Recife, Pernambuco",
    337
   ],
   [
-   "Taguatinga, Federal District",
-   317
+   "Belém, Pará",
+   322
   ],
   [
-   "Belém, Pará",
-   316
+   "Taguatinga, Federal District",
+   321
   ],
   [
    "Campinas, São Paulo (state)",
-   274
+   290
   ],
   [
    "Florianópolis, Santa Catarina",
-   268
+   270
   ],
   [
    "São Luís, Maranhão",
-   251
+   252
   ]
  ],
  "engaged_audience_demographics.gender": [
