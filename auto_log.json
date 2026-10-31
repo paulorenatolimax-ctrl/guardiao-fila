@@ -1,6 +1,41 @@
 [
  {
   "tipo": "emoji",
+  "t": "👏👏👏",
+  "post": "O livro de George Orwell que desmascarou o comunis"
+ },
+ {
+  "tipo": "pedido",
+  "t": "Interessante,. Nunca havia pensado em 1984 como um final para A Revolução dos Bi",
+  "post": "O livro de George Orwell que desmascarou o comunis"
+ },
+ {
+  "tipo": "elogio",
+  "t": "Muito bom seu trabalho expondo as falacias",
+  "post": "Médico: menino criado como menina deu certo. Em 20"
+ },
+ {
+  "tipo": "pedido",
+  "t": "@especialista.marcos Isso mesmo! Muito interessante 👏🏽👏🏽👏🏽",
+  "post": "Médico: menino criado como menina deu certo. Em 20"
+ },
+ {
+  "tipo": "elogio",
+  "t": "Eu tenho uma amiga, não posso citar o nome, que é uma excelente psicóloga. Ela m",
+  "post": "Médico: menino criado como menina deu certo. Em 20"
+ },
+ {
+  "tipo": "emoji",
+  "t": "😢",
+  "post": "Médico: menino criado como menina deu certo. Em 20"
+ },
+ {
+  "tipo": "elogio",
+  "t": "A etnia dela é maravilhosa né.... Nenhum grupo racial ou étnico humano tem sido ",
+  "post": "Susan Sontag, ícone da esquerda americana, chamou "
+ },
+ {
+  "tipo": "emoji",
   "t": "🤣🤣🤣🤣🤣🤣🤣🤣",
   "post": "Susan Sontag, ícone da esquerda americana, chamou "
  },
@@ -8,5 +43,10 @@
   "tipo": "emoji",
   "t": "😢",
   "post": "Susan Sontag, ícone da esquerda americana, chamou "
+ },
+ {
+  "tipo": "pedido",
+  "t": "Pensar que essa galera ainda manda no nosso país! Dá um aperto no peito! 😢",
+  "post": "Dom Pedro II governou 49 anos. A República que o d"
  }
 ]
