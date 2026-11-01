@@ -1,0 +1,42 @@
+name: Robô de palavras-chave (DM)
+on:
+  schedule:
+    - cron: '*/10 * * * *'   # 01/11/2026: substitui o ManyChat; a cada 10 min
+  workflow_dispatch:
+    inputs:
+      modo:
+        description: "listar (só mostra) ou enviar"
+        default: listar
+      horas:
+        description: "olhar comentários das últimas N horas"
+        default: "48"
+      n_posts:
+        description: "quantos posts recentes varrer"
+        default: "8"
+concurrency:
+  group: palavras
+  cancel-in-progress: false
+permissions:
+  contents: write
+jobs:
+  p:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          MODO: ${{ inputs.modo || 'enviar' }}
+          HORAS: ${{ inputs.horas || '6' }}
+          N_POSTS: ${{ inputs.n_posts || '8' }}
+        run: python3 palavras.py
+      - name: Registrar
+        if: always()
+        run: |
+          git config user.name  "fila-guardiao"
+          git config user.email "actions@github.com"
+          [ -f palavras_feitas.json ] && git add palavras_feitas.json
+          git diff --staged --quiet && exit 0
+          git commit -m "palavras: $(date -u +%d/%m\ %H:%M)"
+          for i in 1 2 3 4 5; do git pull --rebase && git push && exit 0; sleep 5; done

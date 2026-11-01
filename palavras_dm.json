@@ -1,0 +1,31 @@
+{
+  "_o_que_e": "01/11/2026: substitui o ManyChat. Comentário que é só uma PALAVRA em caixa alta (ou uma das listadas) vira DM pela API oficial (resposta privada ao comentário) + resposta pública curta. Edite os textos aqui; o robô (palavras.yml, a cada 10 min) lê este arquivo. Nunca remova palavra: só acrescente.",
+  "whatsapp": "https://wa.me/5511952138830?text=Quero%20entrar%20na%20comunidade%20do%20Guardi%C3%A3o",
+  "trilha": "https://jornadafilosofica.com/trilha",
+  "guia": "https://jornadafilosofica.com/guia",
+  "publico": ["Te mandei agora no direct 💙", "Mandei no seu direct 💙", "Está no seu direct 💙"],
+  "modelo": "Oi{nome}! {abertura}\n\n📚 Trilha do Guardião, 247 estações de 10 minutos por dia, em forma de jogo: {trilha}\n\n💬 Entra na comunidade do Guardião no WhatsApp (grupos de esquerdismo, ateísmo e relativismo): {whatsapp}\n\nQualquer dúvida, responde aqui 💙",
+  "abertura_padrao": "Aqui está o que você pediu. Começa pelo Guia do Guardião, gratuito: {guia}",
+  "estacoes": {
+    "JUSTIÇA": "Joga agora a estação grátis sobre justiça social (Hayek), 10 minutos: https://jornadafilosofica.com/trilha/estacoes/T-04/index.html",
+    "JUSTICA": "Joga agora a estação grátis sobre justiça social (Hayek), 10 minutos: https://jornadafilosofica.com/trilha/estacoes/T-04/index.html",
+    "FAMÍLIA": "Joga agora a estação grátis sobre de onde vem a ideia de que a família oprime (Engels), 10 minutos: https://jornadafilosofica.com/trilha/estacoes/T-02/index.html",
+    "FAMILIA": "Joga agora a estação grátis sobre de onde vem a ideia de que a família oprime (Engels), 10 minutos: https://jornadafilosofica.com/trilha/estacoes/T-02/index.html",
+    "COMUNISMO": "Joga agora a estação grátis sobre como o comunismo matou mais que qualquer guerra, 10 minutos: https://jornadafilosofica.com/trilha/estacoes/T-07/index.html",
+    "ESCOLA": "Joga agora a estação grátis: a escola ensina a pensar ou ensina o slogan? (Lewis), 10 minutos: https://jornadafilosofica.com/trilha/estacoes/T-08/index.html",
+    "GALILEU": "Joga agora a estação grátis sobre o caso Galileu sem lenda, 10 minutos: https://jornadafilosofica.com/trilha/estacoes/G-02/index.html",
+    "LÓGICA": "Joga agora a estação grátis sobre os 38 truques de ter razão (Schopenhauer), 10 minutos: https://jornadafilosofica.com/trilha/estacoes/C-03/index.html",
+    "LOGICA": "Joga agora a estação grátis sobre os 38 truques de ter razão (Schopenhauer), 10 minutos: https://jornadafilosofica.com/trilha/estacoes/C-03/index.html",
+    "ROUSSEAU": "Joga agora a estação grátis sobre o bom selvagem de Rousseau, 10 minutos: https://jornadafilosofica.com/trilha/estacoes/F-03/index.html",
+    "ORWELL": "Joga agora a estação grátis sobre a Novilíngua de 1984, 10 minutos: https://jornadafilosofica.com/trilha/estacoes/A-12/index.html",
+    "CHESTERTON": "Joga agora a estação grátis sobre a cerca de Chesterton, 10 minutos: https://jornadafilosofica.com/trilha/estacoes/E-11/index.html",
+    "FRANKL": "Joga agora a estação grátis sobre Frankl e o sentido da vida, 10 minutos: https://jornadafilosofica.com/trilha/estacoes/I-09/index.html",
+    "FILHOS": "Joga agora a estação grátis sobre a infância que migrou para a tela (Haidt), 10 minutos: https://jornadafilosofica.com/trilha/estacoes/J-01/index.html",
+    "UNIVERSIDADE": "Joga agora a estação grátis sobre a universidade que parou de pensar (Flávio Gordon), 10 minutos: https://jornadafilosofica.com/trilha/estacoes/K-02/index.html",
+    "ECONOMIA": "Joga agora a estação grátis sobre o que se vê e o que não se vê (Bastiat), 10 minutos: https://jornadafilosofica.com/trilha/estacoes/L-05/index.html",
+    "SÓCRATES": "Joga agora a estação grátis sobre a vida sem exame (Sócrates), 10 minutos: https://jornadafilosofica.com/trilha/estacoes/D-03/index.html",
+    "SOCRATES": "Joga agora a estação grátis sobre a vida sem exame (Sócrates), 10 minutos: https://jornadafilosofica.com/trilha/estacoes/D-03/index.html",
+    "DEUS": "Joga agora a estação grátis sobre o argumento moral: sem Deus, o bem vira gosto, 10 minutos: https://jornadafilosofica.com/trilha/estacoes/H-11/index.html"
+  },
+  "palavras_extra": ["HISTÓRIA", "HISTORIA", "CONSERVAR", "KRONSTADT", "GALTON", "SMITH", "PROIBIDOS", "LENIN", "LÊNIN", "MAO", "LITA", "PRÁXIS", "PRAXIS", "LIVE", "VIDA", "TEXTO", "TERROR", "SARTRE", "PROMETEU", "PICASSO", "NUNCA", "KULAKS", "KULAK", "JULES", "HOLODOMOR", "FOME", "FOLCLORE", "AQUINO", "LIVROS", "DADOS", "ACESSO", "GUARDIÃO", "GUARDIAO", "GUIA", "TRILHA", "QUERO", "EU", "LIVRO", "VOEGELIN", "GRAMSCI", "MARX", "FREIRE", "ARISTÓTELES", "ARISTOTELES", "BURKE", "SCRUTON"]
+}
