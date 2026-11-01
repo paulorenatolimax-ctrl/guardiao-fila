@@ -42,7 +42,7 @@ except (RuntimeError, urllib.error.HTTPError, KeyError) as e:
     filhos = criar_filhos(c["fallback_slides"], chamar, API, UID, TOK, REPO, TAG)
 # 01/11/2026 (Paulo): todo carrossel oferece a Trilha. Link não clica em legenda/comentário,
 # então o caminho é palavra -> DM automática (palavras.py). Bloco no fim do 1º parágrafo da legenda.
-OFERTA_LEG = ""  # 01/11 12h: "trouxa" reprovado; vazio até o Paulo escolher o texto novo
+OFERTA_LEG = "📚 Trilha do Guardião: 10 minutos por dia para reconhecer o esquerdismo, o ateísmo e o relativismo quando eles aparecem. Comenta TRILHA que eu te mando o link no direct."  # 01/11 17h: substitui o 'trouxa'
 if OFERTA_LEG and "TRILHA" not in c["legenda"]:
     _p = c["legenda"].split("\n\n", 1)
     c["legenda"] = _p[0] + "\n\n" + OFERTA_LEG + ("\n\n" + _p[1] if len(_p) > 1 else "")
