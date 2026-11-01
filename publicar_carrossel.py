@@ -42,7 +42,7 @@ except (RuntimeError, urllib.error.HTTPError, KeyError) as e:
     filhos = criar_filhos(c["fallback_slides"], chamar, API, UID, TOK, REPO, TAG)
 # 01/11/2026 (Paulo): todo carrossel oferece a Trilha. Link não clica em legenda/comentário,
 # então o caminho é palavra -> DM automática (palavras.py). Bloco no fim do 1º parágrafo da legenda.
-OFERTA_LEG = "📚 Quer ir à raiz deste tema? Comenta TRILHA que eu te mando no direct a estação grátis da Trilha do Guardião."
+OFERTA_LEG = "📚 Trilha do Guardião: 10 minutos por dia para não ser feito de trouxa pelo esquerdismo, pelo ateísmo e pelo relativismo. Comenta TRILHA que eu te mando o link no direct."
 if "TRILHA" not in c["legenda"]:
     _p = c["legenda"].split("\n\n", 1)
     c["legenda"] = _p[0] + "\n\n" + OFERTA_LEG + ("\n\n" + _p[1] if len(_p) > 1 else "")
@@ -60,7 +60,7 @@ c["publicado"] = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M"); c["media
 json.dump(fila, open("carrosseis.json", "w"), ensure_ascii=False, indent=2)
 print("  PUBLICADO CARROSSEL NO INSTAGRAM:", p["id"])
 try:  # 01/11/2026: 1º comentário do próprio perfil com a oferta (fixar à mão no app, a API não fixa)
-    chamar(f"{API}/{p['id']}/comments", {"message": "Quer se aprofundar? Comenta TRILHA aqui embaixo que eu te mando no direct a estação grátis deste tema 💙", "access_token": TOK})
+    chamar(f"{API}/{p['id']}/comments", {"message": "📚 Trilha do Guardião: 10 minutos por dia para não ser feito de trouxa pelo esquerdismo, pelo ateísmo e pelo relativismo. Comenta TRILHA que eu te mando o link no direct 💙", "access_token": TOK})
     print("  comentário da oferta postado")
 except Exception as e:
     print("comentário da oferta ignorado:", type(e).__name__)
