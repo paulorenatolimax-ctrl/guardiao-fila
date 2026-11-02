@@ -85,6 +85,12 @@ def main():
     print("3/3 publicando no Instagram…")
     p = chamar(f"{API}/{UID}/media_publish", {"creation_id": cid, "access_token": TOK})
     print(f"  PUBLICADO NO INSTAGRAM: media id {p['id']}")
+    # 01/11/2026: modelo Adriano (comentário do dono com a oferta; Paulo fixa no celular com 1 toque)
+    try:
+        chamar(f"{API}/{p['id']}/comments", {"message": "📚 Trilha do Guardião: 10 minutos por dia para reconhecer o esquerdismo, o ateísmo e o relativismo quando eles aparecem. Comenta TRILHA que eu te mando o link no direct. 💙", "access_token": TOK})
+        print("  1º comentário da oferta postado")
+    except Exception as e:
+        print("  comentário da oferta falhou (Reel publicado mesmo assim):", e)
 
     item["publicado"] = time.strftime("%Y-%m-%d %H:%M")
     item["media_id"]  = p["id"]
