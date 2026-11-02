@@ -10,7 +10,7 @@ def legenda_ok(t):
     while len(t) > LIMITE_LEGENDA and re.search(r"\s#\S+\s*$", t): t = re.sub(r"\s*#\S+\s*$", "", t)
     # 17/10/2026: em vez de travar o post, enxuga o rodapé: primeiro os créditos de imagem, depois as últimas Fontes
     if len(t) > LIMITE_LEGENDA:
-        t = re.sub(r"\n+Imagens:[^\n]*", "", t)
+        t = re.sub(r"\n+(Imagens|Créditos de imagem)[^\n]*", "", t)  # 01/11: pega "Imagens (Wikimedia...)" e "Créditos de imagem"
     while len(t) > LIMITE_LEGENDA and re.search(r"\nFontes:.*\n• [^\n]*$", t, re.S):
         t = re.sub(r"\n• [^\n]*$", "", t)
     if len(t) > LIMITE_LEGENDA: print("legenda longa demais mesmo enxugando rodapé:", len(t)); sys.exit(1)
