@@ -50,6 +50,7 @@ ESPECIAIS = {
         # 19h14: Gramsci forçado a pedido do Paulo; 21h: mais um (DIR1).
         # 07/10/2026: Paulo pediu o carrossel da democracia (DEM1) às 19h; CPV1 segue às 20h (intervalo do dia: 55 min).
         date(2026, 10, 27): ([7.5, 16.5, 18.5, 20.5], timedelta(minutes=90), 4),  # 27/10 16h30: Paulo mandou tirar a pausa e subir já (E06 Platão agora, B03 18h30, F02 20h30)
+        date(2026, 11, 1): ([7.5, 11.5, 15.5, 20], timedelta(minutes=90), 4),  # 01/11: dia fechado em 4; grade de 6 vale a partir de 02/11
         date(2026, 10, 13): ([7.5, 11.5, 15.5, 21], timedelta(minutes=90), 4),
         date(2026, 10, 21): ([7.5, 11.5, 14.5, 17.5, 20.5], timedelta(minutes=90), 5),  # Paulo 21/10: 5 por dia, espaçados (18h30+20h30 colados reprovado em 12/10). G276 Mao, G273 Fidel, G318 Stalin, G296 Picasso, G314 Identitarismo
         date(2026, 10, 22): ([7, 9.5, 12, 14.5, 17, 19.5, 22], timedelta(minutes=90), 7),  # Paulo 21/10: voltar a 6-7 por dia na reta do 2º turno, a cada 2h30

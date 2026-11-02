@@ -136,6 +136,12 @@ def auto():
     json.dump(log, open("auto_log.json", "w"), ensure_ascii=False, indent=1)
     print(f"respondidos hoje: {feitos}")
 
+def oferta():
+    """01/11/2026: 1º comentário com a oferta da Trilha em posts que saíram sem ela. Lê oferta_posts.json [media_id]."""
+    from publicar_carrossel_oferta import OFERTA
+    for mid in json.load(open("oferta_posts.json")):
+        post(f"{mid}/comments", message=OFERTA + " 💙"); print("oferta comentada", mid); time.sleep(20)
+
 if __name__ == "__main__":
     m = os.environ.get("MODO", "listar")
-    listar() if m == "listar" else direct() if m == "direct" else auto() if m == "auto" else responder()
+    oferta() if m == "oferta" else listar() if m == "listar" else direct() if m == "direct" else auto() if m == "auto" else responder()
