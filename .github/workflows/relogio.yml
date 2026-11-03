@@ -1,0 +1,40 @@
+name: Relógio da fila
+# 03/11/2026: em 02/11 o cron do GitHub quase não rodou de manhã (6 execuções em 7 h em vez de 84):
+# o carrossel das 7h30 saiu 9h39, o atraso se somou e o das 20h30 nem saiu.
+# Este relógio fica ligado ~5h40 por vez e, a cada 5 min (7h-23h59 BRT), dispara carrossel e Reel
+# SEM forcar (quem decide se publica continua sendo o decidir.py). Antes de terminar, liga o próximo
+# relógio (corrente sem fim). O cron abaixo é só o "estepe" caso a corrente se rompa.
+# Repo público: minutos do Actions são grátis.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '7 */4 * * *'
+concurrency:
+  group: relogio
+  cancel-in-progress: false
+jobs:
+  relogio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    permissions:
+      actions: write
+      contents: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - name: Bater de 5 em 5 minutos
+        run: |
+          fim=$(( $(date +%s) + 340*60 ))
+          while [ "$(date +%s)" -lt "$fim" ]; do
+            h=$(TZ=America/Sao_Paulo date +%H)
+            if [ "$h" -ge 7 ]; then
+              echo "$(TZ=America/Sao_Paulo date '+%d/%m %H:%M') BRT: disparando carrossel e Reel"
+              gh workflow run carrossel.yml -f forcar=false || echo "falhou carrossel"
+              gh workflow run publicar.yml -f forcar=false || echo "falhou reel"
+            fi
+            sleep 300
+          done
+      - name: Ligar o próximo relógio
+        if: always()
+        run: gh workflow run relogio.yml

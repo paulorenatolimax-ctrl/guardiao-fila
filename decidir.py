@@ -31,7 +31,8 @@ TIPOS = {
     # 12/10/2026: Paulo achou 18h30 e 20h30 colados e o buraco de manhã sem sentido; grade harmonizada a cada ~4 h
     # (7h30, 11h30, 15h30, 20h), com o Reel das 17h no meio da tarde.
     # 01/11/2026 noite: Paulo aprovou 6 por dia: 7h30, 10h, 12h30, 15h30, 18h, 20h30.
-    "carrossel": ("carrosseis.json", "carrosseis", [7.5, 10, 12.5, 15.5, 18, 20.5], timedelta(minutes=90), 6),
+    # 03/11/2026: intervalo mínimo 90 -> 60 min: em 02/11 o atraso de manhã se somou e o último nem saiu.
+    "carrossel": ("carrosseis.json", "carrosseis", [7.5, 10, 12.5, 15.5, 18, 20.5], timedelta(minutes=60), 6),
     "teste":     ("teste.json",      "fila",       [8, 14, 18],   timedelta(minutes=90), 3),
 }
 # MODO ELEIÇÃO: grade especial por data (BRT), por tipo. Fora dessas datas vale TIPOS.
