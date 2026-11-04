@@ -38,6 +38,7 @@ TIPOS = {
 # MODO ELEIÇÃO: grade especial por data (BRT), por tipo. Fora dessas datas vale TIPOS.
 ESPECIAIS = {
     "reel": {
+        date(2026, 11, 4): ([15, 20, 22], timedelta(hours=1), 3),  # 04/11: Paulo pediu 2 Reels hoje além da Argentina (15h07): R115 às 20h, R108 às 22h
         date(2026, 10, 19): ([13], timedelta(hours=4), 1),  # 19/10: Paulo aprovou o R54 (Gramsci, folclore) para as 13h
         date(2026, 10, 27): ([14], timedelta(hours=4), 1),  # 27/10: Paulo aprovou o R95 (Gramsci, o poder não está na Presidência) para as 14h
     },
