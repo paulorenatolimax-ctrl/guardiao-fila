@@ -6,8 +6,9 @@ import publicar_youtube
 
 REPO = "paulorenatolimax-ctrl/guardiao-fila"
 TAG = os.environ.get("RELEASE_TAG", "videos")
-numeros = [int(x) for x in os.environ.get("NUMEROS", "").split(",") if x.strip()]
-fila = json.load(open("fila.json", encoding="utf-8"))
+ARQ = os.environ.get("ARQ") or "fila.json"   # 08/11: "teste.json" sobe Trial Reels no YouTube
+numeros = [int(x) if x.strip().isdigit() else x.strip() for x in os.environ.get("NUMEROS", "").split(",") if x.strip()]
+fila = json.load(open(ARQ, encoding="utf-8"))
 feitos = []
 for n in numeros:
     item = next((x for x in fila["fila"] if x.get("n") == n), None)
@@ -23,5 +24,5 @@ for n in numeros:
         print(f"{n}: no YouTube ({yt_id})")
     except Exception as e:
         print(f"{n}: FALHOU no YouTube: {e}")
-    json.dump(fila, open("fila.json", "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+    json.dump(fila, open(ARQ, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
 print("Subidos:", feitos)
