@@ -43,7 +43,7 @@ except (RuntimeError, urllib.error.HTTPError, KeyError) as e:
 # 01/11/2026 (Paulo): todo carrossel oferece a Trilha. Link não clica em legenda/comentário,
 # então o caminho é palavra -> DM automática (palavras.py). Bloco no fim do 1º parágrafo da legenda.
 OFERTA_LEG = "📚 Trilha do Guardião: 10 minutos por dia para reconhecer o esquerdismo, o ateísmo e o relativismo quando eles aparecem. Comenta TRILHA que eu te mando o link no direct."  # 01/11 17h: substitui o 'trouxa'
-if OFERTA_LEG and "TRILHA" not in c["legenda"]:
+if OFERTA_LEG and "TRILHA" not in c["legenda"] and not c.get("sem_oferta"):  # 18/11: "sem_oferta": true desliga o bloco nesta peça
     _p = c["legenda"].split("\n\n", 1)
     c["legenda"] = _p[0] + "\n\n" + OFERTA_LEG + ("\n\n" + _p[1] if len(_p) > 1 else "")
 r = chamar(f"{API}/{UID}/media", {"media_type": "CAROUSEL", "children": ",".join(filhos), "caption": legenda_ok(c["legenda"]), "access_token": TOK})
@@ -60,7 +60,7 @@ c["publicado"] = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M"); c["media
 json.dump(fila, open("carrosseis.json", "w"), ensure_ascii=False, indent=2)
 print("  PUBLICADO CARROSSEL NO INSTAGRAM:", p["id"])
 try:  # 01/11/2026: 1º comentário do próprio perfil com a oferta (fixar à mão no app, a API não fixa)
-    if OFERTA_LEG:
+    if OFERTA_LEG and not c.get("sem_oferta"):
         chamar(f"{API}/{p['id']}/comments", {"message": OFERTA_LEG + " 💙", "access_token": TOK})
         print("  comentário da oferta postado")
 except Exception as e:
