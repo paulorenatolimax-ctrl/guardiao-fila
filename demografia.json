@@ -2,37 +2,37 @@
  "follower_demographics.gender": [
   [
    "F",
-   16520
+   16534
   ],
   [
    "M",
-   15477
+   15490
   ],
   [
    "U",
-   3830
+   3834
   ]
  ],
  "follower_demographics.age": [
   [
    "35-44",
-   11419
+   11437
   ],
   [
    "45-54",
-   10930
+   10941
   ],
   [
    "25-34",
-   5571
+   5566
   ],
   [
    "55-64",
-   4786
+   4789
   ],
   [
    "65+",
-   1658
+   1662
   ],
   [
    "18-24",
@@ -46,27 +46,27 @@
  "follower_demographics.city": [
   [
    "São Paulo, São Paulo (state)",
-   2886
+   2882
   ],
   [
    "Rio de Janeiro, Rio de Janeiro (state)",
-   1914
+   1920
   ],
   [
    "Belo Horizonte, Minas Gerais",
-   758
+   759
   ],
   [
    "Curitiba, Paraná",
-   722
+   724
   ],
   [
    "Fortaleza, Ceará",
-   682
+   684
   ],
   [
    "Porto Alegre, Rio Grande do Sul",
-   568
+   570
   ],
   [
    "Salvador, Bahia",
@@ -78,19 +78,19 @@
   ],
   [
    "Manaus, Amazonas",
-   444
+   447
   ],
   [
    "Recife, Pernambuco",
-   423
+   421
   ],
   [
    "Taguatinga, Federal District",
-   381
+   377
   ],
   [
    "Belém, Pará",
-   373
+   374
   ],
   [
    "Campinas, São Paulo (state)",
@@ -98,117 +98,117 @@
   ],
   [
    "Florianópolis, Santa Catarina",
-   328
+   325
   ],
   [
    "São Luís, Maranhão",
-   293
+   292
   ]
  ],
  "engaged_audience_demographics.gender": [
   [
    "F",
-   52053
+   45966
   ],
   [
    "M",
-   44501
+   39736
   ],
   [
    "U",
-   12958
+   11732
   ]
  ],
  "engaged_audience_demographics.age": [
   [
    "35-44",
-   31401
+   27766
   ],
   [
    "45-54",
-   30028
+   26615
   ],
   [
    "25-34",
-   18928
+   16869
   ],
   [
    "55-64",
-   15493
+   13844
   ],
   [
    "18-24",
-   6874
+   6243
   ],
   [
    "65+",
-   5961
+   5365
   ],
   [
    "13-17",
-   827
+   732
   ]
  ],
  "engaged_audience_demographics.city": [
   [
    "São Paulo, São Paulo (state)",
-   8789
+   7736
   ],
   [
    "Rio de Janeiro, Rio de Janeiro (state)",
-   5872
+   5188
   ],
   [
    "Curitiba, Paraná",
-   2427
+   2151
   ],
   [
    "Belo Horizonte, Minas Gerais",
-   2292
+   1993
   ],
   [
    "Fortaleza, Ceará",
-   2167
+   1943
   ],
   [
    "Porto Alegre, Rio Grande do Sul",
-   1952
+   1727
   ],
   [
    "Salvador, Bahia",
-   1476
+   1309
   ],
   [
    "Goiânia, Goiás",
-   1474
+   1309
   ],
   [
    "Recife, Pernambuco",
-   1456
+   1293
   ],
   [
    "Manaus, Amazonas",
-   1289
+   1148
   ],
   [
    "Florianópolis, Santa Catarina",
-   1124
-  ],
-  [
-   "Campinas, São Paulo (state)",
-   1026
+   984
   ],
   [
    "Belém, Pará",
-   1014
+   919
+  ],
+  [
+   "Campinas, São Paulo (state)",
+   883
   ],
   [
    "Taguatinga, Federal District",
-   969
+   865
   ],
   [
    "São Luís, Maranhão",
-   900
+   826
   ]
  ]
 }
