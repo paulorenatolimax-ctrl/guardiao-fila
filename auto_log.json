@@ -1,5 +1,10 @@
 [
  {
+  "tipo": "pedido",
+  "t": "Interessante essa explicação",
+  "post": "A Venezuela chegou a 94% de pobreza, com a maior r"
+ },
+ {
   "tipo": "emoji",
   "t": "❤️",
   "post": "Você não entende a esquerda se não conhece esta pa"
@@ -11,12 +16,12 @@
  },
  {
   "tipo": "emoji",
-  "t": "😈👿",
+  "t": "😢",
   "post": "O partido de Hitler se chamava Nacional-Socialista"
  },
  {
-  "tipo": "emoji",
-  "t": "👏👏👏👏",
+  "tipo": "pedido",
+  "t": "Mas a glr q manda VC estudar história diz q é de Direita",
   "post": "O partido de Hitler se chamava Nacional-Socialista"
  }
 ]
