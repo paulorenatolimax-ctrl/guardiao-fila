@@ -34,7 +34,8 @@ TIPOS = {
     # 03/11/2026: intervalo mínimo 90 -> 60 min: em 02/11 o atraso de manhã se somou e o último nem saiu.
     # 07/11/2026: Paulo pediu para diminuir o ritmo (alcance por post caiu com 6 por dia): 3 por dia, 7h30, 12h30 e 20h30.
     # 20/11/2026 11h10: Paulo pediu 6 por dia, a cada 2 h, começando 7h: 7h, 9h, 11h, 13h, 15h, 17h.
-    "carrossel": ("carrosseis.json", "carrosseis", [7, 9, 11, 13, 15, 17], timedelta(minutes=90), 6),
+    # 20/11/2026 11h53: a partir de 21/11, pelos números do relatorio.csv: sai 15h, entra 19h: 7h, 9h, 11h, 13h, 17h, 19h.
+    "carrossel": ("carrosseis.json", "carrosseis", [7, 9, 11, 13, 17, 19], timedelta(minutes=90), 6),
     "teste":     ("teste.json",      "fila",       [8, 14, 18],   timedelta(minutes=90), 3),
 }
 # MODO ELEIÇÃO: grade especial por data (BRT), por tipo. Fora dessas datas vale TIPOS.
