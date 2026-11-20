@@ -47,7 +47,7 @@ ESPECIAIS = {
         date(2026, 10, 27): ([14], timedelta(hours=4), 1),  # 27/10: Paulo aprovou o R95 (Gramsci, o poder não está na Presidência) para as 14h
     },
     "carrossel": {
-        date(2026, 11, 20): ([11, 13, 15, 17], timedelta(minutes=90), 4),  # 20/11 (feriado, nada saiu até 11h): K023 já, depois 13h, 15h e 17h (Paulo 11h10)
+        date(2026, 11, 20): ([11, 13, 15, 15.5, 17, 19, 21], timedelta(minutes=90), 7),  # 20/11 15h35: Paulo, Consciência Negra: K017 forçado já, K029 17h, K042 19h, K014 21h;  # 20/11 (feriado, nada saiu até 11h): K023 já, depois 13h, 15h e 17h (Paulo 11h10)
         # 03/10/2026: modo eleição (6/dia) cancelado pelo Paulo; volta à grade normal de 3 por dia.
         # 04/10/2026: Paulo pediu 4 carrosséis no dia (carrossel ganha tração com os dias).
         # 05/10/2026: Paulo aprovou tudo e pediu 5 no dia (8h saiu atrasado pelo bloqueio da API).
