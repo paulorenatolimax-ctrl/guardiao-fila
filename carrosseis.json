@@ -1458,10 +1458,26 @@
       "cta_modo": "salva",
       "via": "Paulo 20/11 11h-11h31 no chat (áudio): aprovadas; prints auditados 20/11 12h; grade 25/11-1/12"
     },
-    {
+        {
       "id": "K045",
       "titulo": "O irmão de um ateu famoso queimou a Bíblia. Hoje é cristão.",
       "slides": [
+        "carK045_01.jpg",
+        "carK045_02b.mp4",
+        "carK045_03.jpg",
+        "carK045_04.jpg",
+        "carK045_05.jpg",
+        "carK045_06.jpg",
+        "carK045_07.jpg",
+        "carK045_08.jpg",
+        "carK045_09.jpg",
+        "carK045_10.jpg"
+      ],
+      "legenda": "O irmão de um ateu famoso queimou a Bíblia. Hoje é cristão.\n\nEm 1967, aos 15 anos, no campo do colégio interno em Cambridge, Peter Hitchens tentou pôr fogo na própria Bíblia, presente dos pais. Na entrevista de 2024 ao The Sacred, ele diz: \"vamos queimar a minha Bíblia. E não deu certo.\" No Daily Mail de 2010, escreveu: \"Pus fogo na minha Bíblia.\" Era a revolta contra tudo o que tinha aprendido. Ele mesmo conta: zombava dos fracos, brigou com a polícia, usou drogas e quase matou alguém de moto.\n\nO irmão, Christopher Hitchens, escreveu Deus Não é Grande (2007) e morreu em 2011 como um dos ateus mais famosos do mundo.\n\nPeter fez o caminho inverso. Aos 30 anos, em 1981, já não evitava as igrejas. Diante do Juízo Final de Rogier van der Weyden, ficou de boca aberta: \"não tive dúvida de que estava entre os condenados\". Casou na Igreja. A filha foi batizada, e depois a mulher, criada como ateia marxista.\n\nPara ser justo: ele admite que o medo pesou na volta, e diz que não detesta os ateus.\n\nO argumento:\nSe o ateísmo fosse o fim de quem pensa, quem pensa não voltaria dele.\nPeter, jornalista, viveu o ateísmo e voltou.\nLogo, o ateísmo não é o fim de quem pensa.\n\nBasta 1 caso para derrubar o \"todo\". Salva e compartilha com quem acha que a Bíblia queimada é o fim da história.\n\nSalva pra quando disserem que gente inteligente não crê em Deus. Manda pra quem reza por um irmão que se afastou de Deus.\n\nFontes:\nPeter Hitchens, \"How I found God and peace with my atheist brother\", Daily Mail, 2010 (do livro The Rage Against God).\nRNZ/BBC, \"Christopher Hitchens dies\", 16/12/2011.\n\nImagens: Wikimedia Commons. Nigel Luckhurst (CC BY-SA 4.0); stepher, Arkansas Lad, meesh (CC BY/BY-SA 2.0); Benjamin Smith (CC BY-SA 4.0); Rogier van der Weyden (domínio público); AndyScott, Poliphilo, Eazy01 (CC0).\n\nVídeo (slide 2): The Sacred, entrevista com Peter Hitchens (https://www.youtube.com/watch?v=sJjAokiuwNY), 14:32-14:49. Tradução nossa.\n\n#Verdade #GuardiãoDaTradição #Cristianismo",
+      "aprovado": true,
+      "cta_modo": "salva",
+      "via": "Paulo 20/11 11h-11h31 no chat (áudio): aprovadas; prints auditados 20/11 12h; grade 25/11-1/12",
+      "fallback_slides": [
         "carK045_01.jpg",
         "carK045_02.jpg",
         "carK045_03.jpg",
@@ -1473,10 +1489,7 @@
         "carK045_09.jpg",
         "carK045_10.jpg"
       ],
-      "legenda": "O irmão de um ateu famoso queimou a Bíblia. Hoje é cristão.\n\nEm 1967, aos 15 anos, Peter Hitchens pôs fogo na própria Bíblia, presente dos pais, no campo do colégio interno, em Cambridge. Era a revolta contra tudo o que tinha aprendido. Ele mesmo conta: zombava dos fracos, brigou com a polícia, usou drogas e quase matou alguém de moto.\n\nO irmão, Christopher Hitchens, escreveu Deus Não é Grande (2007) e morreu em 2011 como um dos ateus mais famosos do mundo.\n\nPeter fez o caminho inverso. Aos 30 anos, em 1981, já não evitava as igrejas. Diante do Juízo Final de Rogier van der Weyden, ficou de boca aberta: \"não tive dúvida de que estava entre os condenados\". Casou na Igreja. A filha foi batizada, e depois a mulher, criada como ateia marxista.\n\nPara ser justo: ele admite que o medo pesou na volta, e diz que não detesta os ateus.\n\nO argumento:\nSe o ateísmo fosse o fim de quem pensa, quem pensa não voltaria dele.\nPeter, jornalista, viveu o ateísmo e voltou.\nLogo, o ateísmo não é o fim de quem pensa.\n\nBasta 1 caso para derrubar o \"todo\". Salva e compartilha com quem acha que a Bíblia queimada é o fim da história.\n\nSalva pra quando disserem que gente inteligente não crê em Deus. Manda pra quem reza por um irmão que se afastou de Deus.\n\nFontes:\nPeter Hitchens, \"How I found God and peace with my atheist brother\", Daily Mail, 2010 (do livro The Rage Against God).\nRNZ/BBC, \"Christopher Hitchens dies\", 16/12/2011.\n\nImagens: Wikimedia Commons. Nigel Luckhurst (CC BY-SA 4.0); stepher, Arkansas Lad, meesh (CC BY/BY-SA 2.0); Benjamin Smith (CC BY-SA 4.0); Rogier van der Weyden (domínio público); AndyScott, Poliphilo, Eazy01 (CC0).\n\n#Verdade #GuardiãoDaTradição #Cristianismo",
-      "aprovado": true,
-      "cta_modo": "salva",
-      "via": "Paulo 20/11 11h-11h31 no chat (áudio): aprovadas; prints auditados 20/11 12h; grade 25/11-1/12"
+      "legenda_fallback": "O irmão de um ateu famoso queimou a Bíblia. Hoje é cristão.\n\nEm 1967, aos 15 anos, Peter Hitchens pôs fogo na própria Bíblia, presente dos pais, no campo do colégio interno, em Cambridge. Era a revolta contra tudo o que tinha aprendido. Ele mesmo conta: zombava dos fracos, brigou com a polícia, usou drogas e quase matou alguém de moto.\n\nO irmão, Christopher Hitchens, escreveu Deus Não é Grande (2007) e morreu em 2011 como um dos ateus mais famosos do mundo.\n\nPeter fez o caminho inverso. Aos 30 anos, em 1981, já não evitava as igrejas. Diante do Juízo Final de Rogier van der Weyden, ficou de boca aberta: \"não tive dúvida de que estava entre os condenados\". Casou na Igreja. A filha foi batizada, e depois a mulher, criada como ateia marxista.\n\nPara ser justo: ele admite que o medo pesou na volta, e diz que não detesta os ateus.\n\nO argumento:\nSe o ateísmo fosse o fim de quem pensa, quem pensa não voltaria dele.\nPeter, jornalista, viveu o ateísmo e voltou.\nLogo, o ateísmo não é o fim de quem pensa.\n\nBasta 1 caso para derrubar o \"todo\". Salva e compartilha com quem acha que a Bíblia queimada é o fim da história.\n\nSalva pra quando disserem que gente inteligente não crê em Deus. Manda pra quem reza por um irmão que se afastou de Deus.\n\nFontes:\nPeter Hitchens, \"How I found God and peace with my atheist brother\", Daily Mail, 2010 (do livro The Rage Against God).\nRNZ/BBC, \"Christopher Hitchens dies\", 16/12/2011.\n\nImagens: Wikimedia Commons. Nigel Luckhurst (CC BY-SA 4.0); stepher, Arkansas Lad, meesh (CC BY/BY-SA 2.0); Benjamin Smith (CC BY-SA 4.0); Rogier van der Weyden (domínio público); AndyScott, Poliphilo, Eazy01 (CC0).\n\n#Verdade #GuardiãoDaTradição #Cristianismo"
     },
     {
       "id": "K077",
