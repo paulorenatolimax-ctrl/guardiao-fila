@@ -33,7 +33,8 @@ TIPOS = {
     # 01/11/2026 noite: Paulo aprovou 6 por dia: 7h30, 10h, 12h30, 15h30, 18h, 20h30.
     # 03/11/2026: intervalo mínimo 90 -> 60 min: em 02/11 o atraso de manhã se somou e o último nem saiu.
     # 07/11/2026: Paulo pediu para diminuir o ritmo (alcance por post caiu com 6 por dia): 3 por dia, 7h30, 12h30 e 20h30.
-    "carrossel": ("carrosseis.json", "carrosseis", [7.5, 12.5, 20.5], timedelta(minutes=90), 3),
+    # 20/11/2026 11h10: Paulo pediu 6 por dia, a cada 2 h, começando 7h: 7h, 9h, 11h, 13h, 15h, 17h.
+    "carrossel": ("carrosseis.json", "carrosseis", [7, 9, 11, 13, 15, 17], timedelta(minutes=90), 6),
     "teste":     ("teste.json",      "fila",       [8, 14, 18],   timedelta(minutes=90), 3),
 }
 # MODO ELEIÇÃO: grade especial por data (BRT), por tipo. Fora dessas datas vale TIPOS.
@@ -45,6 +46,7 @@ ESPECIAIS = {
         date(2026, 10, 27): ([14], timedelta(hours=4), 1),  # 27/10: Paulo aprovou o R95 (Gramsci, o poder não está na Presidência) para as 14h
     },
     "carrossel": {
+        date(2026, 11, 20): ([11, 13, 15, 17], timedelta(minutes=90), 4),  # 20/11 (feriado, nada saiu até 11h): K023 já, depois 13h, 15h e 17h (Paulo 11h10)
         # 03/10/2026: modo eleição (6/dia) cancelado pelo Paulo; volta à grade normal de 3 por dia.
         # 04/10/2026: Paulo pediu 4 carrosséis no dia (carrossel ganha tração com os dias).
         # 05/10/2026: Paulo aprovou tudo e pediu 5 no dia (8h saiu atrasado pelo bloqueio da API).
