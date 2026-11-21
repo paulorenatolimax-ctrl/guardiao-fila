@@ -35,8 +35,9 @@ TIPOS = {
     # 07/11/2026: Paulo pediu para diminuir o ritmo (alcance por post caiu com 6 por dia): 3 por dia, 7h30, 12h30 e 20h30.
     # 20/11/2026 11h10: Paulo pediu 6 por dia, a cada 2 h, começando 7h: 7h, 9h, 11h, 13h, 15h, 17h.
     # 20/11/2026 11h53: a partir de 21/11, pelos números do relatorio.csv: sai 15h, entra 19h: 7h, 9h, 11h, 13h, 17h, 19h.
-    # 21/11/2026 09:45: Paulo aprovou 3/dia, 1 tema/dia, a partir de 22/11: 7h, 13h, 19h. O dia 21/11 permanece na grade de 6 (ESPECIAIS).
-    "carrossel": ("carrosseis.json", "carrosseis", [7, 13, 19], timedelta(minutes=90), 3),
+    # 21/11/2026 09:45: Paulo aprovou 3/dia, 1 tema/dia, a partir de 22/11. O dia 21/11 permanece na grade de 6 (ESPECIAIS).
+    # 21/11/2026 ~10h: horários pelos dados do relatorio.csv (FEED, mediana, age>=12h): 7h (n=24, alcance 5.794, shares 101), 14h (n=13, alcance 5.851, shares 131), 17h (n=5, alcance 9.535, shares 97). 19h é dos piores (n=7, alcance 3.221, shares 28). 13h tem só 4 posts. Reel segue às 20h.
+    "carrossel": ("carrosseis.json", "carrosseis", [7, 14, 17], timedelta(minutes=90), 3),
     "teste":     ("teste.json",      "fila",       [8, 14, 18],   timedelta(minutes=90), 3),
 }
 # MODO ELEIÇÃO: grade especial por data (BRT), por tipo. Fora dessas datas vale TIPOS.
