@@ -35,7 +35,8 @@ TIPOS = {
     # 07/11/2026: Paulo pediu para diminuir o ritmo (alcance por post caiu com 6 por dia): 3 por dia, 7h30, 12h30 e 20h30.
     # 20/11/2026 11h10: Paulo pediu 6 por dia, a cada 2 h, começando 7h: 7h, 9h, 11h, 13h, 15h, 17h.
     # 20/11/2026 11h53: a partir de 21/11, pelos números do relatorio.csv: sai 15h, entra 19h: 7h, 9h, 11h, 13h, 17h, 19h.
-    "carrossel": ("carrosseis.json", "carrosseis", [7, 9, 11, 13, 17, 19], timedelta(minutes=90), 6),
+    # 21/11/2026 09:45: Paulo aprovou 3/dia, 1 tema/dia, a partir de 22/11: 7h, 13h, 19h. O dia 21/11 permanece na grade de 6 (ESPECIAIS).
+    "carrossel": ("carrosseis.json", "carrosseis", [7, 13, 19], timedelta(minutes=90), 3),
     "teste":     ("teste.json",      "fila",       [8, 14, 18],   timedelta(minutes=90), 3),
 }
 # MODO ELEIÇÃO: grade especial por data (BRT), por tipo. Fora dessas datas vale TIPOS.
@@ -47,6 +48,7 @@ ESPECIAIS = {
         date(2026, 10, 27): ([14], timedelta(hours=4), 1),  # 27/10: Paulo aprovou o R95 (Gramsci, o poder não está na Presidência) para as 14h
     },
     "carrossel": {
+        date(2026, 11, 21): ([7, 9, 11, 13, 17, 19], timedelta(minutes=90), 6),  # 21/11 09:45: Paulo aprovou 3/dia a partir de 22/11; hoje segue a grade de 6 (já saíram 7h e 9h; restam 11h, 13h, 17h, 19h)
         date(2026, 11, 20): ([11, 13, 15, 15.5, 17, 19, 21], timedelta(minutes=90), 7),  # 20/11 15h35: Paulo, Consciência Negra: K017 forçado já, K029 17h, K042 19h, K014 21h;  # 20/11 (feriado, nada saiu até 11h): K023 já, depois 13h, 15h e 17h (Paulo 11h10)
         # 03/10/2026: modo eleição (6/dia) cancelado pelo Paulo; volta à grade normal de 3 por dia.
         # 04/10/2026: Paulo pediu 4 carrosséis no dia (carrossel ganha tração com os dias).
